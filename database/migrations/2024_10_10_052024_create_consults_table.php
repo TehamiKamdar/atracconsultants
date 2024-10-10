@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('consults', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('message');
+            $table->string('qualification');
+            $table->unsignedBigInteger('country_id');
+            $table->foreign('country_id')->references('id')->on('countries')->onUpdate('cascade')->onDelete('restrict');
+            $table->string('field');
             $table->timestamps();
         });
     }

@@ -218,6 +218,15 @@
         <h1 class="text-[#2BB673] text-2xl font-semibold text-center my-2">Contact Form</h1>
         <p class="text-4xl font-bold text-center my-2">Request our free consultation!</p>
     </div>
+
+    @if (session('success'))
+        <script>
+            alert("{!! session('success') !!}");
+        </script>
+    @endif
+
+
+
     <div class="btm w-[90vw] md:h-[80vh] mx-auto bg-[#2BB673] rounded-3xl mt-10">
         <div class="top py-5">
             <div class="icon flex justify-center">

@@ -32,6 +32,10 @@ Route::prefix('admin')->group(function () {
         Route::get( '' , [AdminController::class , 'countryIndex'])->name('admin-countries');
         Route::post( 'insert' , [AdminController::class , 'countryStore'])->name('country-store');
     });
+    Route::prefix('consults')->group(function(){
+        Route::get( '' , [AdminController::class , 'consultIndex'])->name('admin-consults');
+        Route::get( 'details/{id}' , [AdminController::class , 'consultDetails'])->name('admin-consult-details');
+    });
 });
 
 Route::middleware([
