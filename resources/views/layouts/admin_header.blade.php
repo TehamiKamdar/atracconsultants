@@ -53,13 +53,36 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="{{route('admin-consults')}}" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user"></i>
-                </span>
-                <span class="hide-menu">Consults</span>
-              </a>
-            </li>
+                <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-user"></i>
+                  </span>
+                  <span class="hide-menu">Consults</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                  <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                      <span class="hide-menu">All Consults</span>
+                    </a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                      <span class="hide-menu">Pending Consults</span>
+                    </a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                      <span class="hide-menu">Approved Consults</span>
+                    </a>
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                      <span class="hide-menu">Rejected Consults</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
             <li class="sidebar-item">
               <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
                 <span>

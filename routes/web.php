@@ -4,6 +4,7 @@ use App\Models\country;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Models\fields;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,8 @@ use App\Http\Controllers\AdminController;
 //Web Routes
 Route::get('/', function () {
     $countries = country::all();
-    return view('web.index', compact('countries'));
+    $fields = fields::orderBy('field', 'asc')->get();
+    return view('web.index', compact('countries', 'fields'));
 })->name('user-home');
 Route::post('/consult' , [AdminController::class , 'consultRequest'])->name('consultation');
 
@@ -33,8 +35,14 @@ Route::prefix('admin')->group(function () {
         Route::post( 'insert' , [AdminController::class , 'countryStore'])->name('country-store');
     });
     Route::prefix('consults')->group(function(){
+        Route::get( '' , [AdminController::class , 'consultAllIndex'])->name('admin-consults');
+        Route::get( 'pending' , [AdminController::class , 'consultPendingIndex'])->name('pending-consults');
+        Route::get( 'approved' , [AdminController::class , 'consultApprovedIndex'])->name('approved-consults');
+        Route::get( 'rejected' , [AdminController::class , 'consultRejectedIndex'])->name('rejected-consults');
         Route::get( '' , [AdminController::class , 'consultIndex'])->name('admin-consults');
         Route::get( 'details/{id}' , [AdminController::class , 'consultDetails'])->name('admin-consult-details');
+        Route::post( 'approve/{id}' , [AdminController::class , 'consultApprove'])->name('consult.approve');
+        Route::post( 'reject/{id}' , [AdminController::class , 'consultReject'])->name('consult.reject');
     });
 });
 

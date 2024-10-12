@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries')->onUpdate('cascade')->onDelete('restrict');
             $table->string('field');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

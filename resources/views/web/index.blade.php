@@ -244,18 +244,49 @@
                         <input name="name" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="text" placeholder="Full name">
                     </div>
                     <div>
-                        <input name="phone" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="text" placeholder="Phone number">
+                        <input name="email" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="email" placeholder="Email Address">
                     </div>
                 </div>
-                <div class="my-3 w-[95%] mx-auto">
-                    <input name="email" class="px-4 py-2 w-[97.5%] rounded-lg outline-none" type="text" placeholder="Email address">
+                <div class="my-3 w-[95%] mx-auto grid grid-cols-2 gap-2">
+                    <div>
+                        <input name="phone" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="phone" placeholder="Phone Number">
+                    </div>
+                    <div>
+                        <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="qualification" id="">
+                            <option value="" selected disabled>Qualification</option>
+                            <option value="Matriculation">Matriculation</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Bachelors">Bachelors</option>
+                            <option value="Masters">Masters</option>
+                        </select>
+                    </div>
                 </div>
+                <div class="my-3 w-[95%] mx-auto grid grid-cols-2 gap-2">
+                    <div>
+                        <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="country" id="">
+                            <option value="" selected disabled>Country of Interest</option>
+                            @foreach ($countries as $c)
+                                <option value="{{$c->id}}">{{$c->country_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="field" id="">
+                            <option value="" selected disabled>Fields of Interest</option>
+                            @foreach ($fields as $f)
+                                <option value="{{$f->field}}">{{$f->field}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <div class="my-3 w-[95%] mx-auto">
                     <textarea placeholder="Message" rows="5" class="px-4 py-2 w-[97.5%] rounded-lg outline-none" name="message" id=""></textarea>
                 </div>
                 <div class="my-3 w-[95%] mx-auto">
                     <button class="bg-white px-8 py-2 text-[#2BB673] rounded-3xl my-4 font-semibold">Book Now <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
+
             </form>
         </div>
     </div>
