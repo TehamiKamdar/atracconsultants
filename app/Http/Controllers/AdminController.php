@@ -107,7 +107,7 @@ class AdminController extends Controller
                 $consultId = $id;
                 $consult = DB::table('consults')
                 ->join('countries','consults.country_id', '=', 'countries.id')
-                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.created_at')
+                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status',  'consults.created_at')
                 ->where('consults.id', $consultId)->first();
 
                 return view('admin.details', ['consult' => $consult]);

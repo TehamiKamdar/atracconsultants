@@ -48,6 +48,7 @@
                 <dd class="col-sm-8">{{ $consult->created_at }}</dd>
                 <br>
 
+                @if ($consult->status == 'pending')
                 <dd class="col-sm-8">
                     <!-- Approve and Reject Buttons -->
                     <form action="{{ route('consult.approve', $consult->id) }}" method="POST" style="display:inline;">
@@ -60,6 +61,17 @@
                         <button type="submit" class="btn btn-danger btn-sm">Reject</button>
                     </form>
                 </dd>
+                @else
+                    @if ($consult->status == 'approved')
+                    <dd class="col-sm-8">
+                        <span class="badge bg-success">{{ $consult->status }}</span>
+                    </dd>
+                    @else
+                    <dd class="col-sm-8">
+                        <span class="badge bg-danger">{{ $consult->status }}</span>
+                    </dd>
+                    @endif
+                @endif  
 
 
 
