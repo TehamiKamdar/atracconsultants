@@ -39,7 +39,6 @@ Route::prefix('admin')->group(function () {
         Route::get( 'pending' , [AdminController::class , 'consultPendingIndex'])->name('pending-consults');
         Route::get( 'approved' , [AdminController::class , 'consultApprovedIndex'])->name('approved-consults');
         Route::get( 'rejected' , [AdminController::class , 'consultRejectedIndex'])->name('rejected-consults');
-        Route::get( '' , [AdminController::class , 'consultIndex'])->name('admin-consults');
         Route::get( 'details/{id}' , [AdminController::class , 'consultDetails'])->name('admin-consult-details');
         Route::post( 'approve/{id}' , [AdminController::class , 'consultApprove'])->name('consult.approve');
         Route::post( 'reject/{id}' , [AdminController::class , 'consultReject'])->name('consult.reject');

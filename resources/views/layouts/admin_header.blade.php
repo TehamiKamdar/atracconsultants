@@ -61,22 +61,22 @@
                 </a>
                 <ul aria-expanded="false" class="collapse first-level">
                   <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ route('admin-consults') }}" class="sidebar-link">
                       <span class="hide-menu">All Consults</span>
                     </a>
                   </li>
                   <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ route('pending-consults') }}" class="sidebar-link">
                       <span class="hide-menu">Pending Consults</span>
                     </a>
                   </li>
                   <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ route('approved-consults') }}" class="sidebar-link">
                       <span class="hide-menu">Approved Consults</span>
                     </a>
                   </li>
                   <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <a href="{{ route('rejected-consults') }}" class="sidebar-link">
                       <span class="hide-menu">Rejected Consults</span>
                     </a>
                   </li>
