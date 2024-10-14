@@ -69,11 +69,11 @@
         </div>
 
         <div class="content">
-            <p>Dear {{ $cons['name'] }},</p>
+            <p>Dear {{ $consultApprove['name'] }},</p>
 
             <p>We are pleased to inform you that your appointment request has been approved and confirmed.</p>
 
-            <p>Your appointment is scheduled for <strong>{{ $appointmentDate }}</strong> at <strong>{{ $appointmentTime }}</strong>.</p>
+            <p>Your appointment is scheduled for Today.</p>
 
             <p>If you need to make any changes to your appointment or require additional information, feel free to reach out to us at support@atracconsultants.com or +923359285777.</p>
 

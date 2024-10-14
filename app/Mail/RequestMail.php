@@ -13,10 +13,10 @@ class RequestMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $cons;
-    public function __construct($cons)
+    public $consultRequest;
+    public function __construct($consultRequest)
     {
-        $this->cons = $cons;
+        $this->consultRequest = $consultRequest;
     }
 
     /**

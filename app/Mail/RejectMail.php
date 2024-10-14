@@ -13,12 +13,10 @@ class RejectMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $consultReject;
+    public function __construct($consultReject)
     {
-        //
+        $this->consultReject = $consultReject;
     }
 
     /**
@@ -37,7 +35,7 @@ class RejectMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.rejectMail',
         );
     }
 

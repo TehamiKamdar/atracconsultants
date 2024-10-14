@@ -69,7 +69,7 @@
         </div>
 
         <div class="content">
-            <p>Dear {{ $cons['name'] }},</p>
+            <p>Dear {{ $consultReject['name'] }},</p>
 
             <p>We regret to inform you that your recent appointment request has been rejected.</p>
 

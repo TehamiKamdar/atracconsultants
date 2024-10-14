@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\country;
+use App\Mail\RejectMail;
 use App\Models\consults;
+use App\Mail\ApproveMail;
 use App\Mail\RequestMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,11 +51,15 @@ class AdminController extends Controller
     public function consultApprovedIndex(){
         if(Auth::check()){
             if(Auth::User()->role==1){
-                $consults = DB::table('consults')
-                ->join('countries','consults.country_id', '=', 'countries.id')
-                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message','consults.status')
-                ->where('status', '=', 'approved')
-                ->get();
+            // Data fetch on page
+            $consults = DB::table('consults')
+            ->join('countries','consults.country_id', '=', 'countries.id')
+            ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message','consults.status')
+            ->where('status', '=', 'approved')
+            ->get();
+
+            //email sending for rejection
+
                 return view('admin.approved', compact('consults'));
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
@@ -92,7 +98,7 @@ class AdminController extends Controller
         $consult->country_id = $req->country;
         $consult->field = $req->field;
 
-        $cons = [
+        $consultRequest = [
             'name' => $req->name,
             'email' => $req->email,
             'message' => $req->message,
@@ -100,7 +106,7 @@ class AdminController extends Controller
             'country_id' => $req->country_id,
             'field' => $req->field
         ];
-        Mail::to($req->email)->send(new RequestMail($cons));
+        Mail::to($req->email)->send(new RequestMail($consultRequest));
 
         $consult->save();
         return redirect()->back()->with('success',"Your query has been passed to us. We'll get back to you shortly");
@@ -138,6 +144,12 @@ class AdminController extends Controller
                     $consult->status = 'approved';
                     $consult->save(); // Save the changes
 
+                    $consultApprove = [
+                        'name' => $consult->name,
+                        'email'=> $consult->email
+                    ];
+                    Mail::to($consult->email)->send(new ApproveMail($consultApprove));
+
                     return redirect()->back()->with('success', 'Appointment Approved');
                 } else {
                     return redirect()->back()->with('error', 'Consult not found');
@@ -162,6 +174,11 @@ class AdminController extends Controller
                 if ($consult) {
                     $consult->status = 'rejected';
                     $consult->save(); // Save the changes
+                    $consultReject = [
+                        'name' => $consult->name,
+                        'email'=> $consult->email
+                    ];
+                    Mail::to($consult->email)->send(new RejectMail($consultReject));
 
                     return redirect()->back()->with('reject', 'Appointment Rejected');
                 } else {

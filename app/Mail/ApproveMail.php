@@ -13,12 +13,10 @@ class ApproveMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $consultApprove;
+    public function __construct($consultApprove)
     {
-        //
+        $this->consultApprove = $consultApprove;
     }
 
     /**
@@ -37,7 +35,7 @@ class ApproveMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.approveMail',
         );
     }
 

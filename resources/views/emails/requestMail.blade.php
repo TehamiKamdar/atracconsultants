@@ -69,7 +69,7 @@
         </div>
 
         <div class="content">
-            <p>Dear {{ $cons['name'] }},</p>
+            <p>Dear {{ $consultRequest['name'] }},</p>
 
             <p>We have received your appointment request and are currently reviewing it. Your request is pending confirmation.</p>
 
