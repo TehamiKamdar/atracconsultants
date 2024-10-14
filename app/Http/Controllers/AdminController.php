@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\country;
 use App\Models\consults;
-use App\Mail\ApproveMail;
+use App\Mail\RequestMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -100,7 +100,7 @@ class AdminController extends Controller
             'country_id' => $req->country_id,
             'field' => $req->field
         ];
-        Mail::to($req->email)->send(new ApproveMail($cons));
+        Mail::to($req->email)->send(new RequestMail($cons));
 
         $consult->save();
         return redirect()->back()->with('success',"Your query has been passed to us. We'll get back to you shortly");
