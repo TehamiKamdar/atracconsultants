@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\country;
 use App\Models\consults;
+use App\Mail\ApproveMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -80,24 +82,29 @@ class AdminController extends Controller
     }
     public function consultRequest(Request $req){
         // return view('web.index');
-        if(Auth::check()){
-            if(Auth::User()->role==1){
-                $consult = new consults();
-                $consult->name = $req->name;
-                $consult->phone = $req->phone;
-                $consult->email = $req->email;
-                $consult->message = $req->message;
-                $consult->qualification = $req->qualification;
-                $consult->country_id = $req->country;
-                $consult->field = $req->field;
-                $consult->save();
-                return redirect()->back()->with('success',"Your query has been passed to us. We'll get back to you shortly");
-            }else{
-                abort(403, "Why don't you go back and try again when you're feeling more heroic?");
-            }
-        }else{
-            return redirect()->route('login');
-        }
+
+        $consult = new consults();
+        $consult->name = $req->name;
+        $consult->phone = $req->phone;
+        $consult->email = $req->email;
+        $consult->message = $req->message;
+        $consult->qualification = $req->qualification;
+        $consult->country_id = $req->country;
+        $consult->field = $req->field;
+
+        $cons = [
+            'name' => $req->name,
+            'email' => $req->email,
+            'message' => $req->message,
+            'qualification' => $req->qualification,
+            'country_id' => $req->country_id,
+            'field' => $req->field
+        ];
+        Mail::to($req->email)->send(new ApproveMail($cons));
+
+        $consult->save();
+        return redirect()->back()->with('success',"Your query has been passed to us. We'll get back to you shortly");
+
 
     }
 
