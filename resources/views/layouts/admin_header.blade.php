@@ -84,11 +84,11 @@
               </li>
 
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+              <a class="sidebar-link" href="{{route('admin-services')}}" aria-expanded="false">
                 <span>
                   <i class="ti ti-cards"></i>
                 </span>
-                <span class="hide-menu">Card</span>
+                <span class="hide-menu">Services</span>
               </a>
             </li>
             <li class="sidebar-item">

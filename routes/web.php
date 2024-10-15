@@ -47,6 +47,10 @@ Route::prefix('admin')->group(function () {
         Route::post( 'approve/{id}' , [AdminController::class , 'consultApprove'])->name('consult.approve');
         Route::post( 'reject/{id}' , [AdminController::class , 'consultReject'])->name('consult.reject');
     });
+    Route::prefix('services')->group(function(){
+        Route::get('', [AdminController::class , 'serviceIndex'])->name('admin-services');
+        Route::post('insert', [AdminController::class , 'serviceStore'])->name('services-store');
+    });
 });
 
 Route::middleware([

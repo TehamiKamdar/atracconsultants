@@ -7,6 +7,7 @@ use App\Mail\RejectMail;
 use App\Models\consults;
 use App\Mail\ApproveMail;
 use App\Mail\RequestMail;
+use App\Models\services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -225,7 +226,7 @@ class AdminController extends Controller
                 $countries->country_name = $req->country_name;
 
                 $countries->save();
-                return redirect()->back()->with('success', 'Success');
+                return redirect()->route('admin-countries')->with('success', 'Country Added');
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
@@ -262,6 +263,35 @@ class AdminController extends Controller
                 } else {
                     return redirect()->back()->with('error', 'Country not found');
                 }
+            }else{
+                abort(403, "Why don't you go back and try again when you're feeling more heroic?");
+            }
+        }else{
+            return redirect()->route('login');
+        }
+    }
+    public function serviceIndex(){
+        if(Auth::check()){
+            if(Auth::User()->role==1){
+                $countries = country::orderBy('country_name', 'asc')->get();
+                return view('admin.services.index', compact('countries'));
+            }else{
+                abort(403, "Why don't you go back and try again when you're feeling more heroic?");
+            }
+        }else{
+            return redirect()->route('login');
+        }
+    }
+    public function serviceStore(Request $req){
+        if(Auth::check()){
+            if(Auth::User()->role==1){
+                $service = new services();
+                $service->service_icon = $req->service_icon;
+                $service->service_heading = $req->service_heading;
+                $service->service_details = $req->service_details;
+
+                $service->save();
+                return redirect()->route('admin-services')->with('success', 'Service Added');
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
