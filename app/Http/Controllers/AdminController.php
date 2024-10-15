@@ -209,7 +209,8 @@ class AdminController extends Controller
     public function countryIndex(){
         if(Auth::check()){
             if(Auth::User()->role==1){
-                return view('admin.countries');
+                $countries = country::orderBy('country_name', 'asc')->get();
+                return view('admin.countries', compact('countries'));
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
@@ -225,6 +226,42 @@ class AdminController extends Controller
 
                 $countries->save();
                 return redirect()->back()->with('success', 'Success');
+            }else{
+                abort(403, "Why don't you go back and try again when you're feeling more heroic?");
+            }
+        }else{
+            return redirect()->route('login');
+        }
+    }
+    public function countryActive($id){
+        if(Auth::check()){
+            if(Auth::User()->role==1){
+                $country = country::find($id);
+                if ($country) {
+                    $country->status = 'active';
+                    $country->save(); // Save the changes
+                    return redirect()->back()->with('active', 'Country Activated');
+                } else {
+                    return redirect()->back()->with('error', 'Country not found');
+                }
+            }else{
+                abort(403, "Why don't you go back and try again when you're feeling more heroic?");
+            }
+        }else{
+            return redirect()->route('login');
+        }
+    }
+    public function countryInactive($id){
+        if(Auth::check()){
+            if(Auth::User()->role==1){
+                $country = country::find($id);
+                if ($country) {
+                    $country->status = 'inactive';
+                    $country->save(); // Save the changes
+                    return redirect()->back()->with('inactive', 'Country Inactivated');
+                } else {
+                    return redirect()->back()->with('error', 'Country not found');
+                }
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }

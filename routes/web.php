@@ -20,8 +20,9 @@ use App\Models\fields;
 
 //Web Routes
 Route::get('/', function () {
-    $countries = country::all();
+    $countries = country::orderBy('country_name', 'asc')->where('status', 'active')->get();
     $fields = fields::orderBy('field', 'asc')->get();
+    // print_r($countries);
     return view('web.index', compact('countries', 'fields'));
 })->name('user-home');
 Route::post('/consult' , [AdminController::class , 'consultRequest'])->name('consultation');
@@ -34,6 +35,8 @@ Route::prefix('admin')->group(function () {
     Route::prefix('countries')->group(function(){
         Route::get( '' , [AdminController::class , 'countryIndex'])->name('admin-countries');
         Route::post( 'insert' , [AdminController::class , 'countryStore'])->name('country-store');
+        Route::post( 'active/{id}' , [AdminController::class , 'countryActive'])->name('country-active');
+        Route::post( 'inactive/{id}' , [AdminController::class , 'countryInactive'])->name('country-inactive');
     });
     Route::prefix('consults')->group(function(){
         Route::get( '' , [AdminController::class , 'consultAllIndex'])->name('admin-consults');
