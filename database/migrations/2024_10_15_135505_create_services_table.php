@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->string('service_icon');
-            $table->string('service_heading');
-            $table->string('service_details');
+            $table->string('service_icon')->required();
+            $table->string('service_heading')->required();
+            $table->string('service_details')->required();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

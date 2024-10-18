@@ -273,8 +273,8 @@ class AdminController extends Controller
     public function serviceIndex(){
         if(Auth::check()){
             if(Auth::User()->role==1){
-                $countries = country::orderBy('country_name', 'asc')->get();
-                return view('admin.services.index', compact('countries'));
+                $services = services::all();
+                return view('admin.services.index', compact('services'));
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
@@ -292,6 +292,42 @@ class AdminController extends Controller
 
                 $service->save();
                 return redirect()->route('admin-services')->with('success', 'Service Added');
+            }else{
+                abort(403, "Why don't you go back and try again when you're feeling more heroic?");
+            }
+        }else{
+            return redirect()->route('login');
+        }
+    }
+    public function serviceActive($id){
+        if(Auth::check()){
+            if(Auth::User()->role==1){
+                $service = services::find($id);
+                if ($service) {
+                    $service->status = 'active';
+                    $service->save(); // Save the changes
+                    return redirect()->back()->with('active', 'Service Activated');
+                } else {
+                    return redirect()->back()->with('error', 'Service not found');
+                }
+            }else{
+                abort(403, "Why don't you go back and try again when you're feeling more heroic?");
+            }
+        }else{
+            return redirect()->route('login');
+        }
+    }
+    public function serviceInactive($id){
+        if(Auth::check()){
+            if(Auth::User()->role==1){
+                $service = services::find($id);
+                if ($service) {
+                    $service->status = 'inactive';
+                    $service->save(); // Save the changes
+                    return redirect()->back()->with('inactive', 'Service Inactivated');
+                } else {
+                    return redirect()->back()->with('error', 'Service not found');
+                }
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }

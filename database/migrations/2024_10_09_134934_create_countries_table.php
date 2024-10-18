@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('country_name')->unique()->required();
             $table->string('country_image')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

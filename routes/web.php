@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
 use App\Models\fields;
+use App\Models\services;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,9 @@ use App\Models\fields;
 Route::get('/', function () {
     $countries = country::orderBy('country_name', 'asc')->where('status', 'active')->get();
     $fields = fields::orderBy('field', 'asc')->get();
+    $services = services::where('status', 'active')->get();
     // print_r($countries);
-    return view('web.index', compact('countries', 'fields'));
+    return view('web.index', compact('countries', 'fields', 'services'));
 })->name('user-home');
 Route::post('/consult' , [AdminController::class , 'consultRequest'])->name('consultation');
 
@@ -50,6 +52,8 @@ Route::prefix('admin')->group(function () {
     Route::prefix('services')->group(function(){
         Route::get('', [AdminController::class , 'serviceIndex'])->name('admin-services');
         Route::post('insert', [AdminController::class , 'serviceStore'])->name('services-store');
+        Route::post( 'active/{id}' , [AdminController::class , 'serviceActive'])->name('services-active');
+        Route::post( 'inactive/{id}' , [AdminController::class , 'serviceInactive'])->name('services-inactive');
     });
 });
 

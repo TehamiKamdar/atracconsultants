@@ -1,7 +1,17 @@
 @extends('layouts.admin_main')
 @section('main-section')
 
+    @if (session('active'))
+        <div class="alert alert-success">
+            {{session('active')}}
+        </div>
+    @endif
 
+    @if (session('inactive'))
+        <div class="alert alert-danger">
+            {{session('inactive')}}
+        </div>
+    @endif
 
         <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -49,15 +59,27 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @foreach ($countries as $c) --}}
+                @foreach ($services as $s)
                     <tr>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td><i class="{{$s->service_icon}}" style="text-align: center; width:100%; font-size:20px;"></i></td>
+                        <td>{{$s->service_heading}}</td>
+                        <td>{{$s->service_details}}</td>
+                        <td><a href="" class="btn-primary">Update</a></td>
+                        <td>
+                            @if ($s->status=='inactive')
+                            <form action="{{ route('services-active', $s->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Inactive</button>
+                            </form>
+                            @else
+                            <form action="{{ route('services-inactive', $s->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-success">Active</button>
+                            </form>
+                            @endif
+                        </td>
                     </tr>
-                {{-- @endforeach --}}
+                @endforeach
             </tbody>
         </table>
     </div>

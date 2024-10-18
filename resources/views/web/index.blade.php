@@ -53,46 +53,18 @@
     </div>
 
     <div class="btm slider w-[90vw] md:w-[80vw] mx-auto  my-16">
-        <div
-            class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
+        @foreach ($services as $s)
+
+        <div class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
             <div class="bg-white w-[100px] mx-auto h-[100px] rounded-full flex justify-center items-center my-5">
-                <i class="fa-solid fa-user text-gray-500 text-5xl"></i>
+                <i class="{{$s->service_icon}} text-gray-500 text-5xl"></i>
             </div>
             <div class="desc text-white">
-                <h1 class="text-center text-2xl font-bold mb-4">Carrer guidence</h1>
-                <p class="text-center px-5 md:px-10 leading-8">Deciding what profession you should go into is easier when you, have us helping you make an informed decision.</p>
+                <h1 class="text-center text-2xl font-bold mb-4">{{$s->service_heading}}</h1>
+                <p class="text-center px-5 md:px-10 leading-8">{{$s->service_details}}</p>
             </div>
         </div>
-        <div
-            class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
-            <div class="bg-white w-[100px] mx-auto h-[100px] rounded-full flex justify-center items-center my-5">
-                <i class="fa-solid fa-user text-gray-500 text-5xl"></i>
-            </div>
-            <div class="desc text-white">
-                <h1 class="text-center text-2xl font-bold mb-4">Carrer guidence</h1>
-                <p class="text-center px-5 md:px-10 leading-8">Deciding what profession you should go into is easier when you, have us helping you make an informed decision.</p>
-            </div>
-        </div>
-        <div
-            class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
-            <div class="bg-white w-[100px] mx-auto h-[100px] rounded-full flex justify-center items-center my-5">
-                <i class="fa-solid fa-user text-gray-500 text-5xl"></i>
-            </div>
-            <div class="desc text-white">
-                <h1 class="text-center text-2xl font-bold mb-4">Carrer guidence</h1>
-                <p class="text-center px-5 md:px-10 leading-8">Deciding what profession you should go into is easier when you, have us helping you make an informed decision.</p>
-            </div>
-        </div>
-        <div
-            class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
-            <div class="bg-white w-[100px] mx-auto h-[100px] rounded-full flex justify-center items-center my-5">
-                <i class="fa-solid fa-user text-gray-500 text-5xl"></i>
-            </div>
-            <div class="desc text-white">
-                <h1 class="text-center text-2xl font-bold mb-4">Carrer guidence</h1>
-                <p class="text-center px-5 md:px-10 leading-8">Deciding what profession you should go into is easier when you, have us helping you make an informed decision.</p>
-            </div>
-        </div>
+        @endforeach
     </div>
 
 </div>
