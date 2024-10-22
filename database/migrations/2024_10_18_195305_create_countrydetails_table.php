@@ -15,14 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');
-            $table->string('image')->nullable();
-            $table->string('why-study')->required();
-            $table->string('requirements')->required();
-            $table->string('costOfStudy')->required();
-            $table->string('scholarships')->required();
-            $table->string('visaRequire')->required();
-            $table->string('workOpp')->required();
-            $table->string('bookMeeting')->required();
+            $table->text('image')->nullable();
+            $table->text('whyStudy')->required();
+            $table->text('costOfStudy')->required();
+            $table->text('scholarships')->required();
+            $table->text('workOpp')->required();
+            $table->text('bookMeeting')->required();
             $table->timestamps();
         });
     }

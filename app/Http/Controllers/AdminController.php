@@ -7,6 +7,7 @@ use App\Mail\RejectMail;
 use App\Models\consults;
 use App\Mail\ApproveMail;
 use App\Mail\RequestMail;
+use App\Models\countrydetails;
 use App\Models\services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,14 @@ use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
+    public function detailsShow($name){
+        $d = DB::table('countrydetails')
+        ->join('countries', 'countrydetails.country_id' , '=', 'countries.id')
+        ->get();
+
+        
+
+    }
     public function consultAllIndex(){
         if(Auth::check()){
             if(Auth::User()->role==1){
@@ -328,6 +337,23 @@ class AdminController extends Controller
                 } else {
                     return redirect()->back()->with('error', 'Service not found');
                 }
+            }else{
+                abort(403, "Why don't you go back and try again when you're feeling more heroic?");
+            }
+        }else{
+            return redirect()->route('login');
+        }
+    }
+    public function countryDetailsIndex(){
+        $countries = country::all();
+        $details = countrydetails::all();
+        return view('admin.details.index', compact('countries', 'details'));
+    }
+    public function countryDetailsStore(Request $req){
+        if(Auth::check()){
+            if(Auth::User()->role==1){
+                $details = new countrydetails();
+                $details->country_id = $req->country;
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }

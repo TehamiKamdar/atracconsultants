@@ -38,7 +38,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CountriesSeeder::class,
             FieldsSeeder::class,
-            ServiceSeeder::class
+            ServiceSeeder::class,
+            DetailsSeeder::class
         ]);
     }
 }

@@ -27,6 +27,8 @@ Route::get('/', function () {
     // print_r($countries);
     return view('web.index', compact('countries', 'fields', 'services'));
 })->name('user-home');
+
+Route::get('/country/details/{name}', [AdminController::class , 'detailsShow'])->name('country-details');
 Route::post('/consult' , [AdminController::class , 'consultRequest'])->name('consultation');
 
 
@@ -54,6 +56,12 @@ Route::prefix('admin')->group(function () {
         Route::post('insert', [AdminController::class , 'serviceStore'])->name('services-store');
         Route::post( 'active/{id}' , [AdminController::class , 'serviceActive'])->name('services-active');
         Route::post( 'inactive/{id}' , [AdminController::class , 'serviceInactive'])->name('services-inactive');
+    });
+    Route::prefix('details')->group(function(){
+        Route::get('', [AdminController::class , 'countryDetailsIndex'])->name('admin-country-details');
+        Route::post('insert', [AdminController::class , 'serviceStore'])->name('country-details-store');
+        Route::post( 'active/{id}' , [AdminController::class , 'serviceActive'])->name('details-active');
+        Route::post( 'inactive/{id}' , [AdminController::class , 'serviceInactive'])->name('details-inactive');
     });
 });
 

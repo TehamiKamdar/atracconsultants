@@ -36,8 +36,7 @@
                 <img class="w-[120px]" src="{{asset('webassets/newlogo-removebg-preview-BNhagA2w.png')}}" alt="">
             </div>
             <div class="flex justify-center">
-                <button
-                    class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">{{$country->country_name}}</button>
+                <a href="{{route('country-details', $country->country_name)}}" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">{{$country->country_name}}</a>
             </div>
         </div>
         @endforeach
