@@ -65,6 +65,17 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+Route::get('/explode',function(){
+    $var =
+        "Hello Hi How Are You?|I am fine How About You?|Me is good too"
+    ;
+
+    $exploded = explode("|", $var);
+
+
+    return view('test.views', compact('exploded'));
+});
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

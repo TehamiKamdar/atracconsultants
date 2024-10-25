@@ -18,11 +18,14 @@ use Illuminate\Support\Facades\Mail;
 class AdminController extends Controller
 {
     public function detailsShow($name){
-        $d = DB::table('countrydetails')
-        ->join('countries', 'countrydetails.country_id' , '=', 'countries.id')
+        // return $name;
+        $details = DB::table('countrydetails')
+        ->join('countries', 'countrydetails.country_id', '=', 'countries.id')
+        ->where('countries.country_name', $name)
+        ->select('countrydetails.*', 'countries.country_name')
         ->get();
 
-        
+        return view('web.details', compact('details', 'name'));
 
     }
     public function consultAllIndex(){
@@ -347,6 +350,8 @@ class AdminController extends Controller
     public function countryDetailsIndex(){
         $countries = country::all();
         $details = countrydetails::all();
+
+
         return view('admin.details.index', compact('countries', 'details'));
     }
     public function countryDetailsStore(Request $req){
