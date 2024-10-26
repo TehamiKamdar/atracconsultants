@@ -27,17 +27,18 @@
             <div class="desc-top mt-5">
                 <h1 class="text-2xl md:text-4xl font-bold mb-3">Cost of studying in {{$name}} for international students</h1>
 
+                @foreach($details as $detail)
                 @php
-                    $studyDetails = explode('|', $details->whyStudy); // String ko '|' ke basis pe split karo
+                    $studyDetails = explode('|', $detail->whyStudy); // Each detail ke 'whyStudy' ko explode karo
                 @endphp
 
                 @foreach($studyDetails as $study)
                     @php
-                        // Europe ko dynamically $name se replace karo
-                        $study = str_replace('Europe', $name, $study);
+                        $study = str_replace('Europe', $name, $study); // Replace "Europe" with the dynamic $name
                     @endphp
                     <p class="text-xl font-light mt-3">{{ $study }}</p>
                 @endforeach
+            @endforeach
             </div>
 
 
