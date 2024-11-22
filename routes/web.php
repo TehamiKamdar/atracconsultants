@@ -1,12 +1,13 @@
 <?php
 
+use App\Models\hero;
+use App\Models\fields;
 use App\Models\country;
+use App\Models\services;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
-use App\Models\fields;
-use App\Models\services;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,13 @@ Route::get('/', function () {
     $countries = country::orderBy('country_name', 'asc')->where('status', 'active')->get();
     $fields = fields::orderBy('field', 'asc')->get();
     $services = services::where('status', 'active')->get();
+    $hero = hero::all();
     // print_r($countries);
-    return view('web.index', compact('countries', 'fields', 'services'));
+    return view('web.index', compact('countries', 'fields', 'services', 'hero'));
 })->name('user-home');
+Route::get('/aboutus', function(){
+    return view('web.about');
+})->name('user-about');
 
 Route::get('/country/details/{name}', [AdminController::class , 'detailsShow'])->name('country-details');
 Route::post('/consult' , [AdminController::class , 'consultRequest'])->name('consultation');
@@ -64,6 +69,13 @@ Route::prefix('admin')->group(function () {
         Route::post( 'inactive/{id}' , [AdminController::class , 'serviceInactive'])->name('details-inactive');
     });
 });
+
+Route::get('/admin/hero', [AdminController::class, 'heroIndex']);
+Route::post('/admin/hero', [AdminController::class, 'heroAdd'])->name('hero-add');
+
+Route::get('/404', function(){
+    return view('errors.404');
+})->name('error-404');
 
 Route::get('/explode',function(){
     $var =

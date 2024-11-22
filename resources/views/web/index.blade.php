@@ -1,17 +1,21 @@
 @extends('layouts.web_main')
 
+@push('title')
+Home
+@endpush
+
 @section('main-section')
 
 <!-- Hero section start -->
 <div class="hero bg-[#2BB673] py-10 md:h-[88vh] flex items-center">
     <div class="w-[87vw] mx-auto">
+        @foreach ($hero as $h)
+        <img src="./heroImages/{{$h->image}}" alt="">
         <h1 class="text-white text-4xl mb-3">28 June to 10 July</h1>
-        <h1 class="text-white md:text-6xl my-3">STUDY ABROAD EXPO 2024</h1>
-        <p class="text-white font-light mt-5">Explore the world of opportunities with free entry, individual
-            consultation and learn about <br> new scholarships. HYDERABAD - KARACHI - LAHORE - ISLAMABAD -
-            RAWALPINDI - SIALKOT - <br> JHELUM - GUJRAT - PESHAWAR - FAISALABAD - MULTAN - BAHAWALPUR - SARGODHA -
-            <br> GUJRANWALA
+        <h1 class="text-white md:text-6xl my-3">{{$h->heading}}</h1>
+        <p class="text-white font-light mt-5">{{$h->desc}}
         </p>
+        @endforeach
         <button class="bg-white text-xl text-[#2BB673] px-6 py-2 rounded-3xl my-3 font-semibold"><span>View details
             </span><i class="fa-solid fa-arrow-right "></i></button>
     </div>

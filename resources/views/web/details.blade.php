@@ -1,5 +1,7 @@
 @extends('layouts.web_main')
-
+@push('title')
+Details - {{$name}}
+@endpush
 @section('main-section')
 <div class="after-banner w-[90vw] mx-auto flex my-16 md:h-[80vh] md:flex-row flex-col">
     <div class="left md:w-[65%] cnt md:overflow-y-auto ">
@@ -25,21 +27,21 @@
                 <a class="text-xl font-light hover:text-[#2BB673] cursor-pointer">Book a Meeting with expert</a>
             </div>
             <div class="desc-top mt-5">
-                <h1 class="text-2xl md:text-4xl font-bold mb-3">Cost of studying in {{$name}} for international students</h1>
+                <h1 class="text-2xl md:text-4xl font-bold mb-3">Cost of studying in {{ $name }} for international students</h1>
 
-                @foreach($details as $detail)
                 @php
-                    $studyDetails = explode('|', $detail->whyStudy); // Each detail ke 'whyStudy' ko explode karo
+                    // Split the 'whyStudy' field using '|' and replace 'Europe' with the country name
+                    $studyDetails = explode('|', $details->whyStudy);
                 @endphp
 
                 @foreach($studyDetails as $study)
                     @php
-                        $study = str_replace('Europe', $name, $study); // Replace "Europe" with the dynamic $name
+                        $study = str_replace('Europe', $name, $study); // Replace "Europe" with dynamic $name
                     @endphp
                     <p class="text-xl font-light mt-3">{{ $study }}</p>
                 @endforeach
-            @endforeach
             </div>
+
 
 
             <div class="desc-top mt-5">

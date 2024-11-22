@@ -29,14 +29,14 @@
             <div class="modal-body">
             <form action="{{route('services-store')}}" method="post">
                 @csrf
-                <div class="form-group mb-3">
-                    <input type="text" name="service_icon" class="form-control">
+                <div class="form-group ">
+                    <input type="text" name="service_icon" class="form-control" placeholder="icon-class">
+                </div>
+                <div class="form-group my-3">
+                    <input type="text" name="service_heading" class="form-control" placeholder="service heading">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="service_heading" class="form-control">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="service_details" class="form-control">
+                    <input placeholder="service details" type="text" name="service_details" class="form-control">
                 </div>
                 <div class="d-flex justify-content-end mt-3">
                     <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Close</button>

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\hero;
 use App\Models\country;
 use App\Mail\RejectMail;
 use App\Models\consults;
+use App\Models\services;
 use App\Mail\ApproveMail;
 use App\Mail\RequestMail;
-use App\Models\countrydetails;
-use App\Models\services;
 use Illuminate\Http\Request;
+use App\Models\countrydetails;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +24,11 @@ class AdminController extends Controller
         ->join('countries', 'countrydetails.country_id', '=', 'countries.id')
         ->where('countries.country_name', $name)
         ->select('countrydetails.*', 'countries.country_name')
-        ->get();
+        ->first();
 
+        if (!$details) {
+            return redirect()->route('error-404');
+        }
         return view('web.details', compact('details', 'name'));
 
     }
@@ -35,7 +39,7 @@ class AdminController extends Controller
                 ->join('countries','consults.country_id', '=', 'countries.id')
                 ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message')
                 ->get();
-                return view('admin.consult', compact('consults'));
+                return view('admin.consult.consult', compact('consults'));
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
@@ -50,9 +54,9 @@ class AdminController extends Controller
                 $consults = DB::table('consults')
                 ->join('countries','consults.country_id', '=', 'countries.id')
                 ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message','consults.status')
-                ->where('status', '=', 'pending')
+                ->where('consults.status', '=', 'pending')
                 ->get();
-                return view('admin.pending', compact('consults'));
+                return view('admin.consult.pending', compact('consults'));
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
@@ -68,12 +72,12 @@ class AdminController extends Controller
             $consults = DB::table('consults')
             ->join('countries','consults.country_id', '=', 'countries.id')
             ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message','consults.status')
-            ->where('status', '=', 'approved')
+            ->where('consults.status', '=', 'approved')
             ->get();
 
             //email sending for rejection
 
-                return view('admin.approved', compact('consults'));
+                return view('admin.consult.approved', compact('consults'));
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
@@ -88,9 +92,9 @@ class AdminController extends Controller
                 $consults = DB::table('consults')
                 ->join('countries','consults.country_id', '=', 'countries.id')
                 ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message','consults.status')
-                ->where('status', '=', 'rejected')
+                ->where('consults.status', '=', 'rejected')
                 ->get();
-                return view('admin.rejected', compact('consults'));
+                return view('admin.consult.rejected', compact('consults'));
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
@@ -123,8 +127,6 @@ class AdminController extends Controller
 
         $consult->save();
         return redirect()->back()->with('success',"Your query has been passed to us. We'll get back to you shortly");
-
-
     }
 
     public function consultDetails($id){
@@ -136,7 +138,7 @@ class AdminController extends Controller
                 ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status',  'consults.created_at')
                 ->where('consults.id', $consultId)->first();
 
-                return view('admin.details', ['consult' => $consult]);
+                return view('admin.details.details', ['consult' => $consult]);
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
@@ -223,7 +225,7 @@ class AdminController extends Controller
         if(Auth::check()){
             if(Auth::User()->role==1){
                 $countries = country::orderBy('country_name', 'asc')->get();
-                return view('admin.countries', compact('countries'));
+                return view('admin.country.countries', compact('countries'));
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
@@ -365,5 +367,25 @@ class AdminController extends Controller
         }else{
             return redirect()->route('login');
         }
+    }
+
+
+    public function heroIndex(){
+        return view('admin.hero.index');
+    }
+
+    public function heroAdd(Request $req){
+        $hero = new hero();
+        $hero->heading = $req->heading;
+        $hero->desc = $req->desc;
+
+
+        $image = $req->heroimage;
+        $imagename = time().'.'.$image->getClientOriginalName();
+        $req->heroimage->move('heroImages' , $imagename);
+        $hero->image = $imagename;
+
+        $hero->save();
+        return redirect()->back();
     }
 }

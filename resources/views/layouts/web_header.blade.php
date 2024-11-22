@@ -12,8 +12,15 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-    <title>Study Tour</title>
+    <title>
+        Atrac Consultant - @stack('title')
+    </title>
+  <link href="https://fonts.cdnfonts.com/css/bambino-2" rel="stylesheet">
+
     <style>
+        *{
+            font-family: 'Bambino-Regular', sans-serif;
+        }
         html{
             scroll-behavior: smooth;
         }
@@ -104,7 +111,7 @@
                 <li><a href="#testimonial">Testimonials</a></li>
                 <li><a href="#blog">Blog</a></li>
                 <li><a href="./contact.html">Contact Us</a></li>
-                <li><a href="./about.html">About Us</a></li>
+                <li><a href="{{route('user-about')}}">About Us</a></li>
             </ul>
 
             <div id="open-close" class="bars block md:hidden">
@@ -121,6 +128,6 @@
             <li><a href="#testimonial">Testimonials</a></li>
             <li><a href="#blog">Blog</a></li>
             <li><a href="./contact.html">Contact Us</a></li>
-            <li><a href="./about.html">About Us</a></li>
+            <li><a href="{{route('user-about')}}">About Us</a></li>
         </ul>
     </div>
