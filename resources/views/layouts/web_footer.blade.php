@@ -76,10 +76,12 @@
     </div>
 
 
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.js"
+        integrity="sha512-tQQXRDB2wEmuJGtFrmmoFYzNTq8StA1XJrfO0OQbbTxd9G0CwaTDL6/C1y805IlvBVrMwOqob1kf6r/2U5XXVg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -164,6 +166,15 @@
 
 
         });
+
+        var typed = new Typed('#element', {
+            strings: ['STUDY ABROAD EXPO 2024', 'WANNA STUDY ABROAD?'],
+            typeSpeed: 50,
+            loop: true,
+            loopCount: Infinity,
+            backSpeed: 50,
+        });
+
     </script>
 
 </body>

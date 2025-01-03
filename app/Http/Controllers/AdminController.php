@@ -37,7 +37,7 @@ class AdminController extends Controller
             if(Auth::User()->role==1){
                 $consults = DB::table('consults')
                 ->join('countries','consults.country_id', '=', 'countries.id')
-                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message')
+                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.meeting_datetime')
                 ->get();
                 return view('admin.consult.consult', compact('consults'));
             }else{
@@ -135,7 +135,7 @@ class AdminController extends Controller
                 $consultId = $id;
                 $consult = DB::table('consults')
                 ->join('countries','consults.country_id', '=', 'countries.id')
-                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status',  'consults.created_at')
+                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status',  'consults.created_at', 'consults.meeting_datetime')
                 ->where('consults.id', $consultId)->first();
 
                 return view('admin.details.details', ['consult' => $consult]);
@@ -238,7 +238,12 @@ class AdminController extends Controller
             if(Auth::User()->role==1){
                 $countries = new country();
                 $countries->country_name = $req->country_name;
-
+                if ($req->hasFile('country_image')) {
+                    $image = $req->file('country_image');
+                    $imagename = time() . $image->getClientOriginalName();
+                    $image->move(public_path('images/country'), $imagename);
+                    $countries->country_image = $imagename; // Save image name in the database
+                }
                 $countries->save();
                 return redirect()->route('admin-countries')->with('success', 'Country Added');
             }else{
@@ -247,6 +252,22 @@ class AdminController extends Controller
         }else{
             return redirect()->route('login');
         }
+    }
+
+    public function countryUpdate(Request $req){
+        $id = $req->id;
+
+        $country = country::find($id);
+        $country->country_name = $req->name_;
+        if ($req->hasFile('image_')) {
+            $image = $req->file('image_');
+            $imagename = time() . $image->getClientOriginalName();
+            $image->move(public_path('images/country'), $imagename);
+            $country->country_image = $imagename; // Save image name in the database
+        }
+        $country->save();
+        return redirect()->route('admin-countries')->with('update', 'Country Data Updated');
+
     }
     public function countryActive($id){
         if(Auth::check()){
@@ -367,6 +388,11 @@ class AdminController extends Controller
         }else{
             return redirect()->route('login');
         }
+    }
+
+    public function getCountries($id){
+        $country = country::select(['id', 'country_name', 'country_image'])->find($id);
+        return response()->json($country);
     }
 
 

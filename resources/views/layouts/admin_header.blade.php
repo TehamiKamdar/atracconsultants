@@ -107,7 +107,7 @@
                 <span>
                   <i class="ti ti-typography"></i>
                 </span>
-                <span class="hide-menu">Typography</span>
+                <span class="hide-menu">About Page Content</span>
               </a>
             </li>
             <li class="nav-small-cap">

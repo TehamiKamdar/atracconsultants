@@ -49,29 +49,31 @@
                 <br>
 
                 @if ($consult->status == 'pending')
-                <dd class="col-sm-8">
-                    <!-- Approve and Reject Buttons -->
-                    <form action="{{ route('consult.approve', $consult->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                    </form>
-
-                    <form action="{{ route('consult.reject', $consult->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                    </form>
-                </dd>
+                    <dd class="col-sm-8">
+                        <!-- Approve with Date and Time -->
+                        <form action="{{ route('consult.schedule', $consult->id) }}" method="POST">
+                            @csrf
+                            <div class="form-group mb-2">
+                                <label for="meeting_datetime">Select Meeting Date and Time:</label>
+                                <input type="datetime-local" name="meeting_datetime" id="meeting_datetime"
+                                    class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-sm">Schedule & Approve</button>
+                        </form>
+                    </dd>
                 @else
                     @if ($consult->status == 'approved')
-                    <dd class="col-sm-8">
-                        <span class="badge bg-success">{{ $consult->status }}</span>
-                    </dd>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-success">{{ $consult->status }}</span>
+                            <br>
+                            <strong>Meeting Scheduled For:</strong> {{ $consult->meeting_datetime }}
+                        </dd>
                     @else
-                    <dd class="col-sm-8">
-                        <span class="badge bg-danger">{{ $consult->status }}</span>
-                    </dd>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-danger">{{ $consult->status }}</span>
+                        </dd>
                     @endif
-                @endif  
+                @endif
 
 
 

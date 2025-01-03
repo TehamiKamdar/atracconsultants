@@ -103,34 +103,5 @@ Details - {{$name}}
 
         </div>
     </div>
-    <div class="right w-[90vw] md:w-[35%] bg-[#2BB673] h-[90%] rounded-xl mt-10 md:mt-0">
-        <h1 class="text-white text-center text-3xl font-semibold py-4">Book Free Consultation</h1>
-        <form action="">
-            <div class="w-[90%] mx-auto mb-4">
-                <input class="w-[100%] outline-none rounded-xl px-5 py-2" type="text" name=""
-                    placeholder="Full Name *">
-            </div>
-            <div class="w-[90%] mx-auto mb-4">
-                <input class="w-[100%] outline-none rounded-xl px-5 py-2" type="email" name=""
-                    placeholder="Email Address*">
-            </div>
-            <div class="w-[90%] mx-auto mb-4">
-                <input class="w-[100%] outline-none rounded-xl px-5 py-2" type="tel" name=""
-                    placeholder="Phone number *">
-            </div>
-            <div class="w-[90%] mx-auto mb-4">
-                <input class="w-[100%] outline-none rounded-xl px-5 py-2" type="text" value="{{$name}}" name=""
-                    placeholder="Country interested in *">
-            </div>
-            <div class="w-[90%] mx-auto mb-4">
-                <input class="w-[100%] outline-none rounded-xl px-5 py-2" type="tel" name=""
-                    placeholder="Last Qualification *">
-            </div>
-            <div class="w-[90%] mx-auto mb-4 flex gap-4">
-                <button class="bg-[#c9ffe4] text-[#2BB673] px-10 py-2 rounded-3xl font-semibold ">Book Now<i
-                        class="ml-1 fa-solid fa-arrow-right"></i></button>
-            </div>
-        </form>
-    </div>
 </div>
 @endsection

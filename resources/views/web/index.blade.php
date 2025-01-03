@@ -1,21 +1,21 @@
 @extends('layouts.web_main')
 
 @push('title')
-Home
+    Home
 @endpush
 
 @section('main-section')
 
 <!-- Hero section start -->
-<div class="hero bg-[#2BB673] py-10 md:h-[88vh] flex items-center">
+<div class="hero mybg py-10 md:h-[88vh] flex items-center">
     <div class="w-[87vw] mx-auto">
-        @foreach ($hero as $h)
-        <img src="./heroImages/{{$h->image}}" alt="">
-        <h1 class="text-white text-4xl mb-3">28 June to 10 July</h1>
-        <h1 class="text-white md:text-6xl my-3">{{$h->heading}}</h1>
-        <p class="text-white font-light mt-5">{{$h->desc}}
+        <h1 class="text-white md:text-4xl mb-3">28 June to 10 July</h1>
+        <h1 class="text-white text-4xl md:text-6xl my-3"><span id="element"></span></h1>
+        <p class="text-white font-light mt-5">Explore the world of opportunities with free entry, individual
+            consultation and learn about <br> new scholarships. HYDERABAD - KARACHI - LAHORE - ISLAMABAD -
+            RAWALPINDI - SIALKOT - <br> JHELUM - GUJRAT - PESHAWAR - FAISALABAD - MULTAN - BAHAWALPUR - SARGODHA -
+            <br> GUJRANWALA
         </p>
-        @endforeach
         <button class="bg-white text-xl text-[#2BB673] px-6 py-2 rounded-3xl my-3 font-semibold"><span>View details
             </span><i class="fa-solid fa-arrow-right "></i></button>
     </div>
@@ -30,19 +30,22 @@ Home
             <h1 class="font-bold text-2xl md:text-3xl">destinations.</h1>
         </div>
         <div class="top-right md:w-[44vw] w-[100%]">
-            <p class="text-xl font-light mt-5 md:mt-0">When it comes to studying abroad, there are several countries giving international student great opportunities of higher education and becoming part of their international community. See which country suits you best.</p>
+            <p class="text-xl font-light mt-5 md:mt-0">When it comes to studying abroad, there are several countries
+                giving international student great opportunities of higher education and becoming part of their
+                international community. See which country suits you best.</p>
         </div>
     </div>
     <div class="mt-20 slider-country bottom w-[88vw] mx-auto">
         @foreach ($countries as $country)
-        <div class="card shadow-lg rounded-lg ">
-            <div class="img flex justify-center">
-                <img class="w-[120px]" src="{{asset('webassets/newlogo-removebg-preview-BNhagA2w.png')}}" alt="">
+            <div class="card shadow-lg rounded-lg ">
+                <div class="img flex justify-center">
+                    <img class="w-[120px]" src="{{asset('../../../images/country/')}}/{{$country->country_image}}" alt="">
+                </div>
+                <div class="flex justify-center">
+                    <a href="{{route('country-details', $country->country_name)}}"
+                        class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">{{$country->country_name}}</a>
+                </div>
             </div>
-            <div class="flex justify-center">
-                <a href="{{route('country-details', $country->country_name)}}" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">{{$country->country_name}}</a>
-            </div>
-        </div>
         @endforeach
     </div>
 </div>
@@ -58,15 +61,16 @@ Home
     <div class="btm slider w-[90vw] md:w-[80vw] mx-auto  my-16">
         @foreach ($services as $s)
 
-        <div class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
-            <div class="bg-white w-[100px] mx-auto h-[100px] rounded-full flex justify-center items-center my-5">
-                <i class="{{$s->service_icon}} text-gray-500 text-5xl"></i>
+            <div
+                class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
+                <div class="bg-white w-[100px] mx-auto h-[100px] rounded-full flex justify-center items-center my-5">
+                    <i class="{{$s->service_icon}} text-gray-500 text-5xl"></i>
+                </div>
+                <div class="desc text-white">
+                    <h1 class="text-center text-2xl font-bold mb-4">{{$s->service_heading}}</h1>
+                    <p class="text-center px-5 md:px-10 leading-8">{{$s->service_details}}</p>
+                </div>
             </div>
-            <div class="desc text-white">
-                <h1 class="text-center text-2xl font-bold mb-4">{{$s->service_heading}}</h1>
-                <p class="text-center px-5 md:px-10 leading-8">{{$s->service_details}}</p>
-            </div>
-        </div>
         @endforeach
     </div>
 
@@ -87,35 +91,37 @@ Home
 
         <div>
             <div class="flex items-center gap-3">
-                <div
-                    class="icon bg-[#bcfdde] w-[60px] h-[60px] rounded-full flex justify-center items-center text-3xl">
+                <div class="icon bg-[#bcfdde] w-[60px] h-[60px] rounded-full flex justify-center items-center text-3xl">
                     <i class="fa-solid fa-clock text-[#2BB673]"></i>
                 </div>
                 <h1 class="text-2xl font-semibold">State of the art technologies</h1>
             </div>
-            <p class="font-light my-2">We improve on efficiency and provide unmatched customer experience in the industry with modern CRM technologies and student portal.</p>
+            <p class="font-light my-2">We improve on efficiency and provide unmatched customer experience in the
+                industry with modern CRM technologies and student portal.</p>
         </div>
 
         <div>
             <div class="flex items-center gap-3">
-                <div
-                    class="icon bg-[#bcfdde] w-[60px] h-[60px] rounded-full flex justify-center items-center text-3xl">
+                <div class="icon bg-[#bcfdde] w-[60px] h-[60px] rounded-full flex justify-center items-center text-3xl">
                     <i class="fa-solid fa-flag text-[#2BB673]"></i>
                 </div>
                 <h1 class="text-2xl font-semibold">Experienced</h1>
             </div>
-            <p class="font-light my-2">Working since 2004, we have yielded vast experience from helping thousands of students from very high to average profile get admissions from their ideal universities while maintaining a proven success record of experience.</p>
+            <p class="font-light my-2">Working since 2004, we have yielded vast experience from helping thousands of
+                students from very high to average profile get admissions from their ideal universities while
+                maintaining a proven success record of experience.</p>
         </div>
 
         <div>
             <div class="flex items-center gap-3">
-                <div
-                    class="icon bg-[#bcfdde] w-[60px] h-[60px] rounded-full flex justify-center items-center text-3xl">
+                <div class="icon bg-[#bcfdde] w-[60px] h-[60px] rounded-full flex justify-center items-center text-3xl">
                     <i class="fa-solid fa-wallet text-[#2BB673]"></i>
                 </div>
                 <h1 class="text-2xl font-semibold">Free Consultancy</h1>
             </div>
-            <p class="font-light my-2">We represent the largest number of foreign institutes in Pakistan from Australia, Canada, UK, USA, Europe and so on while providing free consultancy for admissions, scholarships, interview preparation and visa related matters.</p>
+            <p class="font-light my-2">We represent the largest number of foreign institutes in Pakistan from Australia,
+                Canada, UK, USA, Europe and so on while providing free consultancy for admissions, scholarships,
+                interview preparation and visa related matters.</p>
         </div>
 
     </div>
@@ -127,9 +133,12 @@ Home
     <div class="options-left md:w-[60%] px-5 md:px-12">
         <h1 class="text-xl my-2 md:text-3xl md:font-semibold leading-[130%]">An impressive amount of options await
         </h1>
-        <h1 class="md:text-4xl text-xl md:font-bold leading-[130%]">Search for your desired study program <br>through TCF...
+        <h1 class="md:text-4xl text-xl md:font-bold leading-[130%]">Search for your desired study program <br>through
+            TCF...
         </h1>
-        <button class="border-2 my-5 border-[#2BB673] hover:text-white hover:border-gray-600 hover:bg-gray-600 text-[#2BB673] px-4 md:px-6 py-2 rounded-3xl font-semibold">Times Course Finder</button>
+        <button
+            class="border-2 my-5 border-[#2BB673] hover:text-white hover:border-gray-600 hover:bg-gray-600 text-[#2BB673] px-4 md:px-6 py-2 rounded-3xl font-semibold">Times
+            Course Finder</button>
     </div>
 
     <div class="hidden options-right md:flex w-[40%] justify-center gap-4">
@@ -156,8 +165,7 @@ Home
             <div class="desc my-4">
                 <p class="date text-gray-400 font-bold">25 June,24</p>
                 <h1 class="font-bold text-2xl">Is there a right time to apply to a Canadian university?</h1>
-                <button
-                    class="bg-[#2BB673] hover:bg-[#000000] px-8 py-2 text-white rounded-3xl my-4 font-semibold">Read
+                <button class="bg-[#2BB673] hover:bg-[#000000] px-8 py-2 text-white rounded-3xl my-4 font-semibold">Read
                     More <i class="fa-solid fa-arrow-right "></i></button>
             </div>
         </div>
@@ -167,8 +175,7 @@ Home
             <div class="desc my-4">
                 <p class="date text-gray-400 font-bold">25 June,24</p>
                 <h1 class="font-bold text-2xl">Is there a right time to apply to a Canadian university?</h1>
-                <button
-                    class="bg-[#2BB673] hover:bg-[#000000] px-8 py-2 text-white rounded-3xl my-4 font-semibold">Read
+                <button class="bg-[#2BB673] hover:bg-[#000000] px-8 py-2 text-white rounded-3xl my-4 font-semibold">Read
                     More <i class="fa-solid fa-arrow-right "></i></button>
             </div>
         </div>
@@ -178,8 +185,7 @@ Home
             <div class="desc my-4">
                 <p class="date text-gray-400 font-bold">25 June,24</p>
                 <h1 class="font-bold text-2xl">Is there a right time to apply to a Canadian university?</h1>
-                <button
-                    class="bg-[#2BB673] hover:bg-[#000000] px-8 py-2 text-white rounded-3xl my-4 font-semibold">Read
+                <button class="bg-[#2BB673] hover:bg-[#000000] px-8 py-2 text-white rounded-3xl my-4 font-semibold">Read
                     More <i class="fa-solid fa-arrow-right "></i></button>
             </div>
         </div>
@@ -216,15 +222,8 @@ Home
                 @csrf
                 <div class="w-[95%] mx-auto grid grid-cols-2 gap-2">
                     <div>
-                        <input name="name" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="text" placeholder="Full name">
-                    </div>
-                    <div>
-                        <input name="email" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="email" placeholder="Email Address">
-                    </div>
-                </div>
-                <div class="my-3 w-[95%] mx-auto grid grid-cols-2 gap-2">
-                    <div>
-                        <input name="phone" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="phone" placeholder="Phone Number">
+                        <input name="name" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="text"
+                            placeholder="Full name">
                     </div>
                     <div>
                         <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="qualification" id="">
@@ -235,8 +234,13 @@ Home
                             <option value="Masters">Masters</option>
                         </select>
                     </div>
+                    
                 </div>
                 <div class="my-3 w-[95%] mx-auto grid grid-cols-2 gap-2">
+                <div>
+                        <input name="email" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="email"
+                            placeholder="Email Address">
+                    </div>
                     <div>
                         <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="country" id="">
                             <option value="" selected disabled>Country of Interest</option>
@@ -244,6 +248,14 @@ Home
                                 <option value="{{$c->id}}">{{$c->country_name}}</option>
                             @endforeach
                         </select>
+                    </div>
+                   
+                    
+                </div>
+                <div class="my-3 w-[95%] mx-auto grid grid-cols-2 gap-2">
+                <div>
+                        <input name="phone" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="phone"
+                            placeholder="Phone Number">
                     </div>
                     <div>
                         <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="field" id="">
@@ -253,13 +265,16 @@ Home
                             @endforeach
                         </select>
                     </div>
+                    
                 </div>
 
                 <div class="my-3 w-[95%] mx-auto">
-                    <textarea placeholder="Message" rows="5" class="px-4 py-2 w-[97.5%] rounded-lg outline-none" name="message" id=""></textarea>
+                    <textarea placeholder="Message" rows="5" class="px-4 py-2 w-[97.5%] rounded-lg outline-none"
+                        name="message" id=""></textarea>
                 </div>
                 <div class="my-3 w-[95%] mx-auto">
-                    <button class="bg-white px-8 py-2 text-[#2BB673] rounded-3xl my-4 font-semibold">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="bg-white px-8 py-2 text-[#2BB673] rounded-3xl my-4 font-semibold">Book Consultation <i
+                            class="fa-solid fa-arrow-right"></i></button>
                 </div>
 
             </form>
@@ -284,7 +299,9 @@ Home
             </div>
             <div class="mid my-4">
                 <p class="text-xl font-light">
-                    It's been a great experience getting my student visa processed by Times. The team has been really cooperative.They helped me getting offer letter from a university when another university had deferred my admission to next year.
+                    It's been a great experience getting my student visa processed by Times. The team has been really
+                    cooperative.They helped me getting offer letter from a university when another university had
+                    deferred my admission to next year.
                 </p>
             </div>
             <div class="btm">
@@ -295,7 +312,8 @@ Home
 
         <div class="card w-[43vw] px-8 py-10 rounded-xl mr-2 mb-3">
             <div class="top">
-                <div class="logo rounded-full bg-pink-500 w-[60px] h-[60px] flex justify-center items-center text-white">
+                <div
+                    class="logo rounded-full bg-pink-500 w-[60px] h-[60px] flex justify-center items-center text-white">
                     <p class="text-3xl font-bold">M</p>
                 </div>
             </div>
