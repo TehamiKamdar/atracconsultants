@@ -39,7 +39,8 @@ class DatabaseSeeder extends Seeder
             CountriesSeeder::class,
             FieldsSeeder::class,
             ServiceSeeder::class,
-            DetailsSeeder::class
+            DetailsSeeder::class,
+            ProgramsLevelSeeder::class
         ]);
     }
 }

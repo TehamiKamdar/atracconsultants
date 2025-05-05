@@ -57,6 +57,7 @@ Route::prefix('admin')->group(function () {
         Route::get( 'details/{id}' , [AdminController::class , 'consultDetails'])->name('admin-consult-details');
         Route::post( 'approve/{id}' , [AdminController::class , 'consultApprove'])->name('consult.approve');
         Route::post( 'reject/{id}' , [AdminController::class , 'consultReject'])->name('consult.reject');
+        Route::post( 'schedule/{id}' , [AdminController::class , 'consultSchedule'])->name('consult.schedule');
     });
     Route::prefix('services')->group(function(){
         Route::get('', [AdminController::class , 'serviceIndex'])->name('admin-services');

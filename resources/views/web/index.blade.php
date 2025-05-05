@@ -9,17 +9,41 @@
 <!-- Hero section start -->
 <div class="hero mybg py-10 md:h-[88vh] flex items-center">
     <div class="w-[87vw] mx-auto">
-        <h1 class="text-white md:text-4xl mb-3">28 June to 10 July</h1>
+        <h1 class="text-white md:text-4xl mb-3">September to February</h1>
         <h1 class="text-white text-4xl md:text-6xl my-3"><span id="element"></span></h1>
-        <p class="text-white font-light mt-5">Explore the world of opportunities with free entry, individual
-            consultation and learn about <br> new scholarships. HYDERABAD - KARACHI - LAHORE - ISLAMABAD -
-            RAWALPINDI - SIALKOT - <br> JHELUM - GUJRAT - PESHAWAR - FAISALABAD - MULTAN - BAHAWALPUR - SARGODHA -
-            <br> GUJRANWALA
+        <p class="text-white font-light mt-5">Explore the realm of opportunity with free access, and individual consultation, and hear about the<br> new scholarships. in USA, UK, CANADA, AUSTRALIA, TURKEY, NORTH CYPRUS, ITALY, GERMANY
         </p>
-        <button class="bg-white text-xl text-[#2BB673] px-6 py-2 rounded-3xl my-3 font-semibold"><span>View details
-            </span><i class="fa-solid fa-arrow-right "></i></button>
+        <button class="bg-white text-xl text-[#2BB673] px-6 py-2 rounded-3xl my-3 font-semibold"><a href="#country">View details</a><i class="fa-solid fa-arrow-right "></i></button>
     </div>
 </div>
+
+<!-- What we do -->
+<div id="whatwedo" class="what-we-do pt-10">
+    <div class="top mx-auto" style="width:80%;">
+        <h1 class="text-center text-[#2BB673] text-3xl md:text-5xl font-bold py-5">Why Atrac Consultants?</h1>
+        <p class="text-center text-xl md:text-2xl font-light pb-2">Atrac Consultants, is your trusted partner in education and career advancement. Established with a commitment to excellence, Atrac Consultants specializes in providing comprehensive education consultancy services to students aspiring to study abroad in renowned educational destinations. Our expertise spans Turkey, Italy, Germany, North Cyprus, Cyprus, the United Kingdom, the United States of America, Canada, and Australia.</p>
+        <h1 class="text-center text-xl md:text-2xl font-light">Our mission is to empower students and professionals by providing them with the knowledge, resources, and support they need to succeed in an increasingly globalized world. At Atrac Consultants, your dreams are our priority, and we are dedicated to helping you turn them into reality.</h1>
+    </div>
+
+    <!-- <div class="btm slider w-[90vw] md:w-[80vw] mx-auto  my-16">
+        @foreach ($services as $s)
+
+            <div
+                class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
+                <div class="bg-white w-[100px] mx-auto h-[100px] rounded-full flex justify-center items-center my-5">
+                    <i class="{{$s->service_icon}} text-gray-500 text-5xl"></i>
+                </div>
+                <div class="desc text-white">
+                    <h1 class="text-center text-2xl font-bold mb-4">{{$s->service_heading}}</h1>
+                    <p class="text-center px-5 md:px-10 leading-8">{{$s->service_details}}</p>
+                </div>
+            </div>
+        @endforeach
+    </div> -->
+
+</div>
+
+
 
 <!--Choose Countries  -->
 <div id="country" class="choose-countries mt-10 md:mt-20">
@@ -30,9 +54,7 @@
             <h1 class="font-bold text-2xl md:text-3xl">destinations.</h1>
         </div>
         <div class="top-right md:w-[44vw] w-[100%]">
-            <p class="text-xl font-light mt-5 md:mt-0">When it comes to studying abroad, there are several countries
-                giving international student great opportunities of higher education and becoming part of their
-                international community. See which country suits you best.</p>
+            <p class="text-xl font-light mt-5 md:mt-0">When it comes to studying abroad, there are several countries giving international student great opportunities of higher education and becoming part of their international community. See which country suits you best.</p>
         </div>
     </div>
     <div class="mt-20 slider-country bottom w-[88vw] mx-auto">
@@ -42,7 +64,7 @@
                     <img class="w-[120px]" src="../../../images/country/{{$country->country_image}}" alt="">
                 </div>
                 <div class="flex justify-center">
-                <a href="{{route('country-details', $country->country_name)}}" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">{{$country->country_name}}</a>
+                <a href="{{route('country-details', $country->slug)}}" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">{{$country->country_name}}</a>
                 </div>
             </div>
         @endforeach
@@ -85,7 +107,7 @@
 
         <div>
             <h1 class="text-2xl font-bold text-[#2BB673]">Why choose Us</h1>
-            <h1 class="text-4xl font-semibold py-3">Reasons For trusting Times Consultant</h1>
+            <h1 class="text-4xl font-semibold py-3">Reasons For trusting Atrac Consultant</h1>
         </div>
 
         <div>
@@ -132,12 +154,10 @@
     <div class="options-left md:w-[60%] px-5 md:px-12">
         <h1 class="text-xl my-2 md:text-3xl md:font-semibold leading-[130%]">An impressive amount of options await
         </h1>
-        <h1 class="md:text-4xl text-xl md:font-bold leading-[130%]">Search for your desired study program <br>through
-            TCF...
+        <h1 class="md:text-4xl text-xl md:font-bold leading-[130%]">Search for your desired study program <br>through Atrac
         </h1>
-        <button
-            class="border-2 my-5 border-[#2BB673] hover:text-white hover:border-gray-600 hover:bg-gray-600 text-[#2BB673] px-4 md:px-6 py-2 rounded-3xl font-semibold">Times
-            Course Finder</button>
+        <br>
+        <a href="#consultation" class="border-2 my-5 border-[#2BB673] hover:text-white hover:border-gray-600 hover:bg-gray-600 text-[#2BB673] px-4 md:px-6 py-2 rounded-3xl font-semibold">Book Free Consultation</a>
     </div>
 
     <div class="hidden options-right md:flex w-[40%] justify-center gap-4">
@@ -193,7 +213,7 @@
 </div>
 
 <!-- request Consultation -->
-<div class="consulatation mb-10">
+<div class="consulatation mb-10" id="consultation">
     <div class="top">
         <h1 class="text-[#2BB673] text-2xl font-semibold text-center my-2">Contact Form</h1>
         <p class="text-4xl font-bold text-center my-2">Request our free consultation!</p>
@@ -205,7 +225,7 @@
         </script>
     @endif
 
-    <div class="btm w-[90vw] md:h-[80vh] mx-auto bg-[#2BB673] rounded-3xl mt-10">
+    <div class="btm w-[90vw] md:h-[82vh] mx-auto bg-[#2BB673] rounded-3xl mt-10">
         <div class="top py-5">
             <div class="icon flex justify-center">
                 <i class="text-6xl text-white fa-regular fa-address-card"></i>
@@ -225,7 +245,6 @@
                     <div>
                         <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="qualification" id="">
                             <option value="" selected disabled>Qualification</option>
-                            <option value="Matriculation">Matriculation</option>
                             <option value="Intermediate">Intermediate</option>
                             <option value="Bachelors">Bachelors</option>
                             <option value="Masters">Masters</option>
@@ -261,6 +280,14 @@
                                 <option value="{{$f->field}}">{{$f->field}}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                </div>
+
+                <div class="my-3 w-[95%] mx-auto grid grid-cols-2 gap-2">
+                    <div>
+                        <input name="percentage" max="100" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="number"
+                            placeholder="Percentage" required>
                     </div>
 
                 </div>

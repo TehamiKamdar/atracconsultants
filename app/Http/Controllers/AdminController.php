@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\hero;
+use App\Models\fields;
 use App\Models\country;
 use App\Mail\RejectMail;
 use App\Models\consults;
@@ -22,14 +23,17 @@ class AdminController extends Controller
         // return $name;
         $details = DB::table('countrydetails')
         ->join('countries', 'countrydetails.country_id', '=', 'countries.id')
-        ->where('countries.country_name', $name)
+        ->where('countries.slug', $name)
         ->select('countrydetails.*', 'countries.country_name')
         ->first();
+        $fields = fields::orderBy('field', 'asc')->get();
+
+        $countryName = $details->country_name;
 
         if (!$details) {
             return redirect()->route('error-404');
         }
-        return view('web.details', compact('details', 'name'));
+        return view('web.details', compact('details', 'name', 'countryName', 'fields'));
 
     }
     public function consultAllIndex(){
@@ -113,6 +117,7 @@ class AdminController extends Controller
         $consult->message = $req->message;
         $consult->qualification = $req->qualification;
         $consult->country_id = $req->country;
+        $consult->percentage = $req->percentage;
         $consult->field = $req->field;
 
         $consultRequest = [
@@ -120,10 +125,11 @@ class AdminController extends Controller
             'email' => $req->email,
             'message' => $req->message,
             'qualification' => $req->qualification,
-            'country_id' => $req->country_id,
+            'country_id' => $req->country,
+            'percentage' => $req->percentage,
             'field' => $req->field
         ];
-        Mail::to($req->email)->send(new RequestMail($consultRequest));
+        // Mail::to($req->email)->send(new RequestMail($consultRequest));
 
         $consult->save();
         return redirect()->back()->with('success',"Your query has been passed to us. We'll get back to you shortly");
@@ -135,10 +141,36 @@ class AdminController extends Controller
                 $consultId = $id;
                 $consult = DB::table('consults')
                 ->join('countries','consults.country_id', '=', 'countries.id')
-                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status',  'consults.created_at', 'consults.meeting_datetime')
+                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status', 'consults.percentage',  'consults.created_at', 'consults.meeting_datetime')
                 ->where('consults.id', $consultId)->first();
 
+                // return $consult;
                 return view('admin.details.details', ['consult' => $consult]);
+            }else{
+                abort(403, "Why don't you go back and try again when you're feeling more heroic?");
+            }
+        }else{
+            return redirect()->route('login');
+        }
+
+        // return $consultId;
+    }
+    public function consultSchedule($id, Request $req){
+        if(Auth::check()){
+            if(Auth::User()->role==1){
+                $consultId = $id;
+                
+                $meeting_datetime = $req->meeting_datetime;
+                DB::table('consults')->where('id', $consultId)->update([
+                    'meeting_datetime' => $meeting_datetime, 
+                    'status' => 'approved'
+                ]);
+                
+                $consult = DB::table('consults')->where('id', $consultId)->first(); // Fetch the updated record
+                
+                Mail::to($consult->email)->send(new ApproveMail($consult));
+                
+                return redirect()->route('approved-consults');
             }else{
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }

@@ -69,11 +69,11 @@
         </div>
 
         <div class="content">
-            <p>Dear {{ $consultApprove['name'] }},</p>
+            <p>Dear {{ $consultApprove->name }},</p>
 
             <p>We are pleased to inform you that your appointment request has been approved and confirmed.</p>
 
-            <p>Your appointment is scheduled for Today.</p>
+            <p>Your appointment is scheduled for {{ \Carbon\Carbon::parse($consultApprove->meeting_datetime)->format('l, F j, Y \a\t h:i A') }}.</p>
 
             <p>If you need to make any changes to your appointment or require additional information, feel free to reach out to us at support@atracconsultants.com or +923359285777.</p>
 

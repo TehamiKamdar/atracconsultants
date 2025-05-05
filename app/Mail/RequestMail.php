@@ -25,7 +25,7 @@ class RequestMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Approve Mail',
+            subject: 'Request Mail',
         );
     }
 

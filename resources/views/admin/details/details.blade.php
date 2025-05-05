@@ -35,6 +35,9 @@
                 <dt class="col-sm-4">Qualified With:</dt>
                 <dd class="col-sm-8">{{ $consult->qualification }}</dd>
 
+                <dt class="col-sm-4">Percentage:</dt>
+                <dd class="col-sm-8">{{ $consult->percentage }}%</dd>
+
                 <dt class="col-sm-4">Country of Interest:</dt>
                 <dd class="col-sm-8">{{ $consult->country_name }}</dd>
 
@@ -46,6 +49,8 @@
 
                 <dt class="col-sm-4">Requested On:</dt>
                 <dd class="col-sm-8">{{ $consult->created_at }}</dd>
+
+                
                 <br>
 
                 @if ($consult->status == 'pending')
@@ -66,7 +71,7 @@
                         <dd class="col-sm-8">
                             <span class="badge bg-success">{{ $consult->status }}</span>
                             <br>
-                            <strong>Meeting Scheduled For:</strong> {{ $consult->meeting_datetime }}
+                            <strong>Meeting Scheduled For:</strong> {{ \Carbon\Carbon::parse($consult->meeting_datetime)->format('d-M-Y h:i A') }}
                         </dd>
                     @else
                         <dd class="col-sm-8">

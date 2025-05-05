@@ -16,8 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');
             $table->text('image')->nullable();
-            $table->text('whyStudy')->required();
-            $table->text('costOfStudy')->required();
+            $table->text('country_description')->required();
+            $table->text('cost_of_living')->required();
+            $table->text('climate')->required();
+            $table->text('language')->required();
             $table->text('scholarships')->required();
             $table->text('workOpp')->required();
             $table->text('bookMeeting')->required();

@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('program_levels', function (Blueprint $table) {
             $table->id();
-            $table->string('country_name')->unique()->required();
-            $table->string('slug')->unique()->required();
-            $table->string('country_image')->nullable();
-            $table->string('status')->default('active');
+            $table->string('program_name');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('program_levels');
     }
 };
