@@ -35,7 +35,7 @@ Route::get('/aboutus', function(){
 
 Route::get('/country/details/{name}', [AdminController::class , 'detailsShow'])->name('country-details');
 Route::post('/consult' , [AdminController::class , 'consultRequest'])->name('consultation');
-
+Route::get('/university/details/{name}', [AdminController::class ,'uniDetails'])->name('university.details');
 
 
 //Admin Routes

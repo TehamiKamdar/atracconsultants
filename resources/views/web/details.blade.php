@@ -160,75 +160,17 @@
     </div>
 
     <div class="mt-20 slider-country bottom w-[88vw] mx-auto">
-        <div class="card shadow-lg rounded-lg ">
-            <div class="img flex justify-center">
-                <img class="w-[120px]" src="" alt="">
+        @foreach ($universities as $uni)
+            <div class="card shadow-lg rounded-lg ">
+                <div class="img flex justify-center">
+                    <img class="w-[120px]" src="{{$uni->logo}}" alt="{{$uni->university_name}}">
+                </div>
+                <div class="flex justify-center">
+                    <a href="{{route('university.details', $uni->slug)}}" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">
+                        {{$uni->university_name}}
+                    </a>
+                </div>
             </div>
-            <div class="flex justify-center">
-                <a href="" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">
-
-                </a>
-            </div>
-        </div>
-        <div class="card shadow-lg rounded-lg ">
-            <div class="img flex justify-center">
-                <img class="w-[120px]" src="" alt="">
-            </div>
-            <div class="flex justify-center">
-                <a href="" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">
-                    
-                </a>
-            </div>
-        </div>
-        <div class="card shadow-lg rounded-lg ">
-            <div class="img flex justify-center">
-                <img class="w-[120px]" src="" alt="">
-            </div>
-            <div class="flex justify-center">
-                <a href="" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">
-                    
-                </a>
-            </div>
-        </div>
-        <div class="card shadow-lg rounded-lg ">
-            <div class="img flex justify-center">
-                <img class="w-[120px]" src="" alt="">
-            </div>
-            <div class="flex justify-center">
-                <a href="" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">
-
-                </a>
-            </div>
-        </div>
-        <div class="card shadow-lg rounded-lg ">
-            <div class="img flex justify-center">
-                <img class="w-[120px]" src="" alt="">
-            </div>
-            <div class="flex justify-center">
-                <a href="" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">
-
-                </a>
-            </div>
-        </div>
-        <div class="card shadow-lg rounded-lg ">
-            <div class="img flex justify-center">
-                <img class="w-[120px]" src="" alt="">
-            </div>
-            <div class="flex justify-center">
-                <a href="" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">
-
-                </a>
-            </div>
-        </div>
-        <div class="card shadow-lg rounded-lg ">
-            <div class="img flex justify-center">
-                <img class="w-[120px]" src="" alt="">
-            </div>
-            <div class="flex justify-center">
-                <a href="" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">
-                    
-                </a>
-            </div>
-        </div>
+        @endforeach
     </div>
 @endsection

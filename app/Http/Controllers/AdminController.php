@@ -19,95 +19,185 @@ use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
-    public function detailsShow($name){
+    public function detailsShow($name)
+    {
         // return $name;
         $details = DB::table('countrydetails')
-        ->join('countries', 'countrydetails.country_id', '=', 'countries.id')
-        ->where('countries.slug', $name)
-        ->select('countrydetails.*', 'countries.country_name')
-        ->first();
+            ->join('countries', 'countrydetails.country_id', '=', 'countries.id')
+            ->where('countries.slug', $name)
+            ->select('countrydetails.*', 'countries.country_name', 'countries.id as country_id')
+            ->first();
         $fields = fields::orderBy('field', 'asc')->get();
 
         $countryName = $details->country_name;
 
+        $country_id = $details->country_id;
+
+        $universities = DB::table('universities')->where('country_id', '=', $country_id)->get();
+
         if (!$details) {
             return redirect()->route('error-404');
         }
-        return view('web.details', compact('details', 'name', 'countryName', 'fields'));
+        return view('web.details', compact('details', 'name', 'countryName', 'fields', 'universities'));
+        // return $universities;
 
     }
-    public function consultAllIndex(){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+
+    public function uniDetails($name)
+    {
+        $university = DB::table('universities')
+            ->where('slug', '=', $name)
+            ->first();
+        if (!$university) {
+            return redirect()->route('error-404');
+        }
+        $uni_id = $university->id;
+        $uniName = $university->university_name;
+
+        $asscdepartments = DB::table('unideptprogcourses')
+            ->join('departments', 'departments.id', '=', 'unideptprogcourses.depart_id')
+            ->join('courses', 'courses.id', '=', 'unideptprogcourses.course_id')
+            ->join('universities', 'universities.id', '=', 'unideptprogcourses.university_id')
+            ->where('unideptprogcourses.university_id', $uni_id)
+            ->where('unideptprogcourses.program_level', 1)
+            ->select(
+                'unideptprogcourses.*',
+                'departments.department_name as department_name',
+                'courses.course_title as course_title',
+                'universities.university_name as university_name',
+                'universities.slug',
+                'universities.country_id'
+            )
+            ->get()
+            ->groupBy('department_name'); // <-- GROUPING here
+
+        $bachelordepartments = DB::table('unideptprogcourses')
+            ->join('departments', 'departments.id', '=', 'unideptprogcourses.depart_id')
+            ->join('courses', 'courses.id', '=', 'unideptprogcourses.course_id')
+            ->join('universities', 'universities.id', '=', 'unideptprogcourses.university_id')
+            ->where('unideptprogcourses.university_id', $uni_id)
+            ->where('unideptprogcourses.program_level', 2)
+            ->select(
+                'unideptprogcourses.*',
+                'departments.department_name as department_name',
+                'courses.course_title as course_title',
+                'universities.university_name as university_name',
+                'universities.slug',
+                'universities.country_id'
+            )
+            ->get()
+            ->groupBy('department_name');
+        $mastersdepartments = DB::table('unideptprogcourses')
+            ->join('departments', 'departments.id', '=', 'unideptprogcourses.depart_id')
+            ->join('courses', 'courses.id', '=', 'unideptprogcourses.course_id')
+            ->join('universities', 'universities.id', '=', 'unideptprogcourses.university_id')
+            ->where('unideptprogcourses.university_id', $uni_id)
+            ->where('unideptprogcourses.program_level', 3)
+            ->select(
+                'unideptprogcourses.*',
+                'departments.department_name as department_name',
+                'courses.course_title as course_title',
+                'universities.university_name as university_name',
+                'universities.slug',
+                'universities.country_id'
+            )
+            ->get()
+            ->groupBy('department_name');
+        $phddepartments = DB::table('unideptprogcourses')
+            ->join('departments', 'departments.id', '=', 'unideptprogcourses.depart_id')
+            ->join('courses', 'courses.id', '=', 'unideptprogcourses.course_id')
+            ->join('universities', 'universities.id', '=', 'unideptprogcourses.university_id')
+            ->where('unideptprogcourses.university_id', $uni_id)
+            ->where('unideptprogcourses.program_level', 4)
+            ->select(
+                'unideptprogcourses.*',
+                'departments.department_name as department_name',
+                'courses.course_title as course_title',
+                'universities.university_name as university_name',
+                'universities.slug',
+                'universities.country_id'
+            )
+            ->get()
+            ->groupBy('department_name');
+
+
+        return view('web.uni_details', compact('uniName', 'university','asscdepartments','bachelordepartments','mastersdepartments','phddepartments'));
+    }
+
+
+    public function consultAllIndex()
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $consults = DB::table('consults')
-                ->join('countries','consults.country_id', '=', 'countries.id')
-                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.meeting_datetime')
-                ->get();
+                    ->join('countries', 'consults.country_id', '=', 'countries.id')
+                    ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.meeting_datetime')
+                    ->get();
                 return view('admin.consult.consult', compact('consults'));
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
-
     }
-    public function consultPendingIndex(){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function consultPendingIndex()
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $consults = DB::table('consults')
-                ->join('countries','consults.country_id', '=', 'countries.id')
-                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message','consults.status')
-                ->where('consults.status', '=', 'pending')
-                ->get();
+                    ->join('countries', 'consults.country_id', '=', 'countries.id')
+                    ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status')
+                    ->where('consults.status', '=', 'pending')
+                    ->get();
                 return view('admin.consult.pending', compact('consults'));
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
-
     }
-    public function consultApprovedIndex(){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
-            // Data fetch on page
-            $consults = DB::table('consults')
-            ->join('countries','consults.country_id', '=', 'countries.id')
-            ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message','consults.status')
-            ->where('consults.status', '=', 'approved')
-            ->get();
+    public function consultApprovedIndex()
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
+                // Data fetch on page
+                $consults = DB::table('consults')
+                    ->join('countries', 'consults.country_id', '=', 'countries.id')
+                    ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status')
+                    ->where('consults.status', '=', 'approved')
+                    ->get();
 
-            //email sending for rejection
+                //email sending for rejection
 
                 return view('admin.consult.approved', compact('consults'));
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
-
     }
-    public function consultRejectedIndex(){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function consultRejectedIndex()
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $consults = DB::table('consults')
-                ->join('countries','consults.country_id', '=', 'countries.id')
-                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message','consults.status')
-                ->where('consults.status', '=', 'rejected')
-                ->get();
+                    ->join('countries', 'consults.country_id', '=', 'countries.id')
+                    ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status')
+                    ->where('consults.status', '=', 'rejected')
+                    ->get();
                 return view('admin.consult.rejected', compact('consults'));
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
-
     }
-    public function consultRequest(Request $req){
+    public function consultRequest(Request $req)
+    {
         // return view('web.index');
 
         $consult = new consults();
@@ -132,56 +222,59 @@ class AdminController extends Controller
         // Mail::to($req->email)->send(new RequestMail($consultRequest));
 
         $consult->save();
-        return redirect()->back()->with('success',"Your query has been passed to us. We'll get back to you shortly");
+        return redirect()->back()->with('success', "Your query has been passed to us. We'll get back to you shortly");
     }
 
-    public function consultDetails($id){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function consultDetails($id)
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $consultId = $id;
                 $consult = DB::table('consults')
-                ->join('countries','consults.country_id', '=', 'countries.id')
-                ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status', 'consults.percentage',  'consults.created_at', 'consults.meeting_datetime')
-                ->where('consults.id', $consultId)->first();
+                    ->join('countries', 'consults.country_id', '=', 'countries.id')
+                    ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.status', 'consults.percentage',  'consults.created_at', 'consults.meeting_datetime')
+                    ->where('consults.id', $consultId)->first();
 
                 // return $consult;
                 return view('admin.details.details', ['consult' => $consult]);
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
 
         // return $consultId;
     }
-    public function consultSchedule($id, Request $req){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function consultSchedule($id, Request $req)
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $consultId = $id;
-                
+
                 $meeting_datetime = $req->meeting_datetime;
                 DB::table('consults')->where('id', $consultId)->update([
-                    'meeting_datetime' => $meeting_datetime, 
+                    'meeting_datetime' => $meeting_datetime,
                     'status' => 'approved'
                 ]);
-                
+
                 $consult = DB::table('consults')->where('id', $consultId)->first(); // Fetch the updated record
-                
+
                 Mail::to($consult->email)->send(new ApproveMail($consult));
-                
+
                 return redirect()->route('approved-consults');
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
 
         // return $consultId;
     }
 
-    public function consultApprove($id){
+    public function consultApprove($id)
+    {
         if (Auth::check()) {
             if (Auth::User()->role == 1) {
                 // Retrieve the consult using Eloquent and update its status
@@ -193,7 +286,7 @@ class AdminController extends Controller
 
                     $consultApprove = [
                         'name' => $consult->name,
-                        'email'=> $consult->email
+                        'email' => $consult->email
                     ];
                     Mail::to($consult->email)->send(new ApproveMail($consultApprove));
 
@@ -212,7 +305,8 @@ class AdminController extends Controller
     }
 
 
-    public function consultReject($id){
+    public function consultReject($id)
+    {
         if (Auth::check()) {
             if (Auth::User()->role == 1) {
                 // Retrieve the consult using Eloquent and update its status
@@ -223,7 +317,7 @@ class AdminController extends Controller
                     $consult->save(); // Save the changes
                     $consultReject = [
                         'name' => $consult->name,
-                        'email'=> $consult->email
+                        'email' => $consult->email
                     ];
                     Mail::to($consult->email)->send(new RejectMail($consultReject));
 
@@ -242,32 +336,35 @@ class AdminController extends Controller
     }
 
 
-    public function index(){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function index()
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 return view('admin.index');
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
-    public function countryIndex(){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function countryIndex()
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $countries = country::orderBy('country_name', 'asc')->get();
                 return view('admin.country.countries', compact('countries'));
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
-    public function countryStore(Request $req){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function countryStore(Request $req)
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $countries = new country();
                 $countries->country_name = $req->country_name;
                 if ($req->hasFile('country_image')) {
@@ -278,15 +375,16 @@ class AdminController extends Controller
                 }
                 $countries->save();
                 return redirect()->route('admin-countries')->with('success', 'Country Added');
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
 
-    public function countryUpdate(Request $req){
+    public function countryUpdate(Request $req)
+    {
         $id = $req->id;
 
         $country = country::find($id);
@@ -299,11 +397,11 @@ class AdminController extends Controller
         }
         $country->save();
         return redirect()->route('admin-countries')->with('update', 'Country Data Updated');
-
     }
-    public function countryActive($id){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function countryActive($id)
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $country = country::find($id);
                 if ($country) {
                     $country->status = 'active';
@@ -312,16 +410,17 @@ class AdminController extends Controller
                 } else {
                     return redirect()->back()->with('error', 'Country not found');
                 }
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
-    public function countryInactive($id){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function countryInactive($id)
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $country = country::find($id);
                 if ($country) {
                     $country->status = 'inactive';
@@ -330,28 +429,30 @@ class AdminController extends Controller
                 } else {
                     return redirect()->back()->with('error', 'Country not found');
                 }
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
-    public function serviceIndex(){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function serviceIndex()
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $services = services::all();
                 return view('admin.services.index', compact('services'));
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
-    public function serviceStore(Request $req){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function serviceStore(Request $req)
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $service = new services();
                 $service->service_icon = $req->service_icon;
                 $service->service_heading = $req->service_heading;
@@ -359,16 +460,17 @@ class AdminController extends Controller
 
                 $service->save();
                 return redirect()->route('admin-services')->with('success', 'Service Added');
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
-    public function serviceActive($id){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function serviceActive($id)
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $service = services::find($id);
                 if ($service) {
                     $service->status = 'active';
@@ -377,16 +479,17 @@ class AdminController extends Controller
                 } else {
                     return redirect()->back()->with('error', 'Service not found');
                 }
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
-    public function serviceInactive($id){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function serviceInactive($id)
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $service = services::find($id);
                 if ($service) {
                     $service->status = 'inactive';
@@ -395,52 +498,57 @@ class AdminController extends Controller
                 } else {
                     return redirect()->back()->with('error', 'Service not found');
                 }
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
-    public function countryDetailsIndex(){
+    public function countryDetailsIndex()
+    {
         $countries = country::all();
         $details = countrydetails::all();
 
 
         return view('admin.details.index', compact('countries', 'details'));
     }
-    public function countryDetailsStore(Request $req){
-        if(Auth::check()){
-            if(Auth::User()->role==1){
+    public function countryDetailsStore(Request $req)
+    {
+        if (Auth::check()) {
+            if (Auth::User()->role == 1) {
                 $details = new countrydetails();
                 $details->country_id = $req->country;
-            }else{
+            } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
     }
 
-    public function getCountries($id){
+    public function getCountries($id)
+    {
         $country = country::select(['id', 'country_name', 'country_image'])->find($id);
         return response()->json($country);
     }
 
 
-    public function heroIndex(){
+    public function heroIndex()
+    {
         return view('admin.hero.index');
     }
 
-    public function heroAdd(Request $req){
+    public function heroAdd(Request $req)
+    {
         $hero = new hero();
         $hero->heading = $req->heading;
         $hero->desc = $req->desc;
 
 
         $image = $req->heroimage;
-        $imagename = time().'.'.$image->getClientOriginalName();
-        $req->heroimage->move('heroImages' , $imagename);
+        $imagename = time() . '.' . $image->getClientOriginalName();
+        $req->heroimage->move('heroImages', $imagename);
         $hero->image = $imagename;
 
         $hero->save();

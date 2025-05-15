@@ -1,6 +1,6 @@
 <!-- Footer Start -->
 <div class="footer bg-[#000000]">
-    <div class="footer-top w-[95vw] mx-auto md:h-[60vh] py-10">
+    <div class=" w-[95vw] mx-auto md:h-[60vh] py-10">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 ">
             <div class="flex flex-col justify-between">
                 <div class="top ">
@@ -75,8 +75,7 @@
             Reserved By <span class="text-[#2BB673]">Atrac Consultants</span></p>
     </div>
 </div>
-
-
+<script src="{{asset('assets/dist/js/bootstrap.bundle.min.js')}}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.js"
@@ -196,7 +195,7 @@
     })
 
 </script>
-
+@yield('scripts')
 </body>
 
 </html>

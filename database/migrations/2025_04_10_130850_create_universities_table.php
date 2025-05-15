@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('universities', function (Blueprint $table) {
             $table->id();
             $table->string('university_name')->required();
+            $table->text('description')->required();
+            $table->text('logo')->required();
+            $table->string('slug')->required();
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
