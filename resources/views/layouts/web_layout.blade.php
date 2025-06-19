@@ -42,7 +42,7 @@
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link-item active" href="/">Home</a>
+                        <a class="nav-link-item {{ Route::is('user-home') ? 'active' : '' }}" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link-item" href="#whywechoose">Why Choose Us</a>
@@ -57,10 +57,10 @@
                         <a class="nav-link-item" href="#consultation">Book an Appointment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link-item" href="{{route('user-about')}}">About Us</a>
+                        <a class="nav-link-item {{ Route::is('user-about') ? 'active' : '' }}" href="{{route('user-about')}}">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link-item" href="{{ route('contact') }}">Contact Us</a>
+                        <a class="nav-link-item {{ Route::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact Us</a>
                     </li>
                 </ul>
             </div>
