@@ -1,381 +1,604 @@
-@extends('layouts.web_main')
+@extends('layouts.web_layout')
 
 @push('title')
     Home
 @endpush
 
-@section('main-section')
+@section('content')
 
-<!-- Hero section start -->
-<div class="hero mybg py-10 md:h-[88vh] flex items-center">
-    <div class="w-[87vw] mx-auto">
-        <h1 class="text-white md:text-4xl mb-3">September to February</h1>
-        <h1 class="text-white text-4xl md:text-6xl my-3"><span id="element"></span></h1>
-        <p class="text-white font-light mt-5">Explore the realm of opportunity with free access, and individual consultation, and hear about the<br> new scholarships. in USA, UK, CANADA, AUSTRALIA, TURKEY, NORTH CYPRUS, ITALY, GERMANY
-        </p>
-        <button class="bg-white text-xl text-[#2BB673] px-6 py-2 rounded-3xl my-3 font-semibold"><a href="#country">View details</a><i class="fa-solid fa-arrow-right "></i></button>
-    </div>
-</div>
+    {{-- Hero Section --}}
 
-<!-- What we do -->
-<div id="whatwedo" class="what-we-do pt-10">
-    <div class="top mx-auto" style="width:80%;">
-        <h1 class="text-center text-[#2BB673] text-3xl md:text-5xl font-bold py-5">Why Atrac Consultants?</h1>
-        <p class="text-center text-xl md:text-2xl font-light pb-2">Atrac Consultants, is your trusted partner in education and career advancement. Established with a commitment to excellence, Atrac Consultants specializes in providing comprehensive education consultancy services to students aspiring to study abroad in renowned educational destinations. Our expertise spans Turkey, Italy, Germany, North Cyprus, Cyprus, the United Kingdom, the United States of America, Canada, and Australia.</p>
-        <h1 class="text-center text-xl md:text-2xl font-light">Our mission is to empower students and professionals by providing them with the knowledge, resources, and support they need to succeed in an increasingly globalized world. At Atrac Consultants, your dreams are our priority, and we are dedicated to helping you turn them into reality.</h1>
-    </div>
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-subtitle">September to February</h2>
+                <h1 class="hero-title" id="element">Explore <span>Global Education</span> Opportunities</h1>
+                <p class="hero-description">
+                    Discover the realm of opportunity with free access to individual consultation
+                    and learn about new scholarships in top study destinations worldwide.
+                </p>
+                <a href="#country" class="hero-btn">
+                    View Details <i class="fas fa-arrow-right"></i>
+                </a>
 
-    <!-- <div class="btm slider w-[90vw] md:w-[80vw] mx-auto  my-16">
-        @foreach ($services as $s)
-
-            <div
-                class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
-                <div class="bg-white w-[100px] mx-auto h-[100px] rounded-full flex justify-center items-center my-5">
-                    <i class="{{$s->service_icon}} text-gray-500 text-5xl"></i>
-                </div>
-                <div class="desc text-white">
-                    <h1 class="text-center text-2xl font-bold mb-4">{{$s->service_heading}}</h1>
-                    <p class="text-center px-5 md:px-10 leading-8">{{$s->service_details}}</p>
+                <div class="country-tags">
+                    <span class="country-tag">USA</span>
+                    <span class="country-tag">UK</span>
+                    <span class="country-tag">CANADA</span>
+                    <span class="country-tag">AUSTRALIA</span>
+                    <span class="country-tag">TURKEY</span>
+                    <span class="country-tag">NORTH CYPRUS</span>
+                    <span class="country-tag">ITALY</span>
+                    <span class="country-tag">GERMANY</span>
                 </div>
             </div>
-        @endforeach
-    </div> -->
-
-</div>
-
-
-
-<!--Choose Countries  -->
-<div id="country" class="choose-countries mt-10 md:mt-20">
-    <div class="top w-[88vw] mx-auto flex md:flex-row flex-col">
-        <div class="top-left md:w-[44vw] w-[100%]">
-            <h1 class="text-[#2BB673] font-bold text-3xl md:text-4xl mb-5">Countries</h1>
-            <h1 class="font-bold text-2xl md:text-3xl mb-2">Choose from the top study</h1>
-            <h1 class="font-bold text-2xl md:text-3xl">destinations.</h1>
         </div>
-        <div class="top-right md:w-[44vw] w-[100%]">
-            <p class="text-xl font-light mt-5 md:mt-0">When it comes to studying abroad, there are several countries giving international student great opportunities of higher education and becoming part of their international community. See which country suits you best.</p>
-        </div>
-    </div>
-    <div class="mt-20 slider-country bottom w-[88vw] mx-auto">
-        @foreach ($countries as $country)
-            <div class="card shadow-lg rounded-lg ">
-                <div class="img flex justify-center">
-                    <img class="w-[120px]" src="../../../images/country/{{$country->country_image}}" alt="">
-                </div>
-                <div class="flex justify-center">
-                <a href="{{route('country-details', $country->slug)}}" class="border mt-10 hover:bg-[#000000] hover:text-[#ffff] border-[#2BB673] text-[#2BB673] px-8 py-1 hover:border-[#000000] rounded-2xl font-semibold">{{$country->country_name}}</a>
-                </div>
-            </div>
-        @endforeach
-    </div>
-</div>
-
-<!-- What we do -->
-<div id="whatwedo" class="what-we-do pt-10">
-    <div class="top">
-        <h1 class="text-center text-[#2BB673] text-3xl md:text-5xl font-bold py-5">What We Do</h1>
-        <h1 class="text-center text-3xl md:text-5xl font-bold pb-2">Our Business & Financial</h1>
-        <h1 class="text-center text-3xl md:text-5xl font-bold">Consulting Services</h1>
-    </div>
-
-    <div class="btm slider w-[90vw] md:w-[80vw] mx-auto  my-16">
-        @foreach ($services as $s)
-
-            <div
-                class="card cursor-pointer w-[100%] md:w-[26vw] hover:bg-[#2BB673] bg-[#000000] h-[48vh] md:h-[59vh] rounded-lg  mr-5">
-                <div class="bg-white w-[100px] mx-auto h-[100px] rounded-full flex justify-center items-center my-5">
-                    <i class="{{$s->service_icon}} text-gray-500 text-5xl"></i>
-                </div>
-                <div class="desc text-white">
-                    <h1 class="text-center text-2xl font-bold mb-4">{{$s->service_heading}}</h1>
-                    <p class="text-center px-5 md:px-10 leading-8">{{$s->service_details}}</p>
-                </div>
-            </div>
-        @endforeach
-    </div>
-
-</div>
-
-<!-- Why Choose us -->
-<div id="whywechoose" class="why-choose flex flex-col md:flex-row">
-    <div class="choose-left bg-[#2BB673] md:w-[50%]">
-
-    </div>
-
-    <div class="choose-right px-10 bg-[#f8f8f8] md:w-[50%] py-20">
-
-        <div>
-            <h1 class="text-2xl font-bold text-[#2BB673]">Why choose Us</h1>
-            <h1 class="text-4xl font-semibold py-3">Reasons For trusting Atrac Consultant</h1>
-        </div>
-
-        <div>
-            <div class="flex items-center gap-3">
-                <div class="icon bg-[#bcfdde] w-[60px] h-[60px] rounded-full flex justify-center items-center text-3xl">
-                    <i class="fa-solid fa-clock text-[#2BB673]"></i>
-                </div>
-                <h1 class="text-2xl font-semibold">State of the art technologies</h1>
-            </div>
-            <p class="font-light my-2">We improve on efficiency and provide unmatched customer experience in the
-                industry with modern CRM technologies and student portal.</p>
-        </div>
-
-        <div>
-            <div class="flex items-center gap-3">
-                <div class="icon bg-[#bcfdde] w-[60px] h-[60px] rounded-full flex justify-center items-center text-3xl">
-                    <i class="fa-solid fa-flag text-[#2BB673]"></i>
-                </div>
-                <h1 class="text-2xl font-semibold">Experienced</h1>
-            </div>
-            <p class="font-light my-2">Working since 2004, we have yielded vast experience from helping thousands of
-                students from very high to average profile get admissions from their ideal universities while
-                maintaining a proven success record of experience.</p>
-        </div>
-
-        <div>
-            <div class="flex items-center gap-3">
-                <div class="icon bg-[#bcfdde] w-[60px] h-[60px] rounded-full flex justify-center items-center text-3xl">
-                    <i class="fa-solid fa-wallet text-[#2BB673]"></i>
-                </div>
-                <h1 class="text-2xl font-semibold">Free Consultancy</h1>
-            </div>
-            <p class="font-light my-2">We represent the largest number of foreign institutes in Pakistan from Australia,
-                Canada, UK, USA, Europe and so on while providing free consultancy for admissions, scholarships,
-                interview preparation and visa related matters.</p>
-        </div>
-
-    </div>
-</div>
-
-<!-- Impressive Amount of options -->
-<div class="options md:h-[55vh] bg-[#000000] text-white flex flex-col md:flex-row items-center py-5 md:py-0">
-
-    <div class="options-left md:w-[60%] px-5 md:px-12">
-        <h1 class="text-xl my-2 md:text-3xl md:font-semibold leading-[130%]">An impressive amount of options await
-        </h1>
-        <h1 class="md:text-4xl text-xl md:font-bold leading-[130%]">Search for your desired study program <br>through Atrac
-        </h1>
-        <br>
-        <a href="#consultation" class="border-2 my-5 border-[#2BB673] hover:text-white hover:border-gray-600 hover:bg-gray-600 text-[#2BB673] px-4 md:px-6 py-2 rounded-3xl font-semibold">Book Free Consultation</a>
-    </div>
-
-    <div class="hidden options-right md:flex w-[40%] justify-center gap-4">
-        <div class="icon">
-            <i class="text-[#2BB673] text-8xl fa-regular fa-star"></i>
-        </div>
-        <div class="icon">
-            <i class="text-[#2BB673] text-8xl fa-solid fa-envelope-open-text"></i>
-        </div>
-    </div>
-
-</div>
-
-<!-- Latest news -->
-<div id="blog" class="latest-news my-20">
-    <div class="top">
-        <h1 class="text-[#2BB673] text-2xl font-semibold text-center my-2">Latest News</h1>
-        <p class="text-5xl font-bold text-center">Something from our latest blog</p>
-    </div>
-    <div class="btm w-[90vw] mx-auto flex-col md:flex-row flex justify-between">
-
-        <div class="my-10 md:w-[26vw]">
-            <img src="https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_640.jpg" alt="">
-            <div class="desc my-4">
-                <p class="date text-gray-400 font-bold">25 June,24</p>
-                <h1 class="font-bold text-2xl">Is there a right time to apply to a Canadian university?</h1>
-                <button class="bg-[#2BB673] hover:bg-[#000000] px-8 py-2 text-white rounded-3xl my-4 font-semibold">Read
-                    More <i class="fa-solid fa-arrow-right "></i></button>
-            </div>
-        </div>
-
-        <div class="my-10 md:w-[26vw]">
-            <img src="https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_640.jpg" alt="">
-            <div class="desc my-4">
-                <p class="date text-gray-400 font-bold">25 June,24</p>
-                <h1 class="font-bold text-2xl">Is there a right time to apply to a Canadian university?</h1>
-                <button class="bg-[#2BB673] hover:bg-[#000000] px-8 py-2 text-white rounded-3xl my-4 font-semibold">Read
-                    More <i class="fa-solid fa-arrow-right "></i></button>
-            </div>
-        </div>
-
-        <div class="my-10 md:w-[26vw]">
-            <img src="https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_640.jpg" alt="">
-            <div class="desc my-4">
-                <p class="date text-gray-400 font-bold">25 June,24</p>
-                <h1 class="font-bold text-2xl">Is there a right time to apply to a Canadian university?</h1>
-                <button class="bg-[#2BB673] hover:bg-[#000000] px-8 py-2 text-white rounded-3xl my-4 font-semibold">Read
-                    More <i class="fa-solid fa-arrow-right "></i></button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- request Consultation -->
-<div class="consulatation mb-10" id="consultation">
-    <div class="top">
-        <h1 class="text-[#2BB673] text-2xl font-semibold text-center my-2">Contact Form</h1>
-        <p class="text-4xl font-bold text-center my-2">Request our free consultation!</p>
-    </div>
-
-    @if (session('success'))
-        <script>
-            alert("{!! session('success') !!}");
-        </script>
-    @endif
-
-    <div class="btm w-[90vw] md:h-[82vh] mx-auto bg-[#2BB673] rounded-3xl mt-10">
-        <div class="top py-5">
-            <div class="icon flex justify-center">
-                <i class="text-6xl text-white fa-regular fa-address-card"></i>
-            </div>
-            <div class="desc">
-                <h1 class="text-center text-white text-xl font-boldbold">Book Free Consultation</h1>
-            </div>
-        </div>
-        <div class="btm">
-            <form action="{{route('consultation')}}" method="POST">
-                @csrf
-                <div class="w-[95%] mx-auto grid grid-cols-2 gap-2">
-                    <div>
-                        <input name="name" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="text"
-                            placeholder="Full name">
-                    </div>
-                    <div>
-                        <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="qualification" id="">
-                            <option value="" selected disabled>Qualification</option>
-                            <option value="Intermediate">Intermediate</option>
-                            <option value="Bachelors">Bachelors</option>
-                            <option value="Masters">Masters</option>
-                        </select>
-                    </div>
-
-                </div>
-                <div class="my-3 w-[95%] mx-auto grid grid-cols-2 gap-2">
-                    <div>
-                        <input name="email" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="email"
-                            placeholder="Email Address">
-                    </div>
-                    <div>
-                        <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="country" id="">
-                            <option value="" selected disabled>Country of Interest</option>
-                            @foreach ($countries as $c)
-                                <option value="{{$c->id}}">{{$c->country_name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+    </section>
 
 
-                </div>
-                <div class="my-3 w-[95%] mx-auto grid grid-cols-2 gap-2">
-                    <div>
-                        <input name="phone" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="phone"
-                            placeholder="Phone Number">
-                    </div>
-                    <div>
-                        <select class="w-[95%] px-4 py-2 rounded-lg outline-none" name="field" id="">
-                            <option value="" selected disabled>Fields of Interest</option>
-                            @foreach ($fields as $f)
-                                <option value="{{$f->field}}">{{$f->field}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+    <!-- Why Atrac Section -->
+    <section id="whatwedo" class="why-atrac-section">
+        <div class="decorative-circle circle-1"></div>
+        <div class="decorative-circle circle-2"></div>
 
-                </div>
-
-                <div class="my-3 w-[95%] mx-auto grid grid-cols-2 gap-2">
-                    <div>
-                        <input name="percentage" max="100" class="w-[95%] px-4 py-2 rounded-lg outline-none" type="number"
-                            placeholder="Percentage" required>
-                    </div>
-
-                </div>
-
-                <div class="my-3 w-[95%] mx-auto">
-                    <textarea placeholder="Message" rows="5" class="px-4 py-2 w-[97.5%] rounded-lg outline-none"
-                        name="message" id=""></textarea>
-                </div>
-                <div class="my-3 w-[95%] mx-auto">
-                    <button class="bg-white px-8 py-2 text-[#2BB673] rounded-3xl my-4 font-semibold">Book Consultation
-                        <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Testimonails -->
-<div id="testimonial" class="testimonial mb-16">
-    <div class="top w-[90vw] mx-auto mb-10">
-        <h1 class="text-[#2BB673] text-2xl font-semibold mb-2">Client Testimonials</h1>
-        <h1 class="text-4xl font-bold">We are Very Happy to Get Our <br> Client's Reviews.</h1>
-    </div>
-    <div class="btm w-[90vw] mx-auto slider-testimonial">
-
-        <div class="card w-[43vw] px-8 py-10 rounded-xl mx-2 mb-3">
-            <div class="top">
-                <div
-                    class="logo rounded-full bg-purple-500 w-[60px] h-[60px] flex justify-center items-center text-white">
-                    <p class="text-3xl font-bold">M</p>
-                </div>
-            </div>
-            <div class="mid my-4">
-                <p class="text-xl font-light">
-                    It's been a great experience getting my student visa processed by Times. The team has been really
-                    cooperative.They helped me getting offer letter from a university when another university had
-                    deferred my admission to next year.
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Atrac Consultants?</h2>
+                <p class="section-subtitle">
+                    Atrac Consultants is your trusted partner in education and career advancement.
+                    Established with a commitment to excellence, we specialize in providing comprehensive
+                    education consultancy services to students aspiring to study abroad in renowned
+                    educational destinations worldwide.
                 </p>
             </div>
-            <div class="btm">
-                <p class="font-bold text-xl">Misbah Riaz</p>
-                <p class="font-light">RMIT University, Melbourne.</p>
-            </div>
-        </div>
 
-        <div class="card w-[43vw] px-8 py-10 rounded-xl mr-2 mb-3">
-            <div class="top">
-                <div
-                    class="logo rounded-full bg-pink-500 w-[60px] h-[60px] flex justify-center items-center text-white">
-                    <p class="text-3xl font-bold">M</p>
-                </div>
-            </div>
-            <div class="mid my-4">
-                <p class="text-xl font-light ">
-                    It's been a great experience getting my student visa processed by Times. The team has been
-                    really cooperative.They helped me getting offer letter from a university when another university
-                    had deferred my admission to next year.
+            <div class="mission-statement">
+                <p class="mission-text">
+                    Our mission is to empower students and professionals by providing them with the knowledge,
+                    resources, and support they need to succeed in an increasingly globalized world.
+                    At Atrac Consultants, your dreams are our priority, and we are dedicated to helping you turn them into
+                    reality.
                 </p>
             </div>
-            <div class="btm">
-                <p class="font-bold text-xl">Misbah Riaz</p>
-                <p class="font-light">RMIT University, Melbourne</p>
-            </div>
         </div>
+    </section>
 
-        <div class="card w-[43vw] px-8 py-10 rounded-xl mr-2 mb-3">
-            <div class="top">
-                <div
-                    class="logo rounded-full bg-orange-500 w-[60px] h-[60px] flex justify-center items-center text-white">
-                    <p class="text-3xl font-bold">M</p>
+    <!-- Countries Section -->
+    <section id="country" class="countries-section">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h1 class="section-heading display-5">Choose from the top study destinations</h1>
+                </div>
+                <div class="col-lg-6">
+                    <p class="section-description">
+                        When it comes to studying abroad, there are several countries offering international students
+                        great opportunities for higher education and becoming part of their international community.
+                        See which country suits you best.
+                    </p>
                 </div>
             </div>
-            <div class="mid my-4">
-                <p class="text-xl font-light ">
-                    It's been a great experience getting my student visa processed by Times. The team has been
-                    really cooperative.They helped me getting offer letter from a university when another university
-                    had deferred my admission to next year.
-                </p>
+
+            <!-- Countries Slider -->
+            <div class="country-slider">
+                @foreach ($countries as $country)
+                    <!-- Country 1 -->
+                    <div class="px-2">
+                        <div class="country-card">
+                            <div class="img">
+                                <img src="https://flagcdn.com/w320/{{ strtolower($country->iso2) }}.png"
+                                    alt="{{ $country->iso2 }}" class="country-img">
+                            </div>
+                            <a href="{{route('country-details', $country->iso2)}}" class="country-btn">{{ $country->name }}</a>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            <div class="btm">
-                <p class="font-bold text-xl">Misbah Riaz</p>
-                <p class="font-light">RMIT University, Melbourne</p>
+        </div>
+    </section>
+
+
+    <!-- Why Choose Us Section -->
+    <section id="whywechoose" class="why-choose-section">
+        <!-- Visual Section -->
+        <div class="visual-section">
+            <div class="visual-content">
+                <h2 class="visual-title">Your Trusted Education Partner</h2>
+                <p class="visual-description">
+                    With nearly two decades of experience, we've helped thousands of students achieve their academic dreams
+                    across the globe. Our proven track record speaks for itself.
+                </p>
+                <button class="btn btn-outline-light btn-lg px-4 py-2">Learn More</button>
             </div>
         </div>
 
+        <!-- Content Section -->
+        <div class="content-section">
+            <div class="section-header">
+                <span class="section-subtitle">Why choose Us</span>
+                <h2 class="section-title">Reasons For Trusting Atrac Consultant</h2>
+            </div>
+
+            <div class="features-list">
+                <!-- Feature 1 -->
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="ri-flashlight-line"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>State of the Art Technologies</h3>
+                        <p>
+                            We improve efficiency and provide unmatched customer experience in the industry
+                            with modern CRM technologies and student portal.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="ri-history-line"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Experienced Professionals</h3>
+                        <p>
+                            Working since 2004, we have vast experience helping thousands of students from
+                            various backgrounds gain admissions to their ideal universities with a proven success record.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="ri-wallet-3-line"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Free Consultancy</h3>
+                        <p>
+                            We represent numerous foreign institutes from Cyprus, Canada, UK, USA, and Europe,
+                            providing free consultancy for admissions, scholarships, and visa matters.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Options Section -->
+    <section class="options-section d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 options-content">
+                    <h2 class="options-headline">An impressive amount of options await</h2>
+                    <h1 class="options-title">Search for your desired study program through Atrac</h1>
+                    <a href="#consultation" class="options-btn">
+                        Book Free Consultation
+                    </a>
+                </div>
+                <div class="col-lg-5 d-none d-lg-flex justify-content-center">
+                    <div class="decorative-icons">
+                        <i class="decorative-icon far fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile decorative icons -->
+        <div class="d-lg-none">
+            <div class="decorative-icons">
+                <i class="decorative-icon far fa-star"></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats-section" class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Our Success Metrics</h2>
+
+            <div class="row g-4">
+                <!-- Visa Approval Ratio (flies from left) -->
+                <div class="col-md-6 col-lg-3 stat-item">
+                    <div class="stat-icon">
+                        <i class="ri-pass-valid-line"></i>
+                    </div>
+                    <div class="stat-value" data-target="98">0</div>
+                    <h3 class="stat-label">Visa Approval Ratio</h3>
+                </div>
+
+                <!-- Student Visa Ratio (flies from top) -->
+                <div class="col-md-6 col-lg-3 stat-item">
+                    <div class="stat-icon">
+                        <i class="ri-graduation-cap-line"></i>
+                    </div>
+                    <div class="stat-value" data-target="95">0</div>
+                    <h3 class="stat-label">Student Visa Ratio</h3>
+                </div>
+
+                <!-- Success Cases (flies from bottom) -->
+                <div class="col-md-6 col-lg-3 stat-item">
+                    <div class="stat-icon">
+                        <i class="ri-checkbox-circle-line"></i>
+                    </div>
+                    <div class="stat-value" data-target="1200">0</div>
+                    <h3 class="stat-label">Success Cases</h3>
+                </div>
+
+                <!-- Client Satisfaction (flies from right) -->
+                <div class="col-md-6 col-lg-3 stat-item">
+                    <div class="stat-icon">
+                        <i class="ri-emotion-happy-line"></i>
+                    </div>
+                    <div class="stat-value" data-target="99">0</div>
+                    <h3 class="stat-label">Client Satisfaction</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News Section -->
+    <section id="blog" class="news-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-subtitle">Latest News</h2>
+                <h1 class="section-title">Insights From Our Blog</h1>
+            </div>
+
+            <div class="row">
+                <!-- News Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="news-card">
+                        <div class="news-img-container overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                alt="Canadian University" class="news-img">
+                        </div>
+                        <div class="news-body">
+                            <p class="news-date">
+                                <i class="far fa-calendar-alt"></i> 25 June, 2024
+                            </p>
+                            <h3 class="news-title">Is There a Right Time to Apply to a Canadian University?</h3>
+                            <a href="#" class="news-btn">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News Card 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="news-card">
+                        <div class="news-img-container overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1523057530100-383d7fbc77a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                alt="Scholarship Opportunities" class="news-img">
+                        </div>
+                        <div class="news-body">
+                            <p class="news-date">
+                                <i class="far fa-calendar-alt"></i> 18 June, 2024
+                            </p>
+                            <h3 class="news-title">Top Scholarship Opportunities for International Students in 2024</h3>
+                            <a href="#" class="news-btn">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- News Card 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="news-card">
+                        <div class="news-img-container overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                alt="Visa Process" class="news-img">
+                        </div>
+                        <div class="news-body">
+                            <p class="news-date">
+                                <i class="far fa-calendar-alt"></i> 10 June, 2024
+                            </p>
+                            <h3 class="news-title">Understanding the Student Visa Process for the UK</h3>
+                            <a href="#" class="news-btn">
+                                Read More <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-all">
+                <a href="#" class="view-all-btn">
+                    View All Articles <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="consultation-section pb-5" id="consultation">
+        <div class="container">
+            <!-- Header Section -->
+            <div class="text-center mb-5">
+                <span class="badge bg-primary-subtle text-primary fs-6 mb-3"
+                    style="background-color: rgba(43, 182, 115, 0.1)!important; color: #2BB673!important;">
+                    <i class="ri-mail-line me-2"></i> Contact Form
+                </span>
+                <h2 class="display-5 fw-bold mb-4">Request Your <span class="text-primary"
+                        style="color: #2BB673!important;">Free</span> Consultation</h2>
+                <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                    Complete this form and our education experts will contact you within 24 hours
+                </p>
+            </div>
+
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show mx-auto mb-5" style="max-width: 800px;"
+                    role="alert">
+                    <i class="ri-checkbox-circle-fill me-2"></i> {!! session('success') !!}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            <!-- Form Container -->
+            <div class="card border-0 shadow-lg overflow-hidden mx-auto" style="max-width: 1000px;">
+                <div class="row g-0">
+                    <!-- Visual Column -->
+                    <div class="col-md-4 d-none d-md-block position-relative" style="background-color: #2BB673;">
+                        <div class="h-100 d-flex flex-column justify-content-center p-5 text-white">
+                            <div class="mb-4">
+                                <i class="ri-customer-service-2-line display-3"></i>
+                            </div>
+                            <h3 class="fw-bold mb-3">Why Consult With Us?</h3>
+                            <ul class="list-unstyled">
+                                <li class="mb-3 d-flex">
+                                    <i class="ri-checkbox-circle-fill me-2 mt-1"></i>
+                                    <span>Free personalized guidance</span>
+                                </li>
+                                <li class="mb-3 d-flex">
+                                    <i class="ri-checkbox-circle-fill me-2 mt-1"></i>
+                                    <span>15+ years of experience</span>
+                                </li>
+                                <li class="mb-3 d-flex">
+                                    <i class="ri-checkbox-circle-fill me-2 mt-1"></i>
+                                    <span>1000+ successful students</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Form Column -->
+                    <div class="col-md-8">
+                        <div class="p-4 p-md-5">
+                            <form action="{{route('consultation')}}" method="POST" class="needs-validation" novalidate>
+                                @csrf
+
+                                <div class="mb-4">
+                                    <label for="name" class="form-label fw-semibold">Full Name <span
+                                            class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">
+                                            <i class="ri-user-line text-muted"></i>
+                                        </span>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="John Doe"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label fw-semibold">Email <span
+                                                class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light">
+                                                <i class="ri-mail-line text-muted"></i>
+                                            </span>
+                                            <input type="email" class="form-control" id="email" name="email"
+                                                placeholder="your@email.com" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-label fw-semibold">Phone <span
+                                                class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light">
+                                                <i class="ri-phone-line text-muted"></i>
+                                            </span>
+                                            <input type="tel" class="form-control" id="phone" name="phone"
+                                                placeholder="+92 300 1234567" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="qualification" class="form-label fw-semibold">Qualification <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" id="qualification" name="qualification" required>
+                                            <option value="" selected disabled>Select your qualification</option>
+                                            <option value="Intermediate">Intermediate</option>
+                                            <option value="Bachelors">Bachelors</option>
+                                            <option value="Masters">Masters</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="percentage" class="form-label fw-semibold">Percentage/GPA <span
+                                                class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" id="percentage" name="percentage"
+                                            max="100" placeholder="e.g. 85" required>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="country" class="form-label fw-semibold">Country of Interest <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" id="country" name="country" required>
+                                            <option value="" selected disabled>Select preferred country</option>
+                                            @foreach ($countries as $c)
+                                                <option value="{{$c->id}}">{{$c->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="field" class="form-label fw-semibold">Field of Interest <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" id="field" name="field" required>
+                                            <option value="" selected disabled>Select field of study</option>
+                                            @foreach ($fields as $f)
+                                                <option value="{{$f->field}}">{{$f->field}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="message" class="form-label fw-semibold">Your Message</label>
+                                    <textarea class="form-control" id="message" name="message" rows="3"
+                                        placeholder="Any specific questions or requirements..."></textarea>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg fw-semibold">
+                                        <i class="ri-calendar-check-line me-2"></i> Book Free Consultation
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+
+    @include('include.reviews')
+
+@endsection
+
+@section('scripts')
+
+    {{-- Country Slider --}}
+    <script>
+        // Initialize slider
+        $(document).ready(function () {
+            $('.country-slider').slick({
+                dots: false,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                arrows: true,
+                prevArrow: '<button type="button" class="slick-prev"></button>',
+                nextArrow: '<button type="button" class="slick-next"></button>',
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
 
 
+    {{-- Stats Animation Counter --}}
+    <script>
+        function animateStats() {
+            const statValues = document.querySelectorAll('.stat-value');
+            const duration = 1500;
+
+            statValues.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                const isPercentage = stat.parentElement.querySelector('.stat-label').textContent.includes('%');
+                let current = 0;
+                const increment = target / (duration / 16);
+
+                const animate = () => {
+                    current = Math.min(current + increment, target);
+
+                    if (isPercentage) {
+                        stat.textContent = Math.floor(current) + '%';
+                    } else {
+                        stat.textContent = Math.floor(current).toLocaleString();
+                    }
+
+                    if (current < target) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                animate();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const statsSection = document.querySelector('#stats-section'); // your section wrapper
+            let hasAnimated = false;
+
+            if (!statsSection) return;
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasAnimated) {
+                        // Step 1: Add in-view class to trigger animations
+                        statsSection.querySelectorAll('.stat-item').forEach(item => {
+                            item.classList.add('in-view');
+                        });
+
+                        // Step 2: Start counting
+                        animateStats();
+
+                        hasAnimated = true;
+                        observer.unobserve(statsSection);
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            observer.observe(statsSection);
+        });
+    </script>
+
+
+
+
+    {{-- Form Validation --}}
+    <script>
+        // Enhanced form validation
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation');
+
+            // Loop over them and prevent submission
+            forms.forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        // Add shake animation to invalid fields
+                        form.querySelectorAll(':invalid').forEach(el => {
+                            el.classList.add('animate__animated', 'animate__headShake');
+                            setTimeout(() => {
+                                el.classList.remove('animate__animated', 'animate__headShake');
+                            }, 1000);
+                        });
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        });
+    </script>
 @endsection

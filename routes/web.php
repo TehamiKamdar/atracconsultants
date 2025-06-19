@@ -22,7 +22,7 @@ use App\Http\Controllers\AdminController;
 
 //Web Routes
 Route::get('/', function () {
-    $countries = country::orderBy('country_name', 'asc')->where('status', 'active')->get();
+    $countries = country::orderBy('name', 'asc')->where('status', 'active')->get();
     $fields = fields::orderBy('field', 'asc')->get();
     $services = services::where('status', 'active')->get();
     $hero = hero::all();
@@ -36,7 +36,12 @@ Route::get('/aboutus', function(){
 Route::get('/country/details/{name}', [AdminController::class , 'detailsShow'])->name('country-details');
 Route::post('/consult' , [AdminController::class , 'consultRequest'])->name('consultation');
 Route::get('/university/details/{name}', [AdminController::class ,'uniDetails'])->name('university.details');
-
+Route::get('/blog', function(){
+    return view('web.blog');
+});
+Route::get('/contact', function(){
+    return view('web.contact');
+})->name('contact');
 
 //Admin Routes
 Route::prefix('admin')->group(function () {

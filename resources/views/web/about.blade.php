@@ -1,90 +1,202 @@
-@extends('layouts.web_main')
+@extends('layouts.web_layout')
+@section('styles')
+<style>
+    :root {
+        --primary-color: #2BB673;
+        --secondary-color: #1E8449;
+    }
 
-@section('main-section')
-<!-- About Us -->
-<div class="about-top my-10">
-    <div class="top w-[90vw] mx-auto">
-        <h1 class="text-center text-5xl font-bold">About Us</h1>
-        <p class="text-center text-xl font-light my-4">TIMES Consultant stands as a dynamic force in the overseas education and immigration consultancy business, proudly contributing its expertise since April 2004. Serving a vital link between prospective students and universities as our profound commitment, our mission is to facilitate a seamless selection process, guiding students to choose the best foreign education institute tailored to their academic requirements.</p>
+    .about-section {
+        background-color: #f8fafc;
+    }
 
-        <p class="text-center text-xl font-light my-4">Our vision at TIMES is to set new benchmarks in the education consultancy field, upholding performance excellence. Drawing from real-world experiences in problem-solving and equipped with practical insights into the ever-changing landscape of admissions, visa processes, and the dynamic education and career industry, we empower our clients to navigate and overcome the challenges inherent in pursuing education abroad.</p>
+    .text-primary {
+        color: var(--primary-color) !important;
+    }
 
-        <p class="text-center text-xl font-light my-4">
-            Considering the idea of moving abroad? There's no need to second-guess. Let us guide you in turning your aspirations into reality through our expert immigration services. Our singular goal is clear: to offer completely unbiased and impartial advice and provide you with the pinnacle of service excellence. Your journey begins with TIMES Consultant – where expertise meets dreams.
-        </p>
-    </div>
-</div>
+    .bg-primary {
+        background-color: var(--primary-color) !important;
+    }
 
-<div class="about-mid mb-10 bg-[#faf9f9]">
-    <div class="top">
-        <h1 class="text-center text-3xl font-bold py-8">BENEFITS TO VISIT TIMES CONSULTANT</h1>
-    </div>
-    <div class="btm bg-[#2BB673] hover:bg-[#000000] w-[90vw] mx-auto rounded-xl">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-12 px-5 md:px-10">
+    .value-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
 
-            <div class="card mb-10 cursor-pointer bg-[white] md:w-[40vw] px-5 py-10 rounded-xl">
-                <div class="icon flex justify-center my-3">
-                    <i class="fa-solid fa-person-circle-question text-6xl"></i>
-                </div>
-                <div class="desc">
-                    <h1 class="text-center text-3xl font-semibold my-2">Our Mission</h1>
-                    <p class="text-center text-xl font-light my-2">To promote diversity and ensure equal opportunities, we aim to facilitate the unimpeded exchange of labor, knowledge, and ideas across borders. We remain steadfast in our mission to recognize and honor competence and merit regardless of a person's country, gender, age, or ethnicity.</p>
-                </div>
-            </div>
+    .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(43, 182, 115, 0.1);
+        border-radius: 50%;
+    }
 
-            <div class="card mb-10 cursor-pointer bg-[white] md:w-[40vw] px-5 py-10 rounded-xl">
-                <div class="icon flex justify-center my-3">
-                    <i class="fa-solid fa-compass text-6xl"></i>
-                </div>
-                <div class="desc">
-                    <h1 class="text-center text-3xl font-semibold my-2">Our Vision</h1>
-                    <p class="text-center text-xl font-light my-2">We see a future in which nations welcomingly absorb large immigrant populations due to a growing global labor and skill gap. Our goals are to develop the greatest potential and support individuals as they aspire to immigrate and succeed in achieving their goals.</p>
-                </div>
-            </div>
+    .hover-scale {
+        transition: transform 0.3s ease;
+    }
 
-            <div class="card mb-10 cursor-pointer bg-[white] md:w-[40vw] px-5 py-10 rounded-xl">
-                <div class="icon flex justify-center my-3">
-                    <i class="fa-solid fa-scale-unbalanced-flip text-6xl"></i>
-                </div>
-                <div class="desc">
-                    <h1 class="text-center text-3xl font-semibold my-2">Our Practice</h1>
-                    <p class="text-center text-xl font-light my-2">When it comes to seeking or accepting professional interactions, we shall: Only look for or accept engagements that fit our appropriate expertise and knowledge. Ensure our resources are adequate to fulfill the assignment. Conduct negotiations for agreements and charges for professional services ethically and properly. Exercise independent thought and action.</p>
-                </div>
-            </div>
+    .hover-scale:hover {
+        transform: translateY(-5px);
+    }
 
-            <div class="card mb-10 cursor-pointer bg-[white] md:w-[40vw] px-5 py-10 rounded-xl">
-                <div class="icon flex justify-center my-3">
-                    <i class="fa-solid fa-book-open text-6xl"></i>
-                </div>
-                <div class="desc">
-                    <h1 class="text-center text-3xl font-semibold my-2">Our Principles</h1>
-                    <p class="text-center text-xl font-light my-2">In the realm of education consultancy, TIMES is committed to: Striving to elevate the professional standards of education consultancy. Endeavoring to enhance the overall quality of its services. Upholding elevated standards of personal conduct.</p>
-                </div>
-            </div>
+    .leader-avatar {
+        width: 200px;
+        height: 200px;
+        background-color: rgba(43, 182, 115, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-            <div></div>
-          </div>
-    </div>
-</div>
+    .leader-icon {
+        font-size: 5rem;
+        color: var(--primary-color);
+    }
 
-<div class="about-btm py-10 bg-[#2BB673] mb-10">
-    <div class="sub bg-white w-[90vw] mx-auto rounded-lg py-10 px-4 md:px-14">
-        <div class="top">
-            <div class="icon flex justify-center">
-                <div class="w-[100px] h-[100px] rounded-full bg-[#d4d4d4] flex justify-center items-center">
-                    <i class="fa-solid fa-user-secret text-6xl"></i>
-                </div>
-            </div>
-            <div class="desc">
-                <h1 class="text-center text-2xl md:text-4xl font-bold pt-4">CEO - Atrac Consultant</h1>
-                <h1 class="text-center text-2xl md:text-4xl font-bold py-2">Uzair Yameen</h1>
+    .leader-message {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+        .leader-avatar {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 1.5rem;
+        }
+
+        .leader-icon {
+            font-size: 4rem;
+        }
+    }
+</style>
+
+@endsection
+@section('content')
+<!-- About Atrac Consultants -->
+<section class="about-section py-5 bg-light">
+    <div class="container">
+        <!-- Header Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-3 text-primary">About Atrac Consultants</h1>
+            <div class="mx-auto" style="max-width: 800px;">
+                <p class="lead mb-4">
+                    Atrac Consultants is a premier education and immigration consultancy with a proven track record since our founding. We serve as the vital bridge connecting ambitious students with world-class educational opportunities abroad.
+                </p>
+                <p class="lead mb-4">
+                    Our vision is to redefine excellence in education consultancy through innovative solutions and personalized guidance. With deep expertise in admissions processes, visa requirements, and global education trends, we empower students to navigate the complexities of international education.
+                </p>
+                <p class="lead">
+                    Considering studying abroad? Let us transform your aspirations into reality through our comprehensive services. At Atrac Consultants, we combine expertise with passion to make your international education dreams come true.
+                </p>
             </div>
         </div>
-        <div class="btm">
-            <p class="text-center text-lg font-light py-4">We credit our excellent success rate in our specialized fields to our astute awareness of immigration, education trends, and the expanding prospects for professionals and students in the global economy. Following a systematic approach, we strive to identify the best options for our clients.</p>
-            <p class="text-center text-lg font-light py-4">We have effectively made the international immigration process more accessible and affordable, eliminating cumbersome procedures. Our system actively promotes foreign education and immigration, bringing these opportunities closer to you. I cordially encourage you to explore our website.</p>
-            <p class="text-center text-lg font-light py-4">Discover your potential abroad.</p>
+
+        <!-- Value Proposition Section -->
+        <div class="value-props py-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Why Choose Atrac Consultants</h2>
+                <p class="lead text-muted">Our commitment to excellence sets us apart</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Mission Card -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-0 shadow-sm h-100 hover-scale">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-wrapper mb-3">
+                                <i class="ri-star-line value-icon"></i>
+                            </div>
+                            <h3 class="h4 fw-bold mb-3">Our Mission</h3>
+                            <p class="mb-0">
+                                To break down barriers in global education by providing equal opportunities for students regardless of background, nationality, or circumstance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vision Card -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-0 shadow-sm h-100 hover-scale">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-wrapper mb-3">
+                                <i class="ri-eye-line value-icon"></i>
+                            </div>
+                            <h3 class="h4 fw-bold mb-3">Our Vision</h3>
+                            <p class="mb-0">
+                                To create a world where geographical boundaries don't limit educational opportunities and talent can flourish anywhere.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approach Card -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-0 shadow-sm h-100 hover-scale">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-wrapper mb-3">
+                                <i class="ri-hand-heart-line value-icon"></i>
+                            </div>
+                            <h3 class="h4 fw-bold mb-3">Our Approach</h3>
+                            <p class="mb-0">
+                                We maintain the highest ethical standards, providing honest advice tailored to each student's unique goals and circumstances.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Values Card -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="card border-0 shadow-sm h-100 hover-scale">
+                        <div class="card-body text-center p-4">
+                            <div class="icon-wrapper mb-3">
+                                <i class="ri-shield-check-line value-icon"></i>
+                            </div>
+                            <h3 class="h4 fw-bold mb-3">Our Values</h3>
+                            <p class="mb-0">
+                                Integrity, excellence, and student success guide every decision we make and every service we provide.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leadership Section -->
+        <div class="leadership-section mt-5">
+            <div class="card border-0 shadow-sm">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-4">
+                        <div class="leader-avatar">
+                            <i class="ri-user-3-line leader-icon"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body p-4 p-md-5">
+                            <h2 class="card-title fw-bold mb-3">Leadership Message</h2>
+                            <h3 class="h4 text-primary mb-4">Uzair Yameen, Founder & CEO</h3>
+                            <div class="leader-message">
+                                <p class="mb-3">
+                                    Our success stems from deep understanding of global education trends and immigration processes. We've simplified what was once complex, making international education accessible to all.
+                                </p>
+                                <p class="mb-3">
+                                    At Atrac Consultants, we've built a system that actively promotes foreign education opportunities while maintaining the highest standards of service and ethical practice.
+                                </p>
+                                <p class="mb-0 fw-bold">
+                                    I invite you to explore how we can help you achieve your international education goals.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
 @endsection

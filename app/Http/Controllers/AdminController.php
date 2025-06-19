@@ -24,12 +24,12 @@ class AdminController extends Controller
         // return $name;
         $details = DB::table('countrydetails')
             ->join('countries', 'countrydetails.country_id', '=', 'countries.id')
-            ->where('countries.slug', $name)
-            ->select('countrydetails.*', 'countries.country_name', 'countries.id as country_id')
+            ->where('countries.iso2', $name)
+            ->select('countrydetails.*', 'countries.name', 'countries.id as country_id')
             ->first();
         $fields = fields::orderBy('field', 'asc')->get();
 
-        $countryName = $details->country_name;
+        $countryName = $details->name;
 
         $country_id = $details->country_id;
 
@@ -219,7 +219,7 @@ class AdminController extends Controller
             'percentage' => $req->percentage,
             'field' => $req->field
         ];
-        // Mail::to($req->email)->send(new RequestMail($consultRequest));
+        Mail::to($req->email)->send(new RequestMail($consultRequest));
 
         $consult->save();
         return redirect()->back()->with('success', "Your query has been passed to us. We'll get back to you shortly");
