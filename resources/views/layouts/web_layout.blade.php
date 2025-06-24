@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="shortcut icon" href="{{ asset('website/favicon.png') }}" type="image/x-icon">
     <link href="https://fonts.cdnfonts.com/css/bambino-2" rel="stylesheet">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -129,11 +129,11 @@
                         </p>
                         <p>
                             <i class="ri-phone-fill"></i>
-                            <span>+92 300 1234567</span>
+                            <span>+92 335 3737904</span>
                         </p>
                         <p>
                             <i class="ri-mail-fill"></i>
-                            <span>info@atracconsultants.com</span>
+                            <span>atracconsultants@gmail.com</span>
                         </p>
                     </div>
                 </div>
