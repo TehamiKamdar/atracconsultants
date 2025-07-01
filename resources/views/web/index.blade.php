@@ -12,7 +12,7 @@
         <div class="container">
             <div class="hero-content">
                 <h2 class="hero-subtitle">September to February</h2>
-                <h1 class="hero-title" id="element">Last Call</h1>
+                <h1 class="hero-title" id="element"></h1>
                 <p class="hero-description">
                     Discover the realm of opportunity with free access to individual consultation
                     and learn about new scholarships in top study destinations worldwide.
@@ -585,7 +585,6 @@
         typeSpeed: 50,
         backSpeed: 30,
         loop: true,
-        smartBackspace: true,
     });
 });
 

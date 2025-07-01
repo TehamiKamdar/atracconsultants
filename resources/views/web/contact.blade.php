@@ -184,6 +184,10 @@ Contact
             font-weight: 600;
         }
 
+        .card-header h3{
+            font-family: 'Bambino-Bold', sans-serif;
+        }
+
         .review-card {
             border-left: 4px solid var(--primary-color);
             background-color: white;
@@ -313,22 +317,22 @@ Contact
                         <form action="{{ route('contact.submit') }}" method="POST">
                             @csrf
                             <div class="floating-label">
-                                <label for="name">Your Name</label>
+                                <label for="name" class="fw-semibold">Your Name</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" required>
                             </div>
 
                             <div class="floating-label">
-                                <label for="email">Email Address</label>
+                                <label for="email" class="fw-semibold">Email Address</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
                             </div>
 
                             <div class="floating-label">
-                                <label for="subject">Subject</label>
+                                <label for="subject" class="fw-semibold">Subject</label>
                                 <input type="text" class="form-control" id="subject" name="subject" placeholder="How can we help?" required>
                             </div>
 
                             <div class="floating-label">
-                                <label for="message">Your Message</label>
+                                <label for="message" class="fw-semibold">Your Message</label>
                                 <textarea class="form-control" id="message" rows="4" name="message" placeholder="Your message here..."
                                     required></textarea>
                             </div>
@@ -365,12 +369,12 @@ Contact
                             </div>
 
                             <div class="floating-label">
-                                <label for="reviewName">Your Name</label>
+                                <label for="reviewName" class="fw-semibold">Your Name</label>
                                 <input type="text" class="form-control" id="reviewName" placeholder="John Doe" required>
                             </div>
 
                             <div class="floating-label">
-                                <label for="reviewText">Your Review</label>
+                                <label for="reviewText" class="fw-semibold">Your Review</label>
                                 <textarea class="form-control" id="reviewText" rows="4"
                                     placeholder="Share your experience..." required></textarea>
                             </div>

@@ -17,6 +17,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="{{asset('assets/dist/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{ asset('website/lib/remixicons-fonts/remixicon.css') }}">
     <link rel="stylesheet" crossorigin href="{{asset('website/style.css')}}">
@@ -26,12 +27,16 @@
 </head>
 
 <body>
+    <div class="marquee-container">
+        <div class="marquee">
+            🎉 Exciting News! We'll be coming to <strong>Islamabad</strong> soon! Stay tuned for updates! 🎉
+        </div>
+    </div>
     <nav class="atrac-navbar navbar navbar-expand-lg" style="z-index: 100">
         <div class="container">
             <!-- Logo -->
             <a class="navbar-brand" href="/">
-                <img src="{{asset('website/logo.png')}}" alt="Atrac Consultants"
-                    class="navbar-logo">
+                <img src="{{asset('website/logo.png')}}" alt="Atrac Consultants" class="navbar-logo">
             </a>
 
             <!-- Mobile Toggle Button -->
@@ -111,8 +116,7 @@
             <div class="row g-4">
                 <!-- About Column -->
                 <div class="col-lg-4 col-md-6 footer-col">
-                    <img src="{{ asset('website/logo.png') }}"
-                        alt="Atrac Consultants Logo" class="footer-logo">
+                    <img src="{{ asset('website/logo.png') }}" alt="Atrac Consultants Logo" class="footer-logo">
                     {{-- <div class="brand-name">Atrac Consultants</div> --}}
                     <p class="mb-4">Providing expert consultancy services with integrity and innovation to help
                         businesses thrive in competitive markets.</p>
@@ -144,7 +148,8 @@
                     <ul class="footer-links">
                         <li><a href="{{ route('user-home') }}"><i class="ri-arrow-right-s-line"></i> Home</a></li>
                         <li><a href="{{ route('user-about') }}"><i class="ri-arrow-right-s-line"></i> About Us</a></li>
-                        <li><a href="{{ '/' . '#country' }}"><i class="ri-arrow-right-s-line"></i> Countries We Offer</a>
+                        <li><a href="{{ '/' . '#country' }}"><i class="ri-arrow-right-s-line"></i> Countries We
+                                Offer</a>
                         </li>
                         <li><a href="{{ '/' . '#whychooseus' }}"><i class="ri-arrow-right-s-line"></i> Our Services</a>
                         </li>
@@ -183,8 +188,8 @@
 
             <div class="row">
                 <div class="col-12">
-                    <div class="copyright">
-                        &copy; {{ date('Y') }} <span class="text-primary">Atrac Consultants.</span> All rights reserved.
+                    <div class="copyright" style="letter-spacing: 0.5;">
+                        &copy; {{ date('Y') }} <span class="text-primary" style="font-family: 'Bambino-Bold'">Atrac Consultants.</span> All rights reserved.
                     </div>
                 </div>
             </div>

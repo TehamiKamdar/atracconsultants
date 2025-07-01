@@ -1,4 +1,7 @@
 @extends('layouts.web_layout')
+@push('title')
+About Us
+@endpush
 @section('styles')
 <style>
     :root {
@@ -10,7 +13,13 @@
         background-color: #f8fafc;
     }
 
+    .about-section p {
+        font-family: 'Bambino-Light', sans-serif;
+        background-color: #f8fafc;
+    }
+
     .text-primary {
+        font-family: 'Bambino-Bold', sans-serif;
         color: var(--primary-color) !important;
     }
 
@@ -62,6 +71,9 @@
         font-size: 1.1rem;
         line-height: 1.7;
     }
+    .h4{
+            font-family: 'Bambino-Bold', sans-serif;
+    }
 
     @media (max-width: 768px) {
         .leader-avatar {
@@ -100,7 +112,7 @@
         <!-- Value Proposition Section -->
         <div class="value-props py-5">
             <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold mb-3">Why Choose Atrac Consultants</h2>
+                <h2 class="h4 display-5 fw-bold mb-3">Why Choose Atrac Consultants</h2>
                 <p class="lead text-muted">Our commitment to excellence sets us apart</p>
             </div>
 
@@ -187,7 +199,8 @@
                                 <p class="mb-3">
                                     At Atrac Consultants, we've built a system that actively promotes foreign education opportunities while maintaining the highest standards of service and ethical practice.
                                 </p>
-                                <p class="mb-0 fw-bold">
+
+                                <p class="mb-0 fw-bold" style="font-family: 'Bambino-Bold', sans-serif; font-size: 22px;">
                                     I invite you to explore how we can help you achieve your international education goals.
                                 </p>
                             </div>

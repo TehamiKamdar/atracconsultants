@@ -10,7 +10,7 @@
     }
 
     body {
-        font-family: 'Segoe UI', system-ui, sans-serif;
+        font-family: 'Bambino-Regular', sans-serif;
         background-color: #f5f7fa;
     }
 
@@ -36,17 +36,20 @@
 
     .review-text {
         color: var(--dark);
+        font-family: 'Bambino-Regular', sans-serif;
         line-height: 1.6;
         margin-bottom: 1.5rem;
     }
 
     .review-author {
         font-weight: 600;
+        font-family: 'Bambino-Bold', sans-serif;
         color: var(--dark);
         margin-bottom: 0.25rem;
     }
 
     .review-date {
+        font-family: 'Bambino-Light', sans-serif;
         color: var(--gray);
         font-size: 0.85rem;
     }

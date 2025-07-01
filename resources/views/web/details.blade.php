@@ -10,6 +10,10 @@
             background-color: #f8fafc;
         }
 
+        h2 {
+            font-family: 'Bambino-Bold', sans-serif;
+        }
+
         .card {
             border-radius: 12px;
             overflow: hidden;
@@ -23,12 +27,14 @@
         .content-text {
             font-size: 1.05rem;
             line-height: 1.7;
+            font-family: 'Bambino-Regular', sans-serif;
             color: #495057;
         }
 
         .list-group-item {
             padding-left: 0;
             border-left: 0;
+            font-family: 'Bambino-Light', sans-serif !important;
             border-right: 0;
         }
 
@@ -99,8 +105,8 @@
             --bs-btn-active-border-color: #2BB673;
             white-space: normal;
         }
-        .swiper-container{
-        }
+
+        .swiper-container {}
 
         .swiper-button-next,
         .swiper-button-prev {
@@ -128,6 +134,135 @@
         .swiper-button-next::after,
         .swiper-button-prev::after {
             font-size: 1.2rem;
+        }
+
+        .insights-container {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .insights-message {
+            position: relative;
+            z-index: 2;
+            color: var(--primary-green);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.4rem;
+            font-family: 'Bambino-Bold',sans-serif;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animated shapes */
+        .shape {
+            position: absolute;
+            background-color: hsl(100, 98%, 65%);
+            opacity: 0.3;
+            border-radius: 50%;
+        }
+
+        .shape-1 {
+            width: 150px;
+            height: 150px;
+            top: -50px;
+            left: -50px;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 100px;
+            height: 100px;
+            bottom: 20px;
+            right: 50px;
+            animation: float 12s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 80px;
+            height: 80px;
+            top: 30%;
+            right: -20px;
+            animation: float 18s ease-in-out infinite;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        }
+
+        .shape-4 {
+            width: 120px;
+            height: 120px;
+            bottom: -30px;
+            left: 30%;
+            animation: float 14s ease-in-out infinite reverse;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(20px, 20px) rotate(5deg);
+            }
+
+            50% {
+                transform: translate(0, 30px) rotate(0deg);
+            }
+
+            75% {
+                transform: translate(-20px, 20px) rotate(-5deg);
+            }
+        }
+
+        /* Blob animation */
+        .blob {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background-color: #D0F0C0;
+            opacity: 0.2;
+            border-radius: 50%;
+            filter: blur(30px);
+            animation: blob-animate 20s linear infinite;
+            z-index: 1;
+        }
+
+        .blob-1 {
+            top: 20%;
+            left: 10%;
+        }
+
+        .blob-2 {
+            bottom: 10%;
+            right: 15%;
+            animation-delay: 5s;
+        }
+
+        @keyframes blob-animate {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            33% {
+                transform: scale(1.1) translate(50px, 30px);
+            }
+
+            66% {
+                transform: scale(0.9) translate(-30px, 50px);
+            }
+
+            100% {
+                transform: scale(1) translate(0, 0);
+            }
         }
     </style>
 @endsection
@@ -459,30 +594,51 @@
             <div class="row">
                 <div class="col-12">
                     <h2 class="fw-bold mb-4">Universities in {{$countryName}}</h2>
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
-                            @foreach ($universities as $uni)
-                                <div class="swiper-slide">
-                                    <div class="card shadow-sm border-0 h-100">
-                                        <div class="card-body text-center p-4">
-                                            <div class="university-logo mb-4">
-                                                <img src="{{$uni->logo}}" alt="{{$uni->university_name}}"
-                                                    class="img-fluid mx-auto" style="max-height: 80px; width: auto;">
+                    @if ($universities->count() > 0)
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                @foreach ($universities as $uni)
+                                    <div class="swiper-slide">
+                                        <div class="card shadow-sm border-0 h-100">
+                                            <div class="card-body text-center p-4">
+                                                <div class="university-logo mb-4">
+                                                    <img src="{{$uni->logo}}" alt="{{$uni->university_name}}"
+                                                        class="img-fluid mx-auto" style="max-height: 80px; width: auto;">
+                                                </div>
+                                                <a href="{{route('university.details', $uni->slug)}}"
+                                                    class="btn btn-outline-primary btn-sm px-4 py-2 mt-3">
+                                                    {{$uni->university_name}}
+                                                </a>
                                             </div>
-                                            <a href="{{route('university.details', $uni->slug)}}"
-                                                class="btn btn-outline-primary btn-sm px-4 py-2 mt-3">
-                                                {{$uni->university_name}}
-                                            </a>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
+
+                            <!-- Navigation buttons -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    @else
+                        <div class="insights-container">
+                            <!-- Animated background shapes -->
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                            <div class="shape shape-3"></div>
+                            <div class="shape shape-4"></div>
+
+                            <!-- Blob effects -->
+                            <div class="blob blob-1"></div>
+                            <div class="blob blob-2"></div>
+
+                            <!-- Message content -->
+                            <div class="insights-message">
+                                We are gathering our insights on the universities based in <span
+                                    id="country-name">{{$countryName}}! Stay Tuned.</span>
+                            </div>
                         </div>
 
-                        <!-- Navigation buttons -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
