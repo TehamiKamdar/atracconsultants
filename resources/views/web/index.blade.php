@@ -479,13 +479,14 @@
     {{-- Country Slider --}}
     <script>
         // Initialize slider
-        $(document).ready(function () {
             $('.country-slider').slick({
                 dots: false,
                 infinite: true,
-                speed: 300,
+                speed: 1000,
                 slidesToShow: 4,
                 slidesToScroll: 1,
+                autoplay: true,      
+                autoplaySpeed: 1000, 
                 arrows: true,
                 prevArrow: '<button type="button" class="slick-prev"></button>',
                 nextArrow: '<button type="button" class="slick-next"></button>',
@@ -493,24 +494,26 @@
                     {
                         breakpoint: 1200,
                         settings: {
-                            slidesToShow: 3
+                            slidesToShow: 3,
+                            arrows:true
                         }
                     },
                     {
                         breakpoint: 768,
                         settings: {
-                            slidesToShow: 2
+                            slidesToShow: 2,
+                            arrows:true
                         }
                     },
                     {
                         breakpoint: 576,
                         settings: {
-                            slidesToShow: 1
+                            slidesToShow: 1,
+                            arrows:true
                         }
                     }
                 ]
             });
-        });
     </script>
 
 

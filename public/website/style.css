@@ -522,10 +522,6 @@
         margin: 0 auto 2rem;
         max-width: 300px;
     }
-
-    .slick-arrow {
-        display: none !important;
-    }
 }
 
 /* Countries Section Styling */
@@ -685,6 +681,12 @@
 
     .section-title {
         font-size: 1.8rem;
+    }
+    .slick-next{
+        right: 20px;
+    }
+    .slick-prev{
+        left: 20px;
     }
 }
 
