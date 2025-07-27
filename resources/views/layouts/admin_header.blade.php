@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
     <title>Modernize Free</title>
-    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-    <link rel="stylesheet" href="{{asset('assets/css/styles.min.css')}}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('website/favicon.png')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 </head>
 
 <body>
@@ -21,9 +19,9 @@
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div>
-                <div class="brand-logo d-flex align-items-center justify-content-between">
+                <div class="brand-logo d-flex align-items-center justify-content-center">
                     <a href="./index.html" class="text-nowrap logo-img">
-                        <img src="{{asset('assets/images/logos/dark-logo.svg')}}" width="180" alt="" />
+                        <img src="{{asset('website/logo.png')}}" width="100" alt="" />
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
