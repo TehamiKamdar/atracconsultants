@@ -372,22 +372,20 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
-    background-color: white;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     display: flex !important;
-    /* Force display */
     align-items: center;
     justify-content: center;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     border: none;
-    color: var(--primary-green);
+    color: var(--primary-green) !important;
+    background: rgba(43, 182, 115, 0.1);
     font-size: 1.2rem;
     cursor: pointer;
     transition: var(--transition);
     opacity: 1 !important;
-    /* Ensure full visibility */
 }
 
 .slick-prev:hover,
