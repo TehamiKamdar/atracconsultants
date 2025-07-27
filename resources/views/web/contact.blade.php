@@ -321,7 +321,7 @@ Contact
             <div class="col-lg-6 col-12">
                 <div class="office-card card">
                     <div class="office-header card-header bambino-bold">
-                        <h2 class="mb-0">Head Office</h2>
+                        <h2 class="mb-0">Head Office —— Karachi</h2>
                     </div>
                     <div class="card-body">
                         <div class="office-info mb-3">
@@ -353,7 +353,7 @@ Contact
             <div class="col-lg-6 col-12">
                 <div class="office-card card">
                     <div class="office-header card-header bambino-bold">
-                        <h2 class="mb-0">Regional Office</h2>
+                        <h2 class="mb-0">Regional Office —— Islamabad</h2>
                     </div>
                     <div class="card-body">
                         <div class="office-info mb-3">
