@@ -5,12 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <title>Modernize Free</title>
+    <title>Dashboard</title>
     <link rel="shortcut icon" type="image/png" href="{{asset('website/favicon.png')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}" />
+    <link rel="stylesheet" href="{{asset('website/style.css')}}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 </head>
-
+@yield('styles')
 <body>
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -101,6 +102,19 @@
                                 <span class="hide-menu">Details</span>
                             </a>
                         </li>
+                        
+                        <li class="nav-small-cap">
+                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                            <span class="hide-menu">Content Management</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{route('admin-cms-home-banner')}}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
+                                <span class="hide-menu">Home Banner</span>
+                            </a>
+                        </li>
                 </nav>
                 <!-- End Sidebar navigation -->
             </div>
@@ -119,14 +133,14 @@
                                 <i class="ti ti-menu-2"></i>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link nav-icon-hover" href="javascript:void(0)">
                                 <i class="ti ti-bell-ringing"></i>
                                 <div class="notification bg-primary rounded-circle"></div>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
-                    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                    {{-- <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                             <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/"
                                 target="_blank" class="btn btn-primary">Download Free</a>
@@ -150,7 +164,7 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div> --}}
                 </nav>
             </header>
             <!--  Header End -->

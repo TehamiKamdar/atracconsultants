@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContentManagement\HomeBannerController;
 use App\Models\hero;
 use App\Models\fields;
 use App\Models\country;
@@ -28,9 +29,8 @@ Route::get('/', function () {
     $countries = country::orderBy('name', 'asc')->where('status', 'active')->get();
     $fields = fields::orderBy('field', 'asc')->get();
     $services = services::where('status', 'active')->get();
-    $hero = hero::all();
     // print_r($countries);
-    return view('web.index', compact('countries', 'fields', 'services', 'hero'));
+    return view('web.index', compact('countries', 'fields', 'services'));
 })->name('user-home');
 Route::get('/about', function(){
     return view('web.about');
@@ -79,10 +79,12 @@ Route::prefix('admin')->group(function () {
         Route::post( 'active/{id}' , [AdminController::class , 'serviceActive'])->name('details-active');
         Route::post( 'inactive/{id}' , [AdminController::class , 'serviceInactive'])->name('details-inactive');
     });
+    Route::prefix('cms')->group(function(){
+        Route::get('banner', [HomeBannerController::class , 'index'])->name('admin-cms-home-banner');
+        Route::put('banner', [HomeBannerController::class , 'update'])->name('banner.update');
+    });
 });
 
-Route::get('/admin/hero', [AdminController::class, 'heroIndex']);
-Route::post('/admin/hero', [AdminController::class, 'heroAdd'])->name('hero-add');
 
 Route::get('/404', function(){
     return view('errors.404');
