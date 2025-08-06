@@ -371,19 +371,18 @@
                             <form action="{{route('consultation')}}" method="POST" class="needs-validation" novalidate>
                                 @csrf
 
-                                <div class="mb-4">
-                                    <label for="name" class="form-label fw-semibold">Full Name <span
-                                            class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="ri-user-line text-muted"></i>
-                                        </span>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="John Doe"
-                                            required>
-                                    </div>
-                                </div>
-
                                 <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label fw-semibold">Full Name <span
+                                                class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light">
+                                                <i class="ri-user-line text-muted"></i>
+                                            </span>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="John Doe"
+                                                required>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label fw-semibold">Email <span
                                                 class="text-danger">*</span></label>
@@ -395,6 +394,9 @@
                                                 placeholder="your@email.com" required>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
                                     <div class="col-md-6">
                                         <label for="phone" class="form-label fw-semibold">Phone <span
                                                 class="text-danger">*</span></label>
@@ -406,9 +408,6 @@
                                                 placeholder="+92 300 1234567" required>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row g-3 mb-4">
                                     <div class="col-md-6">
                                         <label for="qualification" class="form-label fw-semibold">Qualification <span
                                                 class="text-danger">*</span></label>
@@ -418,17 +417,18 @@
                                             <option value="Intermediate">Intermediate</option>
                                             <option value="Bachelors">Bachelors</option>
                                             <option value="Masters">Masters</option>
+                                            <option value="others">Others</option>
                                         </select>
                                     </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
                                     <div class="col-md-6">
                                         <label for="percentage" class="form-label fw-semibold">Percentage/GPA <span
                                                 class="text-danger">*</span></label>
                                         <input type="number" class="form-control" id="percentage" name="percentage"
                                             max="100" placeholder="e.g. 85" required>
                                     </div>
-                                </div>
-
-                                <div class="row g-3 mb-4">
                                     <div class="col-md-6">
                                         <label for="country" class="form-label fw-semibold">Country of Interest <span
                                                 class="text-danger">*</span></label>
@@ -440,6 +440,9 @@
                                             <option value="others">Others</option>
                                         </select>
                                     </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
                                     <div class="col-md-6">
                                         <label for="field" class="form-label fw-semibold">Field of Interest <span
                                                 class="text-danger">*</span></label>
@@ -449,6 +452,15 @@
                                                 <option value="{{$f->field}}">{{$f->field}}</option>
                                             @endforeach
                                             <option value="others">Others</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="office_location" class="form-label fw-semibold">Nearest Office Location <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" id="office_location" name="office_location" required>
+                                            <option value="" selected disabled>Select Location</option>
+                                            <option value="karachi">Karachi</option>
+                                            <option value="islamabad">Islamabad</option>
                                         </select>
                                     </div>
                                 </div>

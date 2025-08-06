@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('country_id')->references('id')->on('countries')->onUpdate('cascade')->onDelete('restrict');
             $table->string('field')->nullable();
             $table->string('percentage')->nullable();
+            $table->string('office_location')->nullable();
             $table->string('status')->default('pending');
             $table->dateTime('meeting_datetime')->nullable();
             $table->timestamps();

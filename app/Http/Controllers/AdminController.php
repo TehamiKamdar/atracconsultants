@@ -211,6 +211,7 @@ class AdminController extends Controller
         $consult->country_id = $req->country;
         $consult->percentage = $req->percentage;
         $consult->field = $req->field;
+        $consult->office_location = $req->office_location;
 
         $consultRequest = [
             'name' => $req->name,
@@ -219,9 +220,10 @@ class AdminController extends Controller
             'qualification' => $req->qualification,
             'country_id' => $req->country,
             'percentage' => $req->percentage,
-            'field' => $req->field
+            'field' => $req->field,
+            'office_location' => $req->office_location
         ];
-        Mail::to($req->email)->send(new RequestMail($consultRequest));
+        // Mail::to($req->email)->send(new RequestMail($consultRequest));
 
         $consult->save();
         return redirect()->back()->with('success', "Your query has been passed to us. We'll get back to you shortly");

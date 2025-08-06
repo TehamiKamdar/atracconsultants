@@ -14,7 +14,7 @@
 
     <!-- Custom Font -->
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/bambino-2">
-    
+
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="{{ asset('website/lib/css/owl.carousel.min.css') }}">
 
@@ -163,7 +163,7 @@
 
                 <!-- Social/Newsletter Column -->
                 <div class="col-lg-4 col-md-6 footer-col">
-                    <h3 class="footer-heading">Stay Connected</h3>
+                    {{-- <h3 class="footer-heading">Stay Connected</h3>
                     <p>Subscribe to our newsletter for industry insights and company updates.</p>
 
                     <form class="mb-4">
@@ -175,9 +175,9 @@
                                 <i class="ri-send-plane-fill"></i>
                             </button>
                         </div>
-                    </form>
+                    </form> --}}
 
-                    <h4 class="mt-4 mb-3">Follow Us</h4>
+                    <h3 class="footer-heading">Follow Us</h3>
                     <div class="social-links">
                         <a href="https://www.facebook.com/atracconsultants"><i class="ri-facebook-fill"></i></a>
                         <a href="https://www.instagram.com/atracconsultants"><i class="ri-instagram-line"></i></a>
