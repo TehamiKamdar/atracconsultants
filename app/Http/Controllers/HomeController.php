@@ -6,9 +6,11 @@ use App\Models\fields;
 use App\Models\country;
 use App\Models\consults;
 use App\Models\contacts;
+use App\Mail\RequestMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -97,7 +99,7 @@ class HomeController extends Controller
             'field' => $req->field,
             'office_location' => $req->office_location
         ];
-        // Mail::to($req->email)->send(new RequestMail($consultRequest));
+        Mail::to($req->email)->send(new RequestMail($consultRequest));
 
         $consult->save();
         return redirect()->back()->with('success', "Your query has been passed to us. We'll get back to you shortly");
