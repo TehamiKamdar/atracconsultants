@@ -39,6 +39,8 @@
         font-family: 'Bambino-Regular', sans-serif;
         line-height: 1.6;
         margin-bottom: 1.5rem;
+        min-height: 300px;
+        overflow-y: hidden
     }
 
     .review-author {

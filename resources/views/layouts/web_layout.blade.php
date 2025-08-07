@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('website/lib/css/animate.min.css') }}">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="{{ asset('assets/dist/css/bootstrap.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Remix Icons -->
     <link rel="stylesheet" href="{{ asset('website/lib/remixicons-fonts/remixicon.css') }}">

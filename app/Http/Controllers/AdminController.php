@@ -135,7 +135,7 @@ class AdminController extends Controller
                     ->join('countries', 'consults.country_id', '=', 'countries.id')
                     ->select('consults.id', 'consults.name', 'consults.phone', 'consults.email', 'countries.name as country_name', 'consults.qualification', 'consults.field', 'consults.message', 'consults.meeting_datetime')
                     ->get();
-                return view('admin.consult.consult', compact('consults'));
+                return view('admin.consult.index', compact('consults'));
             } else {
                 abort(403, "Why don't you go back and try again when you're feeling more heroic?");
             }

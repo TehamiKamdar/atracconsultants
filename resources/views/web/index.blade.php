@@ -326,7 +326,7 @@
                 </span>
                 <h2 class="display-5 fw-bold mb-4">Request Your <span class="text-primary"
                         style="color: #2BB673!important;">Free</span> Appointment</h2>
-                <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                <p class="lead text-muted mx-auto" style="max-width: 720px;">
                     Complete this form and our education experts will contact you within 24 hours
                 </p>
             </div>

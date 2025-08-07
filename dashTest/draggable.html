@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- RemixIcon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="./jqueryui/external/jquery/jquery.js" defer></script>
+  <script src="./jqueryui/jquery-ui.min.js" defer></script>
+  <script src="./script.js" defer></script>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <i class="ri-dashboard-3-line logo-icon"></i>
+      <span class="logo-text">Dashboard</span>
+    </div>
+
+    <ul class="nav flex-column px-2">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="ri-dashboard-line"></i>
+          <span class="nav-link-text">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="draggable.html">
+          <i class="ri-user-line"></i>
+          <span class="nav-link-text">Users</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="ri-shopping-bag-line"></i>
+          <span class="nav-link-text">Products</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="ri-file-chart-line"></i>
+          <span class="nav-link-text">Reports</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="ri-settings-3-line"></i>
+          <span class="nav-link-text">Settings</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Header (Simplified without dropdown) -->
+  <header class="header">
+    <i class="ri-menu-line header-icon"></i>
+    <span class="header-title">Dashboard Overview</span>
+
+    <div class="header-actions">
+      <i class="ri-search-line header-icon" title="Search"></i>
+      <i class="ri-notification-3-line header-icon" title="Notifications"></i>
+      <i class="ri-mail-line header-icon" title="Messages"></i>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container-fluid board">
+      <div class="row g-3">
+        <!-- Pending Column -->
+        <div class="col-md-6">
+          <div class="column pending" data-status="pending">
+            <h3><i class="ri-time-fill"></i> Pending</h3>
+            <div class="column-content">
+              <div class="task draggable pending" draggable="true">
+                <div class="task-header">
+                  <i class="ri-user-3-fill"></i> Jane Smith
+                </div>
+                <div class="task-content">
+                  <div class="user-detail">
+                    <span class="detail-label">Role:</span>
+                    <span class="detail-value">Designer</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Since:</span>
+                    <span class="detail-value">22/06/2023</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Tasks:</span>
+                    <span class="detail-value">3</span>
+                  </div>
+                </div>
+              </div>
+              <div class="task draggable pending" draggable="true">
+                <div class="task-header">
+                  <i class="ri-user-3-fill"></i> Mike Johnson
+                </div>
+                <div class="task-content">
+                  <div class="user-detail">
+                    <span class="detail-label">Role:</span>
+                    <span class="detail-value">Manager</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Since:</span>
+                    <span class="detail-value">05/01/2023</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Tasks:</span>
+                    <span class="detail-value">7</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Column -->
+        <div class="col-md-6">
+          <div class="column active" data-status="active">
+            <h3><i class="ri-user-follow-fill"></i> Active</h3>
+            <div class="column-content">
+              <div class="task draggable active" draggable="true">
+                <div class="task-header">
+                  <i class="ri-user-3-fill"></i> John Doe
+                </div>
+                <div class="task-content">
+                  <div class="user-detail">
+                    <span class="detail-label">Role:</span>
+                    <span class="detail-value">Developer</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Since:</span>
+                    <span class="detail-value">12/05/2023</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Tasks:</span>
+                    <span class="detail-value">5</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hold Column -->
+        <div class="col-md-6">
+          <div class="column hold" data-status="hold">
+            <h3><i class="ri-pause-fill"></i> Hold</h3>
+            <div class="column-content">
+              <div class="task draggable hold" draggable="true">
+                <div class="task-header">
+                  <i class="ri-user-3-fill"></i> Sarah Williams
+                </div>
+                <div class="task-content">
+                  <div class="user-detail">
+                    <span class="detail-label">Role:</span>
+                    <span class="detail-value">Analyst</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Since:</span>
+                    <span class="detail-value">18/03/2023</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Tasks:</span>
+                    <span class="detail-value">2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reject Column -->
+        <div class="col-md-6">
+          <div class="column reject" data-status="reject">
+            <h3><i class="ri-close-circle-fill"></i> Reject</h3>
+            <div class="column-content">
+              <div class="task draggable reject" draggable="true">
+                <div class="task-header">
+                  <i class="ri-user-3-fill"></i> David Brown
+                </div>
+                <div class="task-content">
+                  <div class="user-detail">
+                    <span class="detail-label">Role:</span>
+                    <span class="detail-value">Tester</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Since:</span>
+                    <span class="detail-value">30/07/2023</span>
+                  </div>
+                  <div class="user-detail">
+                    <span class="detail-label">Tasks:</span>
+                    <span class="detail-value">4</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
