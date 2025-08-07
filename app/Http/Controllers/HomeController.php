@@ -88,6 +88,7 @@ class HomeController extends Controller
         $consult->percentage = $req->percentage;
         $consult->field = $req->field;
         $consult->office_location = $req->office_location;
+        $consult->meeting_datetime = $req->meeting_datetime;
 
         if($req->office_location == 'islamabad'){
             $consultRequest = [

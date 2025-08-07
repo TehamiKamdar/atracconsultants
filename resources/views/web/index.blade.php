@@ -466,6 +466,11 @@
                                 </div>
 
                                 <div class="mb-4">
+                                    <label for="meeting_datetime" class="form-label fw-semibold">When You Can Meet<span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="meeting_datetime" name="meeting_datetime" required>
+                                </div>
+
+                                <div class="mb-4">
                                     <label for="message" class="form-label fw-semibold">Your Message</label>
                                     <textarea class="form-control" id="message" name="message" rows="3"
                                         placeholder="Any specific questions or requirements..."></textarea>
