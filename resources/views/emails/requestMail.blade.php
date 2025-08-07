@@ -203,11 +203,11 @@
         <div class="contact-info">
           <div>
             <span>Email:</span>
-            <span><a href="mailto:atracconsultants@gmail.com" target="_blank">atracconsultants@gmail.com</a></span>
+            <span><a href="mailto:{{ $consultRequest['office_email'] }}" target="_blank">{{ $consultRequest['office_email'] }}</a></span>
           </div>
           <div>
             <span>Phone:</span>
-            <span>+92 335 3737904</span>
+            <span>{{ $consultRequest['office_phone'] }}</span>
           </div>
           <div>
             <span>Hours:</span>
@@ -218,7 +218,7 @@
 
       <div class="signature">
         <p>Best regards,</p>
-        <p><strong>The Atrac Consultants Team</strong></p>
+        <p><strong>Atrac Consultants Team</strong></p>
       </div>
     </div>
 

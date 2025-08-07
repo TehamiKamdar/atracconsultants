@@ -89,16 +89,34 @@ class HomeController extends Controller
         $consult->field = $req->field;
         $consult->office_location = $req->office_location;
 
-        $consultRequest = [
-            'name' => $req->name,
-            'email' => $req->email,
-            'message' => $req->message,
-            'qualification' => $req->qualification,
-            'country_id' => $req->country,
-            'percentage' => $req->percentage,
-            'field' => $req->field,
-            'office_location' => $req->office_location
-        ];
+        if($req->office_location == 'islamabad'){
+            $consultRequest = [
+                'name' => $req->name,
+                'email' => $req->email,
+                'message' => $req->message,
+                'qualification' => $req->qualification,
+                'country_id' => $req->country,
+                'percentage' => $req->percentage,
+                'field' => $req->field,
+                'office_location' => $req->office_location,
+                'office_phone' => '+92 325 5209992',
+                'office_email' => 'atracconsultant@gmail.com'
+            ];
+        }else{
+            $consultRequest = [
+                'name' => $req->name,
+                'email' => $req->email,
+                'message' => $req->message,
+                'qualification' => $req->qualification,
+                'country_id' => $req->country,
+                'percentage' => $req->percentage,
+                'field' => $req->field,
+                'office_location' => $req->office_location,
+                'office_phone' => '+92 335 3737904',
+                'office_email' => 'atracconsultants@gmail.com'
+            ];
+        }
+        
         Mail::to($req->email)->send(new RequestMail($consultRequest));
 
         $consult->save();
