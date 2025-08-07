@@ -8,7 +8,8 @@
                 <h2>Account Login</h2>
             </div>
             <div class="card-body">
-                <form>
+                <form action="{{route('login')}}" method="POST">
+                    @csrf
                     <div class="mb-4">
                         <label for="email" class="form-label">EMAIL</label>
                         <div class="input-group">
