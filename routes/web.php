@@ -1,13 +1,6 @@
 <?php
 
-use App\Models\hero;
-use App\Models\fields;
-use App\Models\country;
-use App\Models\services;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MailController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -21,34 +14,22 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-require __DIR__."/auth.php";
-require __DIR__."/admin.php";
-
 //Web Routes
-Route::get('/', function () {
-    $countries = country::orderBy('name', 'asc')->where('status', 'active')->get();
-    $fields = fields::orderBy('field', 'asc')->get();
-    $services = services::where('status', 'active')->get();
-    $hero = hero::all();
-    // print_r($countries);
-    return view('web.index', compact('countries', 'fields', 'services', 'hero'));
-})->name('user-home');
-Route::get('/about', function(){
-    return view('web.about');
-})->name('user-about');
+Route::get('/', [HomeController::class , 'index'])->name('home');
 
+Route::get('/about', [HomeController::class , 'about'])->name('about');
 
-Route::get('/blog', function(){
-    return view('web.blog');
-});
+Route::get('/blog', [HomeController::class , 'blog'])->name('blog');
+
 Route::get('/contact', [HomeController::class , 'showContactForm'])->name('contact');
 
 Route::post('/contact', [HomeController::class , 'contact'])->name('contact.submit');
 
+Route::get('/study-in-{name}', [HomeController::class , 'detailsShow'])->name('country-details');
 
+Route::post('/consult' , [HomeController::class , 'consultRequest'])->name('consultation');
 
-Route::get('/admin/hero', [AdminController::class, 'heroIndex']);
-Route::post('/admin/hero', [AdminController::class, 'heroAdd'])->name('hero-add');
+Route::get('/university/details/{name}', [HomeController::class ,'uniDetails'])->name('university.details');
 
 Route::get('/404', function(){
     return view('errors.404');

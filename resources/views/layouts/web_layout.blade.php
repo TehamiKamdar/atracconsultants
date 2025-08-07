@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theaffiloverifycode" content="ddbafe6c-70dd-4fe8-9e0a-0bd590bfaf01" />
     <!-- Font Awesome -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"></noscript>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    </noscript>
 
     <!-- Favicon (no problem) -->
     <link rel="shortcut icon" href="{{ asset('website/favicon.svg') }}" type="image/x-icon">
@@ -39,7 +42,7 @@
     <script src="{{ asset('website/lib/js/jquery.min.js') }}" defer></script>
 
     <!-- Bootstrap Bundle -->
-    <script src="{{ asset('assets/dist/js/bootstrap.bundle.min.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
 
     <!-- Slick Carousel -->
     <script src="{{ asset('website/lib/js/slick.min.js') }}" defer></script>
@@ -79,11 +82,11 @@
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link-item {{ Route::is('user-home') ? 'active' : '' }}" href="/">Home</a>
+                        <a class="nav-link-item {{ Route::is('home') ? 'active' : '' }}" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link-item {{ Route::is('user-about') ? 'active' : '' }}"
-                            href="{{route('user-about')}}">About Us</a>
+                        <a class="nav-link-item {{ Route::is('about') ? 'active' : '' }}"
+                            href="{{route('about')}}">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link-item" href="{{ '/' . '#whychooseus' }}">Why Choose Us</a>
@@ -92,7 +95,7 @@
                         <a class="nav-link-item" href="{{ '/' . '#country' }}">Countries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link-item" href="{{ '/' . '#consultation' }}">Book an Appointment</a>
+                        <a class="nav-link-item" href="{{ '/' . '#form' }}">Book an Appointment</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link-item {{ Route::is('contact') ? 'active' : '' }}"
@@ -110,22 +113,20 @@
                 <a class="mobile-nav-link active" href="/">Home</a>
             </li>
             <li class="nav-item">
-                <a class="mobile-nav-link" href="{{route('user-about')}}">About Us</a>
+                <a class="mobile-nav-link" href="{{route('about')}}">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="mobile-nav-link" href="#country">Countries</a>
+                <a class="nav-link-item" href="{{ '/' . '#whychooseus' }}">Why Choose Us</a>
             </li>
             <li class="nav-item">
-                <a class="mobile-nav-link" href="#whatwedo">What We Do</a>
+                <a class="nav-link-item" href="{{ '/' . '#country' }}">Countries</a>
             </li>
             <li class="nav-item">
-                <a class="mobile-nav-link" href="#whychooseus">Why Choose Us</a>
+                <a class="nav-link-item" href="{{ '/' . '#form' }}">Book an Appointment</a>
             </li>
             <li class="nav-item">
-                <a class="mobile-nav-link" href="#testimonial">Testimonials</a>
-            </li>
-            <li class="nav-item">
-                <a class="mobile-nav-link" href="./contact.html">Contact Us</a>
+                <a class="nav-link-item {{ Route::is('contact') ? 'active' : '' }}"
+                    href="{{ route('contact') }}">Contact Us</a>
             </li>
         </ul>
     </div>
@@ -150,8 +151,8 @@
                 <div class="col-lg-4 col-md-6 footer-col">
                     <h3 class="footer-heading">Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="{{ route('user-home') }}"><i class="ri-arrow-right-s-line"></i> Home</a></li>
-                        <li><a href="{{ route('user-about') }}"><i class="ri-arrow-right-s-line"></i> About Us</a></li>
+                        <li><a href="{{ route('home') }}"><i class="ri-arrow-right-s-line"></i> Home</a></li>
+                        <li><a href="{{ route('about') }}"><i class="ri-arrow-right-s-line"></i> About Us</a></li>
                         <li><a href="{{ '/' . '#country' }}"><i class="ri-arrow-right-s-line"></i> Countries We
                                 Offer</a>
                         </li>

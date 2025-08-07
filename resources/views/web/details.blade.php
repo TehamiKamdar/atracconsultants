@@ -565,7 +565,7 @@
                                     </select>
                                 </div>
 
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <label class="form-label">Percentage/GPA <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text bg-light">
@@ -574,6 +574,16 @@
                                         <input type="number" class="form-control" name="percentage" max="100"
                                             placeholder="e.g. 85" required>
                                     </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="office_location" class="form-label fw-semibold">Nearest Office Location <span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-select" id="office_location" name="office_location" required>
+                                        <option value="" selected disabled>Select Location</option>
+                                        <option value="karachi">Karachi</option>
+                                        <option value="islamabad">Islamabad</option>
+                                    </select>
                                 </div>
 
                                 <div class="d-grid">

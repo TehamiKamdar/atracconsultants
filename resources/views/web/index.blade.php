@@ -18,7 +18,7 @@
                 <p class="hero-description" id="previewParagraph">
                     Explore the realm of opportunity with free access to individual consultation and apply for scholarships in top universities worldwide
                 </p>
-                <a href="#consultation" class="hero-btn" id="previewButtonText">
+                <a href="#form" class="hero-btn" id="previewButtonText">
                     APPLY NOW <i class="fas fa-arrow-right"></i>
                 </a>
                 <div class="country-tags">
@@ -176,7 +176,7 @@
                 <div class="col-lg-8 options-content">
                     <h2 class="options-headline">An impressive amount of options await</h2>
                     <h1 class="options-title">Search for your desired study program through <span class="text-primary">Atrac Consultants</span></h1>
-                    <a href="#consultation" class="options-btn">
+                    <a href="#form" class="options-btn">
                         Book Free Consultation
                     </a>
                 </div>
