@@ -23,17 +23,19 @@
 
     <!-- Slick Carousel -->
     <link rel="stylesheet" href="{{ asset('website/lib/css/slick.min.css') }}">
-
     <link rel="stylesheet" href="{{ asset('website/lib/css/slick-theme.min.css') }}">
 
     <!-- Animate.css -->
     <link rel="stylesheet" href="{{ asset('website/lib/css/animate.min.css') }}">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('website/lib/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Remix Icons -->
     <link rel="stylesheet" href="{{ asset('website/lib/remixicons-fonts/remixicon.css') }}">
+
+    <!-- iziToast CSS -->
+    <link rel="stylesheet" href="{{ asset('website/lib/iziToast/iziToast.min.css') }}">
 
     <!-- Your Main CSS -->
     <link rel="stylesheet" href="{{ asset('website/style.css') }}">
@@ -42,7 +44,7 @@
     <script src="{{ asset('website/lib/js/jquery.min.js') }}" defer></script>
 
     <!-- Bootstrap Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="{{ asset('website/lib/bootstrap/bootstrap.bundle.min.js') }}" defer></script>
 
     <!-- Slick Carousel -->
     <script src="{{ asset('website/lib/js/slick.min.js') }}" defer></script>
@@ -55,6 +57,10 @@
 
     {{-- Swiper --}}
     <script src="{{ asset('website/lib/js/swiper-bundle.min.js') }}" defer></script>
+
+    <!-- iziToast JS -->
+    <script src="{{ asset('website/lib/iziToast/iziToast.min.js') }}" defer></script>
+
     <title>Atrac Consultants | @stack('title')</title>
     @yield('styles')
 </head>

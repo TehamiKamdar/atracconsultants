@@ -1,10 +1,24 @@
 @extends('layouts.web_layout')
 
+
 @push('title')
     Home
 @endpush
 
 @section('content')
+    @if (session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                iziToast.success({
+                    title: 'Success!',
+                    message: '{{ session('success') }}',
+                    position: 'topRight',
+                    timeout: 5000
+                });
+            });
+        </script>
+    @endif
+
 
     {{-- Hero Section --}}
 
@@ -331,12 +345,7 @@
                 </p>
             </div>
 
-            @if (session('success'))
-                <div id="alert" class="alert alert-primary alert-custom">
-                    {{ session('success') }}
-                    <button id="close-btn" class="close">&times;</button>
-                </div>
-            @endif
+
 
             <!-- Form Container -->
             <div class="card border-0 shadow-lg overflow-hidden mx-auto" style="max-width: 1000px;">
@@ -409,7 +418,19 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="qualification" class="form-label fw-semibold">Qualification <span
+                                        <label for="office_location" class="form-label fw-semibold">Nearest Office Location <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-select" id="office_location" name="office_location" required>
+                                            <option value="" selected disabled>Select Location</option>
+                                            <option value="karachi">Karachi</option>
+                                            <option value="islamabad">Islamabad</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="qualification" class="form-label fw-semibold">Latest Qualification <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-select" id="qualification" name="qualification" required>
                                             <option value="" selected disabled>Select your qualification</option>
@@ -420,15 +441,15 @@
                                             <option value="others">Others</option>
                                         </select>
                                     </div>
-                                </div>
-
-                                <div class="row g-3 mb-4">
                                     <div class="col-md-6">
                                         <label for="percentage" class="form-label fw-semibold">Percentage/GPA <span
                                                 class="text-danger">*</span></label>
                                         <input type="number" class="form-control" id="percentage" name="percentage"
                                             max="100" placeholder="e.g. 85" required>
                                     </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
                                     <div class="col-md-6">
                                         <label for="country" class="form-label fw-semibold">Country of Interest <span
                                                 class="text-danger">*</span></label>
@@ -440,9 +461,6 @@
                                             <option value="others">Others</option>
                                         </select>
                                     </div>
-                                </div>
-
-                                <div class="row g-3 mb-4">
                                     <div class="col-md-6">
                                         <label for="field" class="form-label fw-semibold">Field of Interest <span
                                                 class="text-danger">*</span></label>
@@ -454,20 +472,11 @@
                                             <option value="others">Others</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="office_location" class="form-label fw-semibold">Nearest Office Location <span
-                                                class="text-danger">*</span></label>
-                                        <select class="form-select" id="office_location" name="office_location" required>
-                                            <option value="" selected disabled>Select Location</option>
-                                            <option value="karachi">Karachi</option>
-                                            <option value="islamabad">Islamabad</option>
-                                        </select>
-                                    </div>
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="meeting_datetime" class="form-label fw-semibold">When You Can Meet<span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="meeting_datetime" name="meeting_datetime" required>
+                                    <label for="date" class="form-label fw-semibold">When You Can Meet<span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
                                 </div>
 
                                 <div class="mb-4">

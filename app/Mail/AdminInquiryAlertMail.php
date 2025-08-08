@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class RequestMail extends Mailable
+class AdminInquiryAlertMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -25,7 +25,7 @@ class RequestMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Request Mail',
+            subject: 'Admin Inquiry Alert Mail',
         );
     }
 
@@ -35,7 +35,7 @@ class RequestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.requestMail',
+            view: 'emails.inquiry',
         );
     }
 

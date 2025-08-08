@@ -181,7 +181,7 @@
     </div>
 
     <div class="content">
-      <p>Dear {{ $consultRequest['name'] }},</p>
+      <p>Dear {{ $data['name'] }},</p>
 
       <div class="status-box">
         <p>We've received your appointment request and it's currently being reviewed. Your request is <strong>pending confirmation</strong>.</p>
@@ -203,11 +203,11 @@
         <div class="contact-info">
           <div>
             <span>Email:</span>
-            <span><a href="mailto:{{ $consultRequest['office_email'] }}" target="_blank">{{ $consultRequest['office_email'] }}</a></span>
+            <span><a href="mailto:{{ $data['office_email'] }}" target="_blank">{{ $data['office_email'] }}</a></span>
           </div>
           <div>
             <span>Phone:</span>
-            <span>{{ $consultRequest['office_phone'] }}</span>
+            <span>{{ $data['office_phone'] }}</span>
           </div>
           <div>
             <span>Hours:</span>
@@ -223,7 +223,7 @@
     </div>
 
     <div class="footer">
-      <p>&copy; {{ date('Y') }} Atrac Consultants. All rights reserved.</p>
+      <p>&copy; 2020 - {{ date('Y') }} Atrac Consultants. All rights reserved.</p>
     </div>
   </div>
 </body>

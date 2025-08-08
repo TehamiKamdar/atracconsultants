@@ -9,6 +9,7 @@ use App\Models\contacts;
 use App\Mail\RequestMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Mail\AdminInquiryAlertMail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
@@ -88,10 +89,10 @@ class HomeController extends Controller
         $consult->percentage = $req->percentage;
         $consult->field = $req->field;
         $consult->office_location = $req->office_location;
-        $consult->meeting_datetime = $req->meeting_datetime;
+        $consult->date = $req->meeting_datetime;
 
         if($req->office_location == 'islamabad'){
-            $consultRequest = [
+            $data = [
                 'name' => $req->name,
                 'email' => $req->email,
                 'message' => $req->message,
@@ -99,12 +100,14 @@ class HomeController extends Controller
                 'country_id' => $req->country,
                 'percentage' => $req->percentage,
                 'field' => $req->field,
+                'date' => $req->date,
+                'phone' => $req->phone,
                 'office_location' => $req->office_location,
                 'office_phone' => '+92 325 5209992',
                 'office_email' => 'atracconsultant@gmail.com'
             ];
         }else{
-            $consultRequest = [
+            $data = [
                 'name' => $req->name,
                 'email' => $req->email,
                 'message' => $req->message,
@@ -112,13 +115,24 @@ class HomeController extends Controller
                 'country_id' => $req->country,
                 'percentage' => $req->percentage,
                 'field' => $req->field,
+                'date' => $req->date,
+                'phone' => $req->phone,
                 'office_location' => $req->office_location,
                 'office_phone' => '+92 335 3737904',
                 'office_email' => 'atracconsultants@gmail.com'
             ];
         }
-        
-        Mail::to($req->email)->send(new RequestMail($consultRequest));
+
+        Mail::to($req->email)->send(new RequestMail($data));
+
+        if($req->office_location == 'islamabad'){
+            $adminEmail = 'atracconsultant@gmail.com';
+        }else{
+            $adminEmail = env('MAIL_FROM_ADDRESS');
+        }
+
+        Mail::to($adminEmail)->send(new AdminInquiryAlertMail($data));
+
 
         $consult->save();
         return redirect()->back()->with('success', "Your query has been passed to us. We'll get back to you shortly");

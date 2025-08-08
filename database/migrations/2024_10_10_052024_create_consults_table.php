@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('percentage')->nullable();
             $table->string('office_location')->nullable();
             $table->string('status')->default('pending');
-            $table->dateTime('meeting_datetime')->nullable();
+            $table->dateTime('date')->nullable();
             $table->timestamps();
         });
     }
