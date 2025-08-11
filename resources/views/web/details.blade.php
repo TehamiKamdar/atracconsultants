@@ -6,6 +6,10 @@
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <style>
+        body {
+            font-family: 'Bambino-Regular', Arial, Helvetica, sans-serif;
+        }
+
         .country-details-section {
             background-color: #f8fafc;
         }
@@ -156,7 +160,7 @@
             border-radius: 10px;
             text-align: center;
             font-size: 1.4rem;
-            font-family: 'Bambino-Bold',sans-serif;
+            font-family: 'Bambino-Bold', sans-serif;
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
@@ -477,19 +481,33 @@
                                 Book a Meeting with expert
                             </h2>
                             <div class="content-text">
-                                <p>Are you interested in studying abroad but not sure where to start? Our team of experts is
-                                    here to help! By filling out our simple meeting request form, you can schedule a
-                                    one-on-one consultation to discuss your study abroad options, fees, scholarships, and
-                                    more. We offer guidance for over 60 countries, so whether you're interested in
-                                    {{$countryName}}, Asia, the Americas, or anywhere in between, we've got you covered.
+                                <p class="mt-3">
+                                    Whether you choose to study in {{ $countryName }}, our team will guide you from
+                                    selecting the right university to securing scholarships and visas, making your journey
+                                    smooth and stress-free.
                                 </p>
-                                <p class="mt-3">Our consultation service is completely free, and our team is dedicated to
-                                    helping you achieve your study abroad goals. We understand that the process can be
-                                    overwhelming, but we're here to provide personalized advice and support every step of
-                                    the way. Don't miss out on the opportunity to explore the world and broaden your
-                                    horizons through international education.</p>
-                                <p class="mt-3">Book your meeting today and let us help you make your study abroad dreams a
-                                    reality.</p>
+
+                                <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
+                                    data-bs-target="#applyNowModal">
+                                    Apply Now
+                                </button>
+                                <div class="modal fade" id="applyNowModal" tabindex="-1"
+                                    aria-labelledby="applyNowModalLabel" aria-hidden="true">
+                                    <div class="modal-xl modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary">
+                                                <h5 class="modal-title text-white" id="applyNowModalLabel">Apply Now</h5>
+                                                <button type="button" class="btn-close bg-danger" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @include('include.form', ['layout' => 'modal'])
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -499,99 +517,14 @@
                 <div class="col-lg-4">
                     <div class="card border-0 shadow-lg sticky-top" style="top: 120px; z-index:50;">
                         <div class="card-header bg-primary text-white py-3">
-                            <h3 class="mb-0 text-center fw-bold d-flex align-items-center justify-content-center" style="font-family:'Bambino-Regular',sans-serif;">
+                            <h3 class="mb-0 text-center fw-bold d-flex align-items-center justify-content-center"
+                                style="font-family:'Bambino-Regular',sans-serif;">
                                 <i class="ri-calendar-check-line me-2"></i>
                                 Book Free Consultation
                             </h3>
                         </div>
                         <div class="card-body p-4">
-                            <form action="{{route('consultation')}}" method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <label class="form-label">Full Name <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="ri-user-line"></i>
-                                        </span>
-                                        <input type="text" class="form-control" name="name" placeholder="John Doe" required>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Email <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="ri-mail-line"></i>
-                                        </span>
-                                        <input type="email" class="form-control" name="email" placeholder="your@email.com"
-                                            required>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Phone <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="ri-phone-line"></i>
-                                        </span>
-                                        <input type="tel" class="form-control" name="phone" placeholder="+92 300 1234567"
-                                            required>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Country of Interest</label>
-                                    <input type="text" class="form-control" value="{{$countryName}}" disabled>
-                                    <input type="hidden" name="country" value="{{$details->country_id}}">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Field of Interest <span class="text-danger">*</span></label>
-                                    <select class="form-select" name="field" required>
-                                        <option value="" selected disabled>Select field</option>
-                                        @foreach ($fields as $f)
-                                            <option value="{{$f->field}}">{{$f->field}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Qualification <span class="text-danger">*</span></label>
-                                    <select class="form-select" name="qualification" required>
-                                        <option value="" selected disabled>Select qualification</option>
-                                        <option value="Intermediate">Intermediate</option>
-                                        <option value="Bachelors">Bachelors</option>
-                                        <option value="Masters">Masters</option>
-                                    </select>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label">Percentage/GPA <span class="text-danger">*</span></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text bg-light">
-                                            <i class="ri-percent-line"></i>
-                                        </span>
-                                        <input type="number" class="form-control" name="percentage" max="100"
-                                            placeholder="e.g. 85" required>
-                                    </div>
-                                </div>
-
-                                <div class="mb-4">
-                                    <label for="office_location" class="form-label fw-semibold">Nearest Office Location <span
-                                            class="text-danger">*</span></label>
-                                    <select class="form-select" id="office_location" name="office_location" required>
-                                        <option value="" selected disabled>Select Location</option>
-                                        <option value="karachi">Karachi</option>
-                                        <option value="islamabad">Islamabad</option>
-                                    </select>
-                                </div>
-
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary btn-lg fw-bold">
-                                        <i class="ri-send-plane-line me-2"></i> Book Now
-                                    </button>
-                                </div>
-                            </form>
+                            @include('include.form', ['layout' => 'narrow'])
                         </div>
                     </div>
                 </div>
@@ -655,6 +588,8 @@
     </div>
 @endsection
 @section('scripts')
+    <script src="{{ asset('website/forms.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

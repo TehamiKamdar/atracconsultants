@@ -90,24 +90,42 @@
                     <li class="nav-item">
                         <a class="nav-link-item {{ Route::is('home') ? 'active' : '' }}" href="/">Home</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link-item {{ Route::is('about') ? 'active' : '' }}"
                             href="{{route('about')}}">About Us</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link-item" href="{{ '/' . '#whychooseus' }}">Why Choose Us</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link-item" href="{{ '/' . '#country' }}">Countries</a>
+
+                    <!-- Countries Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link-item" href="#" id="countriesDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Countries
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="countriesDropdown" style="background-color: #f8f8f8; width: 400px;">
+                            @foreach ($countries as $country)
+                                <li>
+                                    <a class="dropdown-item dropdown-toggle" href="{{route('country-details', strtolower($country->name))}}" style="color: #333; padding: 8px 16px;">{{ $country->name }}</a>
+                                    
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link-item" href="{{ '/' . '#form' }}">Book an Appointment</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link-item {{ Route::is('contact') ? 'active' : '' }}"
                             href="{{ route('contact') }}">Contact Us</a>
                     </li>
                 </ul>
+
             </div>
         </div>
     </nav>
@@ -124,8 +142,17 @@
             <li class="nav-item">
                 <a class="nav-link-item" href="{{ '/' . '#whychooseus' }}">Why Choose Us</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link-item" href="{{ '/' . '#country' }}">Countries</a>
+            <!-- Countries Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link-item" href="#" id="countriesDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Countries
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="countriesDropdown" style="background-color: #f8f8f8;">
+                    @foreach ($countries as $country)
+                        <li><a class="dropdown-item" href="{{route('country-details', strtolower($country->name))}}" style="color: #333; padding: 8px 16px;">{{ $country->name }}</a></li>
+                    @endforeach
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link-item" href="{{ '/' . '#form' }}">Book an Appointment</a>
@@ -189,8 +216,7 @@
                         <a href="https://www.facebook.com/atracconsultants"><i class="ri-facebook-fill"></i></a>
                         <a href="https://www.instagram.com/atracconsultants"><i class="ri-instagram-line"></i></a>
                         <a href="https://www.youtube.com/@AtracConsultants"><i class="ri-youtube-fill"></i></a>
-                        <a href="https://www.linkedin.com/in/atrac-consultants-54158a316/"><i
-                                class="ri-linkedin-fill"></i></a>
+                        <a href="https://www.linkedin.com/in/atrac-consultants-54158a316/"><i class="ri-linkedin-fill"></i></a>
                         <a href="https://www.tiktok.com/@atracconsultants"><i class="ri-tiktok-fill"></i></a>
                     </div>
                 </div>

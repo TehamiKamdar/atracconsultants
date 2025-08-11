@@ -3,6 +3,9 @@
     Details - {{$uniName}}
 @endpush
 <style>
+    body{
+        font-family: 'Bambino-Regular', Arial, Helvetica, sans-serif !important;
+    }
     .university-header h1 {
         font-family: 'Bambino-Bold', sans-serif;
     }
@@ -45,7 +48,16 @@
         letter-spacing: 0.25;
     }
 
-    
+    .list-group-item a{
+        text-decoration: none;
+        color: #2BB673;
+    }
+    .list-group-item a:hover{
+        text-decoration: underline;
+        color: #208152;
+    }
+
+
 </style>
 @section('content')
     <div class="university-details container-fluid py-4">
@@ -313,7 +325,7 @@
                                 <div>
                                     <strong>Website:</strong>
                                     <a href="{{ $university->website ?? '#' }}" target="_blank"
-                                        class="d-block text-decoration-none">{{ $university->website ?? 'N/A' }}</a>
+                                        class="d-block">{{ $university->website ?? 'N/A' }}</a>
                                 </div>
                             </li>
                         </ul>

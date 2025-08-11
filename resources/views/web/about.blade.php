@@ -8,7 +8,10 @@ About Us
         --primary-color: #2BB673;
         --secondary-color: #1E8449;
     }
-    
+
+    body{
+        font-family: 'Bambino-Regular', Arial, Helvetica, sans-serif;
+    }
     .card-title{
         font-family: 'Bambino-Bold', sans-serif;
     }
@@ -212,7 +215,7 @@ About Us
         </div>
     </div>
 
-    
+
     </div>
 </section>
 

@@ -109,6 +109,9 @@ Contact
             --gray-color: #6c757d;
             --light-gray: #e9ecef;
         }
+        body{
+            font-family: 'Bambino-Regular', Arial, Helvetica, sans-serif;
+        }
 
         .bg-primary-custom {
             background-color: var(--primary-color) !important;
@@ -281,7 +284,7 @@ Contact
             background-color: #2bb673;
             color: #fff;
         }
-        
+
         .office-card {
             height: 100%;
             border: none;
@@ -314,7 +317,7 @@ Contact
         <div class="text-center mb-5">
             <h1 class="display-5 fw-bold mb-3">Our Locations</h1>
             <p class="lead text-muted">We'd love to welcome you!</p>
-        </div> 
+        </div>
 
         <div class="row g-4">
             <!-- Office 1 -->
@@ -348,7 +351,7 @@ Contact
                     </div>
                 </div>
             </div>
-            
+
             <!-- Office 2 -->
             <div class="col-lg-6 col-12">
                 <div class="office-card card">

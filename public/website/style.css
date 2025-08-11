@@ -1250,6 +1250,43 @@ p.text-muted {
     }
 }
 
+/* Hover pe dropdown open */
+.nav-item.dropdown:hover .dropdown-menu {
+    border: none;
+    display: block;
+    margin-top: 0; /* gap remove */
+}
+
+.dropdown-menu{
+    border: none;
+}
+
+.dropdown-item:hover {
+    background-color: #e8f5ee;
+    color: #2bb673 !important;
+}
+
+.nav-link-item:focus {
+    box-shadow: 0 0 0 0.25rem rgba(43, 182, 115, 0.25);
+}
+
+/* Make submenu appear on hover */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -0.25rem;
+}
+
+/* Optional: hover open on desktop */
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+
 /* Navbar Styles */
 
 
