@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theaffiloverifycode" content="ddbafe6c-70dd-4fe8-9e0a-0bd590bfaf01" />
+    <meta name="description" content="{{ $details->meta_description ?? "Atrac Consultants is your trusted partner in education and career advancement. Established with a commitment to excellence" }}">
+    <meta property="og:title" content="{{ $details->meta_title ?? "Atrac Consultants. Trusted by students, recommended by success" }}">
+    <meta property="og:description" content="{{ $details->meta_description ?? "Atrac Consultants is your trusted partner in education and career advancement. Established with a commitment to excellence" }}">
     <!-- Font Awesome -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -110,7 +112,7 @@
                             @foreach ($countries as $country)
                                 <li>
                                     <a class="dropdown-item dropdown-toggle" href="{{route('country-details', strtolower($country->name))}}" style="color: #333; padding: 8px 16px;">{{ $country->name }}</a>
-                                    
+
                                 </li>
                             @endforeach
                         </ul>

@@ -1,6 +1,6 @@
 @extends('layouts.web_layout')
 @push('title')
-    Details | {{$details->name}}
+    {{$details->meta_title}}
 @endpush
 
 @section('styles')
@@ -332,6 +332,9 @@
                                 About {{$countryName}}
                             </h2>
                             <div class="content-text">
+                                {{$details->meta_description}}
+                                <br>
+                                <br>
                                 {{$details->country_description}}
                             </div>
                         </div>
