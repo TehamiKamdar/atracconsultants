@@ -134,7 +134,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    width: 100%;
     /* CLS Fixes */
     aspect-ratio: 16 / 9; /* Adjust according to your image's size */
     min-height: auto; /* Remove fixed vh height */
@@ -223,13 +223,15 @@
 }
 
 @media (max-width: 768px) {
+    .hero-subtitle{
+        font-size: 1rem;
+    }
+    .hero-title{
+        font-size: 1.75rem;
+    }
     .hero-section {
         min-height: 70vh;
         text-align: center;
-    }
-
-    .hero-title {
-        font-size: 1.5rem;
     }
 
     #element {
@@ -239,7 +241,7 @@
     }
 
     .hero-description {
-        font-size: 1rem;
+        font-size: 0.75rem;
     }
 
     .country-tags {
