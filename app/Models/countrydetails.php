@@ -16,9 +16,15 @@ class countrydetails extends Model
         'country_description',
         'cost_of_living',
         'climate',
+        'admission_requirements',
         'language',
+        'visa_requirements',
         'scholarships',
-        'workOpp',
-        'bookMeeting'
+        'workOpp'
+    ];
+
+    protected $casts = [
+        'admission_requirements' => 'array',
+        'visa_requirements'      => 'array',
     ];
 }

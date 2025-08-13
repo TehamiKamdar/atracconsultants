@@ -290,35 +290,40 @@
                                     <i class="ri-arrow-right-s-line text-primary me-2" style="color: #2BB673;"></i>
                                     About {{$countryName}}
                                 </a>
-                                <a href="#work-opportunity"
+                                <a href="#environment"
                                     class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center">
                                     <i class="ri-arrow-right-s-line text-primary me-2" style="color: #2BB673;"></i>
-                                    Part-Time & Post-Study Work Opportunities
-                                </a>
-                                <a href="#cost-of-studying"
-                                    class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center">
-                                    <i class="ri-arrow-right-s-line text-primary me-2" style="color: #2BB673;"></i>
-                                    Cost of Studying for International Students
+                                    Life in {{$countryName}} (Climate & Language)
                                 </a>
                                 <a href="#requirement"
                                     class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center">
                                     <i class="ri-arrow-right-s-line text-primary me-2" style="color: #2BB673;"></i>
                                     Admission & English Proficiency Requirements
                                 </a>
-                                <a href="#environment"
+                                <a href="#cost-of-studying"
                                     class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center">
                                     <i class="ri-arrow-right-s-line text-primary me-2" style="color: #2BB673;"></i>
-                                    Life in {{$name}} (Climate & Language)
+                                    Cost of Studying for International Students
                                 </a>
                                 <a href="#visa-requirement"
                                     class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center">
                                     <i class="ri-arrow-right-s-line text-primary me-2" style="color: #2BB673;"></i>
                                     Student visa requirements
                                 </a>
+                                <a href="#work-opportunity"
+                                    class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center">
+                                    <i class="ri-arrow-right-s-line text-primary me-2" style="color: #2BB673;"></i>
+                                    Part-Time & Post-Study Work Opportunities
+                                </a>
                                 <a href="#book-a-meeting"
                                     class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center">
                                     <i class="ri-arrow-right-s-line text-primary me-2" style="color: #2BB673;"></i>
                                     Book a Meeting with expert
+                                </a>
+                                <a href="#university"
+                                    class="list-group-item list-group-item-action border-0 py-3 d-flex align-items-center">
+                                    <i class="ri-arrow-right-s-line text-primary me-2" style="color: #2BB673;"></i>
+                                    Explore the range of universities in {{ $countryName }}
                                 </a>
                             </div>
                         </div>
@@ -377,30 +382,32 @@
                                 Admission requirements in {{$countryName}}
                             </h2>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>CV</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>Passport</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>Health insurance for overseas students</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>All educational documents</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>Experience letter (in case of gap)</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>English language test, such as, IELTS/PTE (if any)</span>
-                                </li>
+                                @if (!empty($details->admission_requirements))
+                                    @foreach ($details->admission_requirements as $areq)
+                                        <li class="list-group-item border-0 ps-0 d-flex align-items-start">
+                                            <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
+                                            <span>{{ $areq }}</span>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <div class="insights-container">
+                                        <!-- Animated background shapes -->
+                                        <div class="shape shape-1"></div>
+                                        <div class="shape shape-2"></div>
+                                        <div class="shape shape-3"></div>
+                                        <div class="shape shape-4"></div>
+
+                                        <!-- Blob effects -->
+                                        <div class="blob blob-1"></div>
+                                        <div class="blob blob-2"></div>
+
+                                        <!-- Message content -->
+                                        <div class="insights-message">
+                                            We are gathering our insights on the admission requirements based in <span
+                                                id="country-name">{{$countryName}}! Stay Tuned.</span>
+                                        </div>
+                                    </div>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -426,39 +433,32 @@
                                 Student visa requirements in {{$countryName}}
                             </h2>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>A valid passport</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>Polio certificate</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>Visa application fee</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>Passport-sized pictures</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>Proof of enrolment (your electronic confirmation of enrolment eCOE)</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>A Genuine Temporary Entrant (GTE) statement</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>Details of health insurance policy (OSHC)</span>
-                                </li>
-                                <li class="list-group-item border-0 ps-0 d-flex align-items-start">
-                                    <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
-                                    <span>Financial proof that you can afford living expenses, tuition fees, return airfare,
-                                        expenses for dependents</span>
-                                </li>
+                                @if (!empty($details->visa_requirements))
+                                    @foreach ($details->visa_requirements as $vreq)
+                                        <li class="list-group-item border-0 ps-0 d-flex align-items-start">
+                                            <i class="ri-check-line text-primary mt-1 me-2" style="color: #2BB673;"></i>
+                                            <span>{{ $vreq }}</span>
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <div class="insights-container">
+                                        <!-- Animated background shapes -->
+                                        <div class="shape shape-1"></div>
+                                        <div class="shape shape-2"></div>
+                                        <div class="shape shape-3"></div>
+                                        <div class="shape shape-4"></div>
+
+                                        <!-- Blob effects -->
+                                        <div class="blob blob-1"></div>
+                                        <div class="blob blob-2"></div>
+
+                                        <!-- Message content -->
+                                        <div class="insights-message">
+                                            We are gathering our insights on the visa requirements based in <span
+                                                id="country-name">{{$countryName}}! Stay Tuned.</span>
+                                        </div>
+                                    </div>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -509,8 +509,34 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- Universities -->
+                    <div class="card border-0 shadow-sm mb-5" id="university">
+                        <div class="card-body p-4 p-md-5">
+                            <h2 class="fw-bold mb-4 d-flex align-items-center">
+                                <i class="ri-calendar-check-line text-primary me-3" style="color: #2BB673;"></i>
+                                Explore Study Opportunities in {{ $countryName }}
+                            </h2>
+                            <div class="content-text">
+                                <p class="mt-3">
+                                    Discover the best universities and educational programs in {{ $countryName }}.
+                                    Our comprehensive guide will help you find the perfect institution that matches
+                                    your academic goals and career aspirations.
+                                </p>
 
+                                <p>
+                                    Learn about admission requirements, tuition fees, scholarships, and student life
+                                    to make an informed decision about your international education journey.
+                                </p>
+
+                                <div class="d-flex gap-3 mt-4">
+                                    <a href="#universities-section" class="btn btn-primary">
+                                        <i class="ri-building-2-line me-2"></i> View Universities
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

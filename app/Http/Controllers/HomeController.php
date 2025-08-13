@@ -8,6 +8,7 @@ use App\Models\consults;
 use App\Models\contacts;
 use App\Mail\RequestMail;
 use Illuminate\Http\Request;
+use App\Models\countrydetails;
 use Illuminate\Support\Facades\DB;
 use App\Mail\AdminInquiryAlertMail;
 use App\Http\Controllers\Controller;
@@ -52,8 +53,7 @@ class HomeController extends Controller
     {
 
         // return $name;
-        $details = DB::table('countrydetails')
-            ->join('countries', 'countrydetails.country_id', '=', 'countries.id')
+        $details = countrydetails::join('countries', 'countrydetails.country_id', '=', 'countries.id')
             ->where('countries.name', $name)
             ->select('countrydetails.*', 'countries.name', 'countries.id as country_id')
             ->first();
