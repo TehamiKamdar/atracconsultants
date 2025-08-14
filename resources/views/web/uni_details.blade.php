@@ -80,181 +80,77 @@
                         available courses</small>
                 </div>
 
-                <!-- Programs Tabs -->
-                <div class="programs-tabs bg-white rounded-3 shadow-sm">
-                    <ul class="nav nav-tabs nav-justified" id="programsTab" role="tablist">
-                        @if ($asscdepartments->isNotEmpty())
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active d-flex align-items-center justify-content-center"
-                                    id="associate-tab" data-bs-toggle="tab" data-bs-target="#associate" type="button"
-                                    role="tab">
-                                    <i class="ri-graduation-cap-line me-2"></i> Associate Degree
-                                </button>
-                            </li>
-                        @endif
+                @php
+    $programTabs = [
+        1 => ['id' => 'associate', 'label' => "Associate Degree", 'icon' => 'ri-graduation-cap-line'],
+        2 => ['id' => 'bachelor', 'label' => "Bachelor's", 'icon' => 'ri-book-2-line'],
+        3 => ['id' => 'master', 'label' => "Master's", 'icon' => 'ri-medal-line'],
+        4 => ['id' => 'phd', 'label' => "PhD", 'icon' => 'ri-user-star-line'],
+    ];
+@endphp
 
-                        @if ($bachelordepartments->isNotEmpty())
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link d-flex align-items-center justify-content-center" id="bachelor-tab"
-                                    data-bs-toggle="tab" data-bs-target="#bachelor" type="button" role="tab">
-                                    <i class="ri-book-2-line me-2"></i> Bachelor's
-                                </button>
-                            </li>
-                        @endif
+<div class="programs-tabs bg-white rounded-3 shadow-sm">
+    <!-- Tabs -->
+    <ul class="nav nav-tabs nav-justified" id="programsTab" role="tablist">
+        @foreach ($programTabs as $level => $tab)
+            @if (!empty($programsByLevel[$level]) && $programsByLevel[$level]->isNotEmpty())
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {{ $loop->first ? 'active' : '' }} d-flex align-items-center justify-content-center"
+                        id="{{ $tab['id'] }}-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#{{ $tab['id'] }}"
+                        type="button"
+                        role="tab">
+                        <i class="{{ $tab['icon'] }} me-2"></i> {{ $tab['label'] }}
+                    </button>
+                </li>
+            @endif
+        @endforeach
+    </ul>
 
-                        @if ($mastersdepartments->isNotEmpty())
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link d-flex align-items-center justify-content-center" id="master-tab"
-                                    data-bs-toggle="tab" data-bs-target="#master" type="button" role="tab">
-                                    <i class="ri-medal-line me-2"></i> Master's
-                                </button>
-                            </li>
-                        @endif
-
-                        @if ($phddepartments->isNotEmpty())
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link d-flex align-items-center justify-content-center" id="phd-tab"
-                                    data-bs-toggle="tab" data-bs-target="#phd" type="button" role="tab">
-                                    <i class="ri-user-star-line me-2"></i> PhD
-                                </button>
-                            </li>
-                        @endif
-                    </ul>
-
-                    <div class="tab-content p-4" id="programsTabContent">
-                        <!-- Associate Degree Programs -->
-                        @if ($asscdepartments->isNotEmpty())
-                            <div class="tab-pane fade show active" id="associate" role="tabpanel">
-                                <div class="accordion" id="associateAccordion">
-                                    @foreach ($asscdepartments as $departmentName => $courses)
-                                        <div class="accordion-item border-0 mb-3 shadow-sm rounded-3 overflow-hidden">
-                                            <h2 class="accordion-header bg-light">
-                                                <button class="accordion-button d-flex align-items-center" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#associateCollapse{{$loop->index}}">
-                                                    <i class="ri-community-line me-3 text-primary"></i>
-                                                    <span class="fw-bold">Department of {{ $departmentName }}</span>
-                                                </button>
-                                            </h2>
-                                            <div id="associateCollapse{{$loop->index}}"
-                                                class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
-                                                data-bs-parent="#associateAccordion">
-                                                <div class="accordion-body p-0">
-                                                    <ul class="list-group list-group-flush">
-                                                        @foreach ($courses as $course)
-                                                            <li class="list-group-item d-flex align-items-center py-3">
-                                                                <i class="ri-bookmark-line text-muted me-3"></i>
-                                                                {{ $course->course_title }}
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
+    <!-- Tab Content -->
+    <div class="tab-content p-4" id="programsTabContent">
+        @foreach ($programTabs as $level => $tab)
+            @if (!empty($programsByLevel[$level]) && $programsByLevel[$level]->isNotEmpty())
+                <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $tab['id'] }}" role="tabpanel">
+                    <div class="accordion" id="{{ $tab['id'] }}Accordion">
+                        @foreach ($programsByLevel[$level]->groupBy('departments.department_name') as $departmentName => $programs)
+                            <div class="accordion-item border-0 mb-3 shadow-sm rounded-3 overflow-hidden">
+                                <h2 class="accordion-header bg-light">
+                                    <button class="accordion-button d-flex align-items-center" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#{{ $tab['id'] }}Collapse{{ $loop->index }}">
+                                        <i class="ri-community-line me-3 text-primary"></i>
+                                        <span class="fw-bold">Department of {{ $departmentName }}</span>
+                                    </button>
+                                </h2>
+                                <div id="{{ $tab['id'] }}Collapse{{ $loop->index }}"
+                                    class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
+                                    data-bs-parent="#{{ $tab['id'] }}Accordion">
+                                    <div class="accordion-body p-0">
+                                        <ul class="list-group list-group-flush">
+                                            @foreach ($programs as $program)
+                                                @foreach ($program->departments as $department)
+                                                    @foreach ($department->courses as $course)
+                                                        <li class="list-group-item d-flex align-items-center py-3">
+                                                            <i class="ri-bookmark-line text-muted me-3"></i>
+                                                            {{ $course->course_title }}
+                                                        </li>
+                                                    @endforeach
+                                                @endforeach
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        @endif
-
-                        <!-- Bachelor's Programs -->
-                        @if ($bachelordepartments->isNotEmpty())
-                            <div class="tab-pane fade" id="bachelor" role="tabpanel">
-                                <div class="accordion" id="bachelorAccordion">
-                                    @foreach ($bachelordepartments as $departmentName => $courses)
-                                        <div class="accordion-item border-0 mb-3 shadow-sm rounded-3 overflow-hidden">
-                                            <h2 class="accordion-header bg-light">
-                                                <button class="accordion-button d-flex align-items-center" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#bachelorCollapse{{$loop->index}}">
-                                                    <i class="ri-community-line me-3 text-primary"></i>
-                                                    <span class="fw-bold">Department of {{ $departmentName }}</span>
-                                                </button>
-                                            </h2>
-                                            <div id="bachelorCollapse{{$loop->index}}"
-                                                class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
-                                                data-bs-parent="#bachelorAccordion">
-                                                <div class="accordion-body p-0">
-                                                    <ul class="list-group list-group-flush">
-                                                        @foreach ($courses as $course)
-                                                            <li class="list-group-item d-flex align-items-center py-3">
-                                                                <i class="ri-bookmark-line text-muted me-3"></i>
-                                                                {{ $course->course_title }}
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endif
-
-                        <!-- Master's Programs -->
-                        @if ($mastersdepartments->isNotEmpty())
-                            <div class="tab-pane fade" id="master" role="tabpanel">
-                                <div class="accordion" id="masterAccordion">
-                                    @foreach ($mastersdepartments as $departmentName => $courses)
-                                        <div class="accordion-item border-0 mb-3 shadow-sm rounded-3 overflow-hidden">
-                                            <h2 class="accordion-header bg-light">
-                                                <button class="accordion-button d-flex align-items-center" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#masterCollapse{{$loop->index}}">
-                                                    <i class="ri-community-line me-3 text-primary"></i>
-                                                    <span class="fw-bold">Department of {{ $departmentName }}</span>
-                                                </button>
-                                            </h2>
-                                            <div id="masterCollapse{{$loop->index}}"
-                                                class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
-                                                data-bs-parent="#masterAccordion">
-                                                <div class="accordion-body p-0">
-                                                    <ul class="list-group list-group-flush">
-                                                        @foreach ($courses as $course)
-                                                            <li class="list-group-item d-flex align-items-center py-3">
-                                                                <i class="ri-bookmark-line text-muted me-3"></i>
-                                                                {{ $course->course_title }}
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endif
-
-                        <!-- PhD Programs -->
-                        @if ($phddepartments->isNotEmpty())
-                            <div class="tab-pane fade" id="phd" role="tabpanel">
-                                <div class="accordion" id="phdAccordion">
-                                    @foreach ($phddepartments as $departmentName => $courses)
-                                        <div class="accordion-item border-0 mb-3 shadow-sm rounded-3 overflow-hidden">
-                                            <h2 class="accordion-header bg-light">
-                                                <button class="accordion-button d-flex align-items-center" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#phdCollapse{{$loop->index}}">
-                                                    <i class="ri-community-line me-3 text-primary"></i>
-                                                    <span class="fw-bold">Department of {{ $departmentName }}</span>
-                                                </button>
-                                            </h2>
-                                            <div id="phdCollapse{{$loop->index}}"
-                                                class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
-                                                data-bs-parent="#phdAccordion">
-                                                <div class="accordion-body p-0">
-                                                    <ul class="list-group list-group-flush">
-                                                        @foreach ($courses as $course)
-                                                            <li class="list-group-item d-flex align-items-center py-3">
-                                                                <i class="ri-bookmark-line text-muted me-3"></i>
-                                                                {{ $course->course_title }}
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @endif
+                        @endforeach
                     </div>
                 </div>
+            @endif
+        @endforeach
+    </div>
+</div>
+
             </div>
 
             <!-- Sidebar Area -->

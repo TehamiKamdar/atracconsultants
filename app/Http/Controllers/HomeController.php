@@ -7,6 +7,7 @@ use App\Models\country;
 use App\Models\consults;
 use App\Models\contacts;
 use App\Mail\RequestMail;
+use App\Models\universities;
 use Illuminate\Http\Request;
 use App\Models\countrydetails;
 use Illuminate\Support\Facades\DB;
@@ -137,84 +138,29 @@ class HomeController extends Controller
         $consult->save();
         return redirect()->back()->with('success', "Your query has been passed to us. We'll get back to you shortly");
     }
-    public function uniDetails($name)
-    {
-        $university = DB::table('universities')
-            ->where('slug', '=', $name)
-            ->first();
-        if (!$university) {
-            return view('coming_soon');
-        }
-        $uni_id = $university->id;
-        $uniName = $university->university_name;
+    public function uniDetails($slug)
+{
+    // Get university with all nested relationships
+    $university = universities::with([
+        'programs.departments.courses'
+    ])->where('slug', $slug)->first();
 
-        $asscdepartments = DB::table('unideptprogcourses')
-            ->join('departments', 'departments.id', '=', 'unideptprogcourses.depart_id')
-            ->join('courses', 'courses.id', '=', 'unideptprogcourses.course_id')
-            ->join('universities', 'universities.id', '=', 'unideptprogcourses.university_id')
-            ->where('unideptprogcourses.university_id', $uni_id)
-            ->where('unideptprogcourses.program_level', 1)
-            ->select(
-                'unideptprogcourses.*',
-                'departments.department_name as department_name',
-                'courses.course_title as course_title',
-                'universities.university_name as university_name',
-                'universities.slug',
-                'universities.country_id'
-            )
-            ->get()
-            ->groupBy('department_name'); // <-- GROUPING here
-
-        $bachelordepartments = DB::table('unideptprogcourses')
-            ->join('departments', 'departments.id', '=', 'unideptprogcourses.depart_id')
-            ->join('courses', 'courses.id', '=', 'unideptprogcourses.course_id')
-            ->join('universities', 'universities.id', '=', 'unideptprogcourses.university_id')
-            ->where('unideptprogcourses.university_id', $uni_id)
-            ->where('unideptprogcourses.program_level', 2)
-            ->select(
-                'unideptprogcourses.*',
-                'departments.department_name as department_name',
-                'courses.course_title as course_title',
-                'universities.university_name as university_name',
-                'universities.slug',
-                'universities.country_id'
-            )
-            ->get()
-            ->groupBy('department_name');
-        $mastersdepartments = DB::table('unideptprogcourses')
-            ->join('departments', 'departments.id', '=', 'unideptprogcourses.depart_id')
-            ->join('courses', 'courses.id', '=', 'unideptprogcourses.course_id')
-            ->join('universities', 'universities.id', '=', 'unideptprogcourses.university_id')
-            ->where('unideptprogcourses.university_id', $uni_id)
-            ->where('unideptprogcourses.program_level', 3)
-            ->select(
-                'unideptprogcourses.*',
-                'departments.department_name as department_name',
-                'courses.course_title as course_title',
-                'universities.university_name as university_name',
-                'universities.slug',
-                'universities.country_id'
-            )
-            ->get()
-            ->groupBy('department_name');
-        $phddepartments = DB::table('unideptprogcourses')
-            ->join('departments', 'departments.id', '=', 'unideptprogcourses.depart_id')
-            ->join('courses', 'courses.id', '=', 'unideptprogcourses.course_id')
-            ->join('universities', 'universities.id', '=', 'unideptprogcourses.university_id')
-            ->where('unideptprogcourses.university_id', $uni_id)
-            ->where('unideptprogcourses.program_level', 4)
-            ->select(
-                'unideptprogcourses.*',
-                'departments.department_name as department_name',
-                'courses.course_title as course_title',
-                'universities.university_name as university_name',
-                'universities.slug',
-                'universities.country_id'
-            )
-            ->get()
-            ->groupBy('department_name');
-
-
-        return view('web.uni_details', compact('uniName', 'university','asscdepartments','bachelordepartments','mastersdepartments','phddepartments'));
+    if (!$university) {
+        return view('coming_soon');
     }
+
+    // Group programs by program_level for easy frontend use
+    $programsByLevel = $university->programs->groupBy('program_level');
+
+    // You can directly pass this to the view
+    return view('web.uni_details', [
+        'university'        => $university,
+        'uniName'           => $university->name,
+        'asscdepartments'   => $programsByLevel[1] ?? collect(),
+        'bachelordepartments'=> $programsByLevel[2] ?? collect(),
+        'mastersdepartments'=> $programsByLevel[3] ?? collect(),
+        'phddepartments'    => $programsByLevel[4] ?? collect(),
+    ]);
+}
+
 }

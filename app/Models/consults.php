@@ -20,6 +20,8 @@ class consults extends Model
         'percentage',
         'office_location',
         'status',
-        'date'
+        'date',
+        'time',
+        'reason'
     ];
 }
