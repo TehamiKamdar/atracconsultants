@@ -29,7 +29,7 @@ Route::get('/study-in-{name}', [HomeController::class , 'detailsShow'])->name('c
 
 Route::post('/consult' , [HomeController::class , 'consultRequest'])->name('consultation');
 
-Route::get('/university/details/{name}', [HomeController::class ,'uniDetails'])->name('university.details');
+Route::get('/university/details/{name}/{slug}', [HomeController::class ,'uniDetails'])->name('university.details');
 
 Route::get('/404', function(){
     return view('errors.404');

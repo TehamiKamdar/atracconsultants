@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('inquiry_holds', function (Blueprint $table) {
             $table->id();
-            $table->string('name',191)->required();
-            $table->string('currency',191)->required();
-            $table->string('iso2',191)->nullable();
-            $table->enum('status', ['active','inactive'])->default('inactive');
+            $table->unsignedBigInteger('consult_id'); // correct spelling
+            $table->foreign('consult_id')->references('id')->on('consults')->onDelete('cascade');
+            $table->text('reason')->required();
+            $table->date('revisit_date')->required();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('inquiry_holds');
     }
 };

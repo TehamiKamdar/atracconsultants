@@ -17,26 +17,30 @@ use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $countries = country::orderBy('name', 'asc')->where('status', 'active')->get();
         $fields = fields::orderBy('field', 'asc')->get();
         // print_r($countries);
         return view('web.index', compact('countries', 'fields'));
-
     }
 
-    public function about(){
+    public function about()
+    {
         return view('web.about');
     }
 
-    public function blog(){
+    public function blog()
+    {
         return view('web.blog');
     }
 
-    public function showContactForm(){
+    public function showContactForm()
+    {
         return view('web.contact');
     }
-    public function contact(Request $request){
+    public function contact(Request $request)
+    {
         $validated = $request->validate([
             'name' => 'required|string|min:2|max:100|regex:/^[a-zA-Z\s]+$/',
             'email' => 'required|email|max:255',
@@ -68,7 +72,10 @@ class HomeController extends Controller
 
         $country_id = $details->country_id;
 
-        $universities = DB::table('universities')->where('country_id', '=', $country_id)->get();
+        $universities = universities::where('country_id', '=', $country_id)
+        ->join('countries', 'countries.id', '=', 'universities.country_id')
+        ->select('universities.*', 'countries.name as country_name')
+        ->get();
 
         return view('web.details', compact('details', 'name', 'countryName', 'fields', 'universities'));
         // return $universities;
@@ -92,7 +99,7 @@ class HomeController extends Controller
         $consult->office_location = $req->office_location;
         $consult->date = $req->meeting_datetime;
 
-        if($req->office_location == 'islamabad'){
+        if ($req->office_location == 'islamabad') {
             $data = [
                 'name' => $req->name,
                 'email' => $req->email,
@@ -107,7 +114,7 @@ class HomeController extends Controller
                 'office_phone' => '+92 325 5209992',
                 'office_email' => 'atracconsultant@gmail.com'
             ];
-        }else{
+        } else {
             $data = [
                 'name' => $req->name,
                 'email' => $req->email,
@@ -126,9 +133,9 @@ class HomeController extends Controller
 
         Mail::to($req->email)->send(new RequestMail($data));
 
-        if($req->office_location == 'islamabad'){
+        if ($req->office_location == 'islamabad') {
             $adminEmail = 'atracconsultant@gmail.com';
-        }else{
+        } else {
             $adminEmail = env('MAIL_FROM_ADDRESS');
         }
 
@@ -138,29 +145,30 @@ class HomeController extends Controller
         $consult->save();
         return redirect()->back()->with('success', "Your query has been passed to us. We'll get back to you shortly");
     }
-    public function uniDetails($slug)
-{
-    // Get university with all nested relationships
-    $university = universities::with([
-        'programs.departments.courses'
-    ])->where('slug', $slug)->first();
+    public function uniDetails($name, $slug)
+    {
+        $countryId = country::where('name', '=', $name)->value('id');
 
-    if (!$university) {
-        return view('coming_soon');
+        $university = universities::with('programs.departments.courses')
+            ->where('slug', $slug)
+            ->where('country_id', $countryId)
+            ->first();
+
+        if (!$university) {
+            return view('coming_soon');
+        }
+
+        $description = $university->description;
+        $meta_title = $university->meta_title;
+        $meta_description = $university->meta_description;
+
+        // Group by program name (bachelors, masters, etc.)
+        $programsByLevel = $university->programs->groupBy(function ($program) {
+            return strtolower($program->name); // ensure lowercase keys
+        });
+
+        // return $university;
+
+        return view('web.uni_details', compact('university', 'programsByLevel', 'description', 'meta_title', 'meta_description'));
     }
-
-    // Group programs by program_level for easy frontend use
-    $programsByLevel = $university->programs->groupBy('program_level');
-
-    // You can directly pass this to the view
-    return view('web.uni_details', [
-        'university'        => $university,
-        'uniName'           => $university->name,
-        'asscdepartments'   => $programsByLevel[1] ?? collect(),
-        'bachelordepartments'=> $programsByLevel[2] ?? collect(),
-        'mastersdepartments'=> $programsByLevel[3] ?? collect(),
-        'phddepartments'    => $programsByLevel[4] ?? collect(),
-    ]);
-}
-
 }

@@ -570,6 +570,9 @@
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
                                 @foreach ($universities as $uni)
+                                    @php
+                                    $name = strtolower($uni->country_name);
+                                    @endphp
                                     <div class="swiper-slide">
                                         <div class="card shadow-sm border-0 h-100">
                                             <div class="card-body text-center p-4">
@@ -577,7 +580,7 @@
                                                     <img src="{{ asset('website/favicon.svg')}}" alt="{{$uni->name}}"
                                                         class="img-fluid mx-auto" style="max-height: 80px; width: auto;">
                                                 </div>
-                                                <a href="{{route('university.details', $uni->slug)}}"
+                                                <a href="{{route('university.details', [$name, $uni->slug])}}"
                                                     class="btn btn-outline-primary btn-sm px-4 py-2 mt-3">
                                                     {{$uni->name}}
                                                 </a>

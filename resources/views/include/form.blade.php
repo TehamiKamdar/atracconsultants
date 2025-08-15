@@ -1,3 +1,7 @@
+@php
+$fields = \App\Models\fields::all();
+@endphp
+
 <form action="{{route('consultation')}}" method="POST" class="needs-validation" novalidate>
     @csrf
 

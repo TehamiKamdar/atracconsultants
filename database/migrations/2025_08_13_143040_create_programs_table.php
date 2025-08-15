@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('program_levels', function (Blueprint $table) {
+        Schema::create('programs', function (Blueprint $table) {
             $table->id();
-            $table->string('program_name');
+            $table->foreignId('university_id')->constrained()->onDelete('cascade');
+            $table->string('name'); // Bachelors, Masters, PhD, Diploma...
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('program_levels');
+        Schema::dropIfExists('programs');
     }
 };
