@@ -74,6 +74,11 @@
     font-family: 'Bambino-ExtraLight', sans-serif;
 }
 
+li {
+    font-family: 'Bambino-Light', sans-serif;
+    letter-spacing: 0.25;
+}
+
 /* Primary Alert Variant */
 .alert-primary {
     color: var(--primary-light);

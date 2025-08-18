@@ -533,8 +533,8 @@
                                 </p>
 
                                 <div class="d-flex gap-3 mt-4">
-                                    <a href="#universities-section" class="btn btn-primary">
-                                        <i class="ri-building-2-line me-2"></i> View Universities
+                                    <a href="{{ route('university.list', $details->slug) }}" class="btn btn-primary">
+                                        <i class="ri-building-2-line me-2"></i> Explore Universities of {{ $countryName }}
                                     </a>
                                 </div>
                             </div>
@@ -561,7 +561,7 @@
         </div>
     </div>
 
-    <div class="universities-slider mt-5 mb-5">
+    {{-- <div class="universities-slider mt-5 mb-5">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -622,7 +622,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @section('scripts')
     <script src="{{ asset('website/forms.js') }}"></script>

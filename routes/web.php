@@ -13,7 +13,10 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// For Maintenance Landing Page
+// Route::get('/', function(){
+//     return view('maintenance');
+// })->name('home');
 //Web Routes
 Route::get('/', [HomeController::class , 'index'])->name('home');
 
@@ -28,6 +31,8 @@ Route::post('/contact', [HomeController::class , 'contact'])->name('contact.subm
 Route::get('/study-in-{name}', [HomeController::class , 'detailsShow'])->name('country-details');
 
 Route::post('/consult' , [HomeController::class , 'consultRequest'])->name('consultation');
+
+Route::get('/university/list/{name?}', [HomeController::class , 'getUniversities'])->name('university.list');
 
 Route::get('/university/details/{name}/{slug}', [HomeController::class ,'uniDetails'])->name('university.details');
 

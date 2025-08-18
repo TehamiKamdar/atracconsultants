@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ $description ?? "Atrac Consultants is your trusted partner in education and career advancement. Established with a commitment to excellence" }}">
-    <meta property="og:title" content="{{ $meta_title ?? "Atrac Consultants. Trusted by students, recommended by success" }}">
-    <meta property="og:description" content="{{ $meta_description ?? "Atrac Consultants is your trusted partner in education and career advancement. Established with a commitment to excellence" }}">
+    <meta name="description"
+        content="{{ $description ?? "Atrac Consultants is your trusted partner in education and career advancement. Established with a commitment to excellence" }}">
+    <meta property="og:title"
+        content="{{ $meta_title ?? "Atrac Consultants. Trusted by students, recommended by success" }}">
+    <meta property="og:description"
+        content="{{ $meta_description ?? "Atrac Consultants is your trusted partner in education and career advancement. Established with a commitment to excellence" }}">
     <!-- Font Awesome -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
@@ -64,6 +67,17 @@
     <script src="{{ asset('website/lib/iziToast/iziToast.min.js') }}" defer></script>
 
     <title>Atrac Consultants | @stack('title')</title>
+    <style>
+        /* Disable text selection */
+        body {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10+ */
+            user-select: none;
+            /* Standard */
+        }
+    </style>
     @yield('styles')
 </head>
 
@@ -108,10 +122,13 @@
                             aria-expanded="false">
                             Countries
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="countriesDropdown" style="background-color: #f8f8f8; width: 400px;">
+                        <ul class="dropdown-menu" aria-labelledby="countriesDropdown"
+                            style="background-color: #f8f8f8; width: 400px;">
                             @foreach ($countries as $country)
                                 <li>
-                                    <a class="dropdown-item dropdown-toggle" href="{{route('country-details', strtolower($country->name))}}" style="color: #333; padding: 8px 16px;">{{ $country->name }}</a>
+                                    <a class="dropdown-item dropdown-toggle"
+                                        href="{{route('country-details', strtolower($country->name))}}"
+                                        style="color: #333; padding: 8px 16px;">{{ $country->name }}</a>
 
                                 </li>
                             @endforeach
@@ -152,7 +169,8 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="countriesDropdown" style="background-color: #f8f8f8;">
                     @foreach ($countries as $country)
-                        <li><a class="dropdown-item" href="{{route('country-details', strtolower($country->name))}}" style="color: #333; padding: 8px 16px;">{{ $country->name }}</a></li>
+                        <li><a class="dropdown-item" href="{{route('country-details', strtolower($country->name))}}"
+                                style="color: #333; padding: 8px 16px;">{{ $country->name }}</a></li>
                     @endforeach
                 </ul>
             </li>
@@ -218,7 +236,8 @@
                         <a href="https://www.facebook.com/atracconsultants"><i class="ri-facebook-fill"></i></a>
                         <a href="https://www.instagram.com/atracconsultants"><i class="ri-instagram-line"></i></a>
                         <a href="https://www.youtube.com/@AtracConsultants"><i class="ri-youtube-fill"></i></a>
-                        <a href="https://www.linkedin.com/in/atrac-consultants-54158a316/"><i class="ri-linkedin-fill"></i></a>
+                        <a href="https://www.linkedin.com/in/atrac-consultants-54158a316/"><i
+                                class="ri-linkedin-fill"></i></a>
                         <a href="https://www.tiktok.com/@atracconsultants"><i class="ri-tiktok-fill"></i></a>
                     </div>
                 </div>
@@ -236,7 +255,20 @@
             </div>
         </div>
     </footer>
+    <script>
+        // Disable right-click
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
+        // Disable keyboard shortcuts (Ctrl+U, Ctrl+C, Ctrl+S, F12)
+        document.addEventListener('keydown', function (e) {
+            if (
+                (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c')) ||
+                e.key === 'F12'
+            ) {
+                e.preventDefault();
+            }
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof $ !== 'undefined' && typeof $.fn.owlCarousel !== 'undefined') {

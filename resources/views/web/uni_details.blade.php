@@ -43,12 +43,6 @@
         font-family: 'Bambino-Bold', sans-serif;
         font-weight: 500;
     }
-
-    li {
-        font-family: 'Bambino-Light', sans-serif;
-        letter-spacing: 0.25;
-    }
-
     .list-group-item a {
         text-decoration: none;
         color: #2BB673;
@@ -168,8 +162,8 @@
                             <li class="list-group-item d-flex align-items-center">
                                 <i class="ri-map-pin-line fs-5 text-primary me-3"></i>
                                 <div>
-                                    <strong>Address:</strong>
-                                    <span class="d-block">{{ $university->address ?? 'N/A' }}</span>
+                                    <strong>Location:</strong>
+                                    <span class="d-block">{{ ucfirst($city).', '.ucfirst($state) }}</span>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex align-items-center">

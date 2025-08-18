@@ -9,7 +9,7 @@ class universities extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['country_id', 'name', 'description', 'location', 'website','slug', 'meta_title', 'meta_description', 'meta_keywords', 'address'];
+    protected $fillable = ['country_id', 'name', 'description', 'location', 'website','slug', 'meta_title', 'meta_description', 'meta_keywords', 'state', 'city', 'image'];
 
     public function country()
     {

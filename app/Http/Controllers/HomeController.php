@@ -60,7 +60,7 @@ class HomeController extends Controller
         // return $name;
         $details = countrydetails::join('countries', 'countrydetails.country_id', '=', 'countries.id')
             ->where('countries.name', $name)
-            ->select('countrydetails.*', 'countries.name', 'countries.id as country_id')
+            ->select('countrydetails.*', 'countries.*', 'countries.id as country_id')
             ->first();
         if (!$details) {
             return view('coming_soon');
@@ -69,15 +69,10 @@ class HomeController extends Controller
 
 
         $countryName = $details->name;
-
         $country_id = $details->country_id;
+        // $slug = $details->slug;
 
-        $universities = universities::where('country_id', '=', $country_id)
-        ->join('countries', 'countries.id', '=', 'universities.country_id')
-        ->select('universities.*', 'countries.name as country_name')
-        ->get();
-
-        return view('web.details', compact('details', 'name', 'countryName', 'fields', 'universities'));
+        return view('web.details', compact('details', 'name', 'countryName', 'fields'));
         // return $universities;
 
     }
@@ -145,30 +140,63 @@ class HomeController extends Controller
         $consult->save();
         return redirect()->back()->with('success', "Your query has been passed to us. We'll get back to you shortly");
     }
-    public function uniDetails($name, $slug)
+
+    public function getUniversities($slug)
     {
-        $countryId = country::where('name', '=', $name)->value('id');
+
+        $country = country::where('slug', '=', $slug)->select('id', 'name')->first();
+        $countryName = $country->name;
+        $universities = universities::where('universities.country_id', '=', $country->id)
+            ->join('states', 'states.id', '=', 'universities.state')
+            ->join('cities', 'cities.id', '=', 'universities.city')
+            ->join('countries', 'countries.id', '=', 'universities.country_id')
+            ->select('cities.name as cityName', 'states.name as stateName', 'countries.slug as countryslug', 'universities.*')
+            ->get();
+        // return $universities;
+        return view('web.uni_list', compact('universities', 'countryName'));
+    }
+
+    public function uniDetails($countryslug, $slug)
+    {
+        $countryId = country::where('slug', '=', $countryslug)->value('id');
+
 
         $university = universities::with('programs.departments.courses')
-            ->where('slug', $slug)
-            ->where('country_id', $countryId)
-            ->first();
+        ->where('slug', $slug)
+        ->where('country_id', $countryId)
+        ->first();
 
+        // Agar university hi nahi mili toh direct return karo
         if (!$university) {
             return view('coming_soon');
         }
+
+        // Safe queries for state & city
+        $state = DB::table('states')
+        ->where('id', $university->state)
+        ->value('name'); // direct string return karega
+
+        $city = DB::table('cities')
+        ->where('id', $university->city)
+        ->value('name');
+        // return $city;
 
         $description = $university->description;
         $meta_title = $university->meta_title;
         $meta_description = $university->meta_description;
 
-        // Group by program name (bachelors, masters, etc.)
         $programsByLevel = $university->programs->groupBy(function ($program) {
-            return strtolower($program->name); // ensure lowercase keys
+            return strtolower($program->name);
         });
 
-        // return $university;
-
-        return view('web.uni_details', compact('university', 'programsByLevel', 'description', 'meta_title', 'meta_description'));
+        return view('web.uni_details', compact(
+            'university',
+            'programsByLevel',
+            'description',
+            'meta_title',
+            'meta_description',
+            'state',
+            'city'
+        ));
     }
 }
