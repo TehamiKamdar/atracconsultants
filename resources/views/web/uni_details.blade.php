@@ -43,6 +43,7 @@
         font-family: 'Bambino-Bold', sans-serif;
         font-weight: 500;
     }
+
     .list-group-item a {
         text-decoration: none;
         color: #2BB673;
@@ -115,8 +116,9 @@
                                             @foreach ($program->departments as $deptIndex => $department)
                                                 <div class="accordion-item border-0 mb-3 shadow-sm rounded-3 overflow-hidden">
                                                     <h2 class="accordion-header bg-light">
-                                                        <button class="accordion-button d-flex align-items-center" type="button"
-                                                            data-bs-toggle="collapse"
+                                                        <button
+                                                            class="accordion-button d-flex align-items-center {{ $deptIndex !== 0 ? 'collapsed' : '' }}"
+                                                            type="button" data-bs-toggle="collapse"
                                                             data-bs-target="#{{ $tab['id'] }}Collapse{{ $loop->parent->index }}{{ $deptIndex }}">
                                                             <i class="ri-community-line me-3 text-primary"></i>
                                                             <span class="fw-bold">Department Of {{ $department->name }}</span>
@@ -163,7 +165,7 @@
                                 <i class="ri-map-pin-line fs-5 text-primary me-3"></i>
                                 <div>
                                     <strong>Location:</strong>
-                                    <span class="d-block">{{ ucfirst($city).', '.ucfirst($state) }}</span>
+                                    <span class="d-block">{{ ucfirst($city) . ', ' . ucfirst($state) }}</span>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex align-items-center">
